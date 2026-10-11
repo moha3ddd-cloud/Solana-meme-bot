@@ -1,0 +1,20 @@
+# ============================================================
+# Exit Rules — المسار المحافظ (Swing)
+# ============================================================
+# فلسفة المسار ده: استحمال العملة لفترة أطول، أهداف ربح أبعد، مساحة
+# أوسع للـtrailing stop عشان نمسك حركات أكبر. مناسب لعملة عدّت فحوصات
+# الـScanner بقوة ومعاها momentum مستمر، مش لحظي بس.
+
+take_profit_levels:
+  - gain_pct: 30
+    close_position_pct: 30
+    move_stop_to_breakeven: true
+  - gain_pct: 60
+    close_position_pct: 30
+    move_stop_to_breakeven: true
+  - gain_pct: 100
+    close_position_pct: 20
+    move_stop_to_breakeven: true
+# الباقي (20%) يتسيب لـ trailing stop
+trailing_stop_activation_pct: 100   # يتفعل بعد أول target
+trailing_stop_distance_pct: 15      # يتحرك خلف السعر بمسافة كام %

@@ -1,0 +1,48 @@
+# ============================================================
+# Risk Configuration — عدّل الأرقام دي براحتك من غير ما تلمس الكود
+# ============================================================
+
+account:
+  starting_capital_usd: 1000.0
+
+position_sizing:
+  # نسبة المخاطرة القصوى للصفقة الواحدة (% من رأس المال الحالي)
+  risk_per_trade_pct: 1.0
+  # حد أدنى لنسبة المخاطرة (مايقلش عنها حتى في drawdown scaling)
+  min_risk_per_trade_pct: 0.25
+
+daily_limits:
+  # لو الحساب خسر النسبة دي في يوم واحد -> وقف فتح صفقات جديدة لباقي اليوم
+  daily_loss_limit_pct: 2.0
+  # أقصى عدد صفقات مسموح بيه في اليوم (حماية إضافية من overtrading)
+  max_trades_per_day: 15
+
+drawdown_scaling:
+  # كل ما الـdrawdown من الـpeak equity يزيد، المخاطرة تقل تلقائيًا
+  # القيم دي thresholds تتقارن بـ current_drawdown_pct
+  tiers:
+    - drawdown_pct: 5.0
+      risk_multiplier: 0.75   # المخاطرة تقل لـ 75% من الأصل
+    - drawdown_pct: 10.0
+      risk_multiplier: 0.5    # تقل لـ 50%
+    - drawdown_pct: 15.0
+      risk_multiplier: 0.25   # تقل لـ 25%
+    - drawdown_pct: 20.0
+      risk_multiplier: 0.0    # وقف تام — Emergency Mode
+
+# exit_rules اتنقلت لملفات منفصلة حسب المسار (strategy profile) —
+# شوف config/exit_rules_conservative.yaml و config/exit_rules_scalp.yaml.
+# السبب: عايزين نقدر نجرب أكتر من أسلوب خروج (محافظ/سكالب) من غير ما
+# نلمس إدارة المخاطرة المشتركة (risk %, daily limit, drawdown) اللي
+# فوق دي — دي واحدة لكل الحساب بغض النظر عن أي مسار فتح الصفقة.
+
+execution_safety:
+  max_slippage_pct: 3.0
+  max_price_impact_pct: 2.0
+  min_liquidity_usd: 15000
+
+emergency:
+  # لو حصل أكتر من كذا خطأ RPC/DEX متتالي -> وقف فتح صفقات جديدة
+  max_consecutive_errors: 3
+  # لو الـdrawdown وصل للحد ده -> Emergency Mode (قفل مراكز حسب القواعد)
+  emergency_drawdown_pct: 20.0

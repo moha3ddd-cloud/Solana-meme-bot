@@ -1,0 +1,58 @@
+# ============================================================
+# Scanner & Scoring Config — مسار السكالب
+# ============================================================
+# ⚠️ مبدأ أساسي: الـHard Filters هنا **مطابقة تمامًا** لملف
+# scanner_config.yaml (المحافظ). دي حماية أساسية من الاحتيال —
+# سيولة دنيا، mint/freeze authority، honeypot، توزيع حاملين —
+# مش موضوع توقيت، فمش قابلة للتفاوض بغض النظر عن المسار.
+#
+# الفرق الوحيد هنا: منحنيات الـScoring اللي بتقيس "النضج" و"صحة
+# الحجم" اتعدلت عشان تناسب طبيعة عملة سكالب (عمرها دقايق/ساعات،
+# وحجم تداول نسبة للسيولة طبيعي يكون أعلى من عملة محافظة).
+
+hard_filters:
+  min_liquidity_usd: 15000
+  min_token_age_minutes: 30
+  max_top_holder_pct: 15.0
+  max_top10_holders_pct: 45.0
+  require_liquidity_locked_or_burned: true
+  require_sellable: true
+  reject_if_mint_authority_active: true
+  reject_if_freeze_authority_active: true
+  max_buy_tax_pct: 10.0
+  max_sell_tax_pct: 10.0
+
+# -------- منحنيات مخصصة للسكالب (الفرق الحقيقي عن المحافظ) --------
+scoring_curves:
+  # عملة سكالب تاخد Score كامل على النضج بعد ساعة ونص بس، مش 6 ساعات.
+  # الحد الأدنى المطلق (min_token_age_minutes=30) فوق لسه ساري بالطبع.
+  age_maturity_minutes: 90
+  # نطاق "الحجم الصحي" أوسع — عملة سريعة الحركة طبيعي يكون حجم تداولها
+  # نسبة للسيولة أعلى بكتير من عملة محافظة، من غير ما ده يبقى wash trading
+  volume_healthy_min_ratio: 0.5
+  volume_healthy_max_ratio: 12.0
+
+scoring_weights:
+  liquidity_depth: 0.20
+  volume_activity: 0.20        # وزن أعلى من المحافظ (0.13) — تسارع الحجم أهم لسكالب
+  holder_distribution: 0.20    # ثابت — مخاطر التركيز ما بتتغيرش حسب المسار
+  buy_sell_pressure: 0.15
+  holder_growth_rate: 0.05     # وزن أقل من المحافظ (0.10) — رقم "1h ago" مش موثوق لعملة عمرها دقايق
+  wallet_reputation: 0.10
+  age_maturity: 0.05           # وزن أقل من المحافظ (0.07)، بالإضافة لمنحنى أسرع فوق
+  social_presence: 0.05
+
+minimum_entry_score: 70   # نفس حد الأمان — مش بنقلل المعيار، بس بنقيسه صح
+
+suspicious_flags:
+  critical:
+    - honeypot_detected
+    - transfer_restrictions_detected
+    - liquidity_removal_in_progress
+    - known_rug_wallet_involved
+    - contract_not_verified_and_unaudited_pattern
+  warning_score_penalty:
+    sudden_holder_concentration_change: 15
+    abnormal_wash_trading_pattern: 20
+    low_unique_buyer_count: 10
+    dev_wallet_selling: 15

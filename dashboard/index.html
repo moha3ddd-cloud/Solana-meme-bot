@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Risk Deck — Solana Meme Bot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #10141C;
+    --surface: #171D28;
+    --surface-2: #1E2632;
+    --hairline: #2A3342;
+    --text: #E7EAEF;
+    --text-muted: #8B94A5;
+    --text-faint: #5B6478;
+    --safe: #4FD1C5;
+    --safe-dim: #2A5F5A;
+    --caution: #E8A33D;
+    --caution-dim: #6B4D1E;
+    --danger: #E5484D;
+    --danger-dim: #6B2426;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans Arabic', sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    min-height: 100vh;
+    padding: 20px 14px 60px;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; }
+
+  /* ---- Header ---- */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .brand-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--text-faint);
+    text-transform: uppercase;
+  }
+  h1 {
+    font-family: var(--mono);
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-top: 2px;
+  }
+  .meta-time {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-faint);
+    text-align: left;
+  }
+
+  /* ---- File loader ---- */
+  .loader {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .loader label {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .loader input[type=file] {
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .loader .hint { font-size: 11px; color: var(--text-faint); }
+
+  /* ---- Halt banner ---- */
+  .halt-banner {
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 18px;
+    font-family: var(--mono);
+    font-size: 13px;
+    display: none;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid;
+  }
+  .halt-banner.show { display: flex; }
+  .halt-banner .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--danger);
+    box-shadow: 0 0 0 4px var(--danger-dim);
+    flex-shrink: 0;
+  }
+  .halt-banner.danger { background: rgba(229,72,77,0.08); border-color: var(--danger-dim); color: #F4A5A7; }
+  .halt-banner.caution { background: rgba(232,163,61,0.08); border-color: var(--caution-dim); color: #F0C88A; }
+
+  /* ---- Grid: top cards ---- */
+  .grid-top {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  @media (max-width: 640px) { .grid-top { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: 12px;
+    padding: 16px 18px;
+  }
+  .card-label {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 8px;
+  }
+  .big-number {
+    font-family: var(--mono);
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1;
+  }
+  .sub-number {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 6px;
+  }
+  .positive { color: var(--safe); }
+  .negative { color: var(--danger); }
+  .neutral { color: var(--text); }
+
+  /* ---- Drawdown Altimeter (signature element) ---- */
+  .altimeter-card { display: flex; gap: 18px; align-items: center; }
+  .altimeter-track {
+    position: relative;
+    width: 34px;
+    height: 140px;
+    background: var(--surface-2);
+    border-radius: 17px;
+    border: 1px solid var(--hairline);
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+  .altimeter-tier {
+    position: absolute;
+    left: 0; right: 0;
+    border-top: 1px dashed rgba(255,255,255,0.12);
+  }
+  .altimeter-fill {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(180deg, var(--safe), var(--caution) 70%, var(--danger));
+    border-radius: 0 0 17px 17px;
+    transition: height 0.4s ease;
+  }
+  .altimeter-marker {
+    position: absolute;
+    left: -4px; right: -4px;
+    height: 3px;
+    background: var(--text);
+    border-radius: 2px;
+  }
+  .altimeter-legend { flex: 1; }
+  .altimeter-legend .row {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-faint);
+    padding: 3px 0;
+    border-bottom: 1px dashed var(--hairline);
+  }
+  .altimeter-legend .row:last-child { border-bottom: none; }
+  .altimeter-legend .row.active { color: var(--text); }
+  .altimeter-legend .mult { font-weight: 600; }
+
+  /* ---- Stats row ---- */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  @media (max-width: 640px) { .stats-row { grid-template-columns: repeat(2, 1fr); } }
+  .stat-box {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .stat-box .card-label { margin-bottom: 4px; }
+  .stat-box .val { font-family: var(--mono); font-size: 19px; font-weight: 600; }
+
+  /* ---- Sections ---- */
+  section { margin-bottom: 22px; }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .section-head h2 {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .section-head .count {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-faint);
+  }
+
+  /* ---- Position cards ---- */
+  .position-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 8px;
+  }
+  .position-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .symbol { font-family: var(--mono); font-weight: 600; font-size: 15px; }
+  .position-meta {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-faint);
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .reason-line {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed var(--hairline);
+  }
+  .badge {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 20px;
+    border: 1px solid var(--safe-dim);
+    color: var(--safe);
+    background: rgba(79,209,197,0.08);
+  }
+  .badge.trailing { border-color: var(--caution-dim); color: var(--caution); background: rgba(232,163,61,0.08); }
+  .profile-tag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .profile-tag.conservative { color: var(--safe); background: rgba(79,209,197,0.1); }
+  .profile-tag.scalp { color: var(--caution); background: rgba(232,163,61,0.1); }
+
+  /* ---- Trade log ---- */
+  .log-entry {
+    display: grid;
+    grid-template-columns: 90px 70px 80px 1fr 90px;
+    gap: 10px;
+    align-items: baseline;
+    padding: 9px 4px;
+    border-bottom: 1px solid var(--hairline);
+    font-size: 12px;
+  }
+  .log-entry:last-child { border-bottom: none; }
+  .log-time { font-family: var(--mono); color: var(--text-faint); font-size: 11px; }
+  .log-action {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: 4px;
+    width: fit-content;
+    color: var(--text-muted);
+    background: var(--surface-2);
+  }
+  .log-action.entry { color: var(--safe); }
+  .log-action.full_exit { color: var(--danger); }
+  .log-action.partial_exit { color: var(--caution); }
+  .log-action.emergency_exit { color: var(--danger); font-weight: 700; }
+  .log-reason { color: var(--text-muted); }
+  .log-pnl { font-family: var(--mono); text-align: left; }
+
+  /* ---- Config panel ---- */
+  .config-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  @media (max-width: 480px) { .config-grid { grid-template-columns: 1fr; } }
+  .config-item {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: 8px;
+    padding: 10px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .config-item .k { font-size: 12px; color: var(--text-muted); }
+  .config-item .v { font-family: var(--mono); font-size: 13px; font-weight: 600; }
+  .config-note {
+    font-size: 11px;
+    color: var(--text-faint);
+    margin-top: 8px;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 30px 10px;
+    color: var(--text-faint);
+    font-size: 13px;
+  }
+
+  footer {
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-faint);
+    margin-top: 30px;
+    padding-top: 16px;
+    border-top: 1px solid var(--hairline);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div>
+      <div class="brand-eyebrow">Risk-managed · Paper trading</div>
+      <h1>RISK DECK</h1>
+    </div>
+    <div class="meta-time" id="generatedAt">— لسه محملش بيانات —</div>
+  </header>
+
+  <div class="loader">
+    <label for="fileInput">حمّل ملف snapshot.json:</label>
+    <input type="file" id="fileInput" accept="application/json">
+    <span class="hint">الملف ده بيتولّد من core/dashboard_export.py</span>
+  </div>
+
+  <div class="halt-banner" id="haltBanner">
+    <span class="dot"></span>
+    <span id="haltText"></span>
+  </div>
+
+  <div id="dashboardContent" style="display:none;">
+
+    <div class="grid-top">
+      <div class="card">
+        <div class="card-label">Estimated Total Equity</div>
+        <div class="big-number" id="equityVal">$0.00</div>
+        <div class="sub-number" id="equitySub">cash + open positions</div>
+      </div>
+      <div class="card altimeter-card">
+        <div class="altimeter-track" id="altimeterTrack">
+          <div class="altimeter-fill" id="altimeterFill" style="height:0%"></div>
+        </div>
+        <div class="altimeter-legend" id="altimeterLegend">
+          <div class="card-label" style="margin-bottom:8px;">Drawdown Altimeter</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-box">
+        <div class="card-label">Daily PnL</div>
+        <div class="val" id="dailyPnl">—</div>
+      </div>
+      <div class="stat-box">
+        <div class="card-label">Win Rate</div>
+        <div class="val" id="winRate">—</div>
+      </div>
+      <div class="stat-box">
+        <div class="card-label">Profit Factor</div>
+        <div class="val" id="profitFactor">—</div>
+      </div>
+      <div class="stat-box">
+        <div class="card-label">Trades Today</div>
+        <div class="val" id="tradesToday">—</div>
+      </div>
+    </div>
+
+    <section>
+      <div class="section-head">
+        <h2>By Strategy Profile</h2>
+      </div>
+      <div class="config-grid" id="profileBreakdown"></div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>Open Positions</h2>
+        <span class="count" id="openCount">0</span>
+      </div>
+      <div id="openPositionsList"></div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>Trade Log</h2>
+        <span class="count" id="logCount">0</span>
+      </div>
+      <div class="card" id="tradeLogList" style="padding:6px 12px;"></div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>Risk Config</h2>
+      </div>
+      <div class="config-grid" id="configGrid"></div>
+      <div class="config-note">تعديل القيم دي من config/risk_config.yaml مباشرة — مفيش تعديل حي من هنا لحد ما تتبني طبقة backend.</div>
+    </section>
+
+  </div>
+
+  <div class="empty-state" id="emptyState">حمّل ملف snapshot.json عشان تشوف البيانات</div>
+
+  <footer>Generated by PaperTradingEngine · read-only view</footer>
+</div>
+
+<script>
+const fmtUsd = (n) => {
+  const sign = n < 0 ? '-' : '';
+  return sign + '$' + Math.abs(n).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+};
+const fmtPct = (n) => (n >= 0 ? '+' : '') + n.toFixed(2) + '%';
+const cls = (n) => n > 0 ? 'positive' : (n < 0 ? 'negative' : 'neutral');
+
+document.getElementById('fileInput').addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (evt) => {
+    try {
+      const data = JSON.parse(evt.target.result);
+      render(data);
+    } catch (err) {
+      alert('الملف مش JSON صحيح: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+});
+
+function render(data) {
+  document.getElementById('dashboardContent').style.display = 'block';
+  document.getElementById('emptyState').style.display = 'none';
+  document.getElementById('generatedAt').textContent = new Date(data.generated_at).toLocaleString('en-US');
+
+  // Halt banner
+  const halt = document.getElementById('haltBanner');
+  const haltText = document.getElementById('haltText');
+  if (data.risk_status.kill_switch_active) {
+    halt.className = 'halt-banner show danger';
+    haltText.textContent = 'KILL SWITCH ACTIVE — no new trades';
+  } else if (data.risk_status.trading_halted) {
+    halt.className = 'halt-banner show caution';
+    haltText.textContent = 'Trading halted: ' + data.risk_status.halt_reason;
+  } else {
+    halt.className = 'halt-banner';
+  }
+
+  // Equity
+  document.getElementById('equityVal').textContent = fmtUsd(data.portfolio.estimated_total_equity_usd);
+  document.getElementById('equityVal').className = 'big-number ' + cls(data.portfolio.estimated_total_equity_usd - data.portfolio.starting_capital_usd);
+  document.getElementById('equitySub').textContent =
+    fmtUsd(data.portfolio.cash_usd) + ' cash + ' + fmtUsd(data.portfolio.open_positions_value_usd) + ' in positions';
+
+  // Stats row
+  const dp = document.getElementById('dailyPnl');
+  dp.textContent = fmtUsd(data.risk_status.daily_pnl_usd) + ' (' + fmtPct(data.risk_status.daily_pnl_pct) + ')';
+  dp.className = 'val ' + cls(data.risk_status.daily_pnl_usd);
+
+  document.getElementById('winRate').textContent = data.stats.win_rate_pct !== null ? data.stats.win_rate_pct + '%' : '—';
+  document.getElementById('profitFactor').textContent = data.stats.profit_factor !== null ? data.stats.profit_factor + 'x' : '—';
+  document.getElementById('tradesToday').textContent = data.risk_status.trades_opened_today;
+
+  // Profile breakdown
+  renderProfileBreakdown(data.stats.by_profile);
+
+  // Altimeter
+  renderAltimeter(data);
+
+  // Open positions
+  renderOpenPositions(data.open_positions);
+
+  // Trade log (أحدث حاجة فوق)
+  renderTradeLog(data.trade_log.slice().reverse());
+
+  // Config
+  renderConfig(data.config);
+}
+
+function renderProfileBreakdown(byProfile) {
+  const container = document.getElementById('profileBreakdown');
+  container.innerHTML = '';
+  Object.entries(byProfile || {}).forEach(([name, stats]) => {
+    const item = document.createElement('div');
+    item.className = 'config-item';
+    const wr = stats.win_rate_pct !== null && stats.win_rate_pct !== undefined ? stats.win_rate_pct + '%' : '—';
+    const pf = stats.profit_factor !== null && stats.profit_factor !== undefined ? stats.profit_factor + 'x' : '—';
+    item.innerHTML = `
+      <span class="k"><span class="profile-tag ${name}">${name}</span></span>
+      <span class="v" style="text-align:left;">${stats.closed_trades_count} trades · WR ${wr} · PF ${pf}</span>
+    `;
+    container.appendChild(item);
+  });
+}
+
+function renderAltimeter(data) {
+  const dd = data.risk_status.current_drawdown_pct;
+  const tiers = data.drawdown_tiers; // [{drawdown_pct, risk_multiplier}, ...]
+  const maxScale = tiers[tiers.length - 1].drawdown_pct * 1.25; // هامش فوق آخر tier
+
+  const fillPct = Math.min(100, (dd / maxScale) * 100);
+  document.getElementById('altimeterFill').style.height = fillPct + '%';
+
+  const track = document.getElementById('altimeterTrack');
+  // شيل أي tier lines قديمة (بنسيب الـfill عنصر واحد ثابت)
+  track.querySelectorAll('.altimeter-tier').forEach(el => el.remove());
+  tiers.forEach(tier => {
+    const posFromBottom = (tier.drawdown_pct / maxScale) * 100;
+    const line = document.createElement('div');
+    line.className = 'altimeter-tier';
+    line.style.bottom = posFromBottom + '%';
+    track.appendChild(line);
+  });
+
+  const legend = document.getElementById('altimeterLegend');
+  legend.innerHTML = '<div class="card-label" style="margin-bottom:8px;">Drawdown Altimeter</div>';
+  const currentRow = document.createElement('div');
+  currentRow.className = 'row active';
+  currentRow.innerHTML = `<span>الحالي</span><span class="mult">${dd.toFixed(2)}%</span>`;
+  legend.appendChild(currentRow);
+
+  tiers.forEach(tier => {
+    const row = document.createElement('div');
+    const isPast = dd >= tier.drawdown_pct;
+    row.className = 'row' + (isPast ? ' active' : '');
+    row.innerHTML = `<span>≥ ${tier.drawdown_pct}%</span><span class="mult">risk ×${tier.risk_multiplier}</span>`;
+    legend.appendChild(row);
+  });
+}
+
+function renderOpenPositions(positions) {
+  document.getElementById('openCount').textContent = positions.length;
+  const container = document.getElementById('openPositionsList');
+  container.innerHTML = '';
+  if (positions.length === 0) {
+    container.innerHTML = '<div class="empty-state" style="padding:16px;">مفيش صفقات مفتوحة دلوقتي</div>';
+    return;
+  }
+  positions.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'position-card';
+    const badges = p.targets_hit.map(i => `<span class="badge">Target ${i + 1} hit</span>`).join(' ')
+      + (p.trailing_active ? ' <span class="badge trailing">Trailing active</span>' : '');
+    card.innerHTML = `
+      <div class="position-top">
+        <span class="symbol">${p.symbol} <span class="profile-tag ${p.profile}">${p.profile}</span></span>
+        <span class="position-meta">
+          <span>entry ${p.entry_price}</span>
+          <span>stop ${p.current_stop_price.toFixed(4)}</span>
+          <span>${p.remaining_size_pct}% open</span>
+        </span>
+      </div>
+      <div>${badges || '<span class="badge" style="color:var(--text-faint);border-color:var(--hairline);background:transparent;">no targets yet</span>'}</div>
+      <div class="reason-line">دخلت لأن: ${p.entry_reasons}</div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function renderTradeLog(entries) {
+  document.getElementById('logCount').textContent = entries.length;
+  const container = document.getElementById('tradeLogList');
+  container.innerHTML = '';
+  if (entries.length === 0) {
+    container.innerHTML = '<div class="empty-state">مفيش حركات مسجلة لسه</div>';
+    return;
+  }
+  entries.forEach(e => {
+    const row = document.createElement('div');
+    row.className = 'log-entry';
+    const time = new Date(e.timestamp).toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'});
+    const pnlText = e.pnl_usd !== null && e.pnl_usd !== undefined ? fmtUsd(e.pnl_usd) : '';
+    row.innerHTML = `
+      <span class="log-time">${time}</span>
+      <span class="log-action ${e.action}">${e.action.replace('_', ' ')}</span>
+      <span class="profile-tag ${e.profile}" style="justify-self:start;">${e.profile}</span>
+      <span class="log-reason">${e.symbol} — ${e.reason}</span>
+      <span class="log-pnl ${cls(e.pnl_usd || 0)}">${pnlText}</span>
+    `;
+    container.appendChild(row);
+  });
+}
+
+function renderConfig(config) {
+  const grid = document.getElementById('configGrid');
+  grid.innerHTML = '';
+  const labels = {
+    risk_per_trade_pct: 'Risk per Trade',
+    daily_loss_limit_pct: 'Daily Loss Limit',
+    max_trades_per_day: 'Max Trades / Day',
+    emergency_drawdown_pct: 'Emergency Drawdown',
+  };
+  const units = {
+    risk_per_trade_pct: '%',
+    daily_loss_limit_pct: '%',
+    max_trades_per_day: '',
+    emergency_drawdown_pct: '%',
+  };
+  Object.entries(config).forEach(([k, v]) => {
+    const item = document.createElement('div');
+    item.className = 'config-item';
+    item.innerHTML = `<span class="k">${labels[k] || k}</span><span class="v">${v}${units[k] || ''}</span>`;
+    grid.appendChild(item);
+  });
+}
+
+// لو الملف متاح على نفس السيرفر (snapshot.json جنب index.html)، حاول تحمّله تلقائيًا
+fetch('snapshot.json').then(r => r.ok ? r.json() : null).then(data => { if (data) render(data); }).catch(() => {});
+</script>
+</body>
+</html>

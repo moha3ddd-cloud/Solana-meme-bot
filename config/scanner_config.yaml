@@ -1,0 +1,52 @@
+# ============================================================
+# Scanner & Scoring Config — فلترة العملات قبل حتى ما نوصل لمرحلة الـScore
+# ============================================================
+
+# -------- Hard Filters (استبعاد فوري — لو فشل أي شرط هنا، العملة برة خالص) --------
+hard_filters:
+  min_liquidity_usd: 15000
+  min_token_age_minutes: 30          # عملة عمرها أقل من كده = مشبوهة جدًا
+  max_top_holder_pct: 15.0           # لو أكبر holder واحد (غير الـpool) عنده أكتر من كده
+  max_top10_holders_pct: 45.0        # مجموع أكبر 10 هولدرز
+  require_liquidity_locked_or_burned: true
+  require_sellable: true             # اختبار بيع فعلي (simulate sell) لازم ينجح
+  reject_if_mint_authority_active: true    # لسه ينفع يطبع توكنز جديدة = خطر
+  reject_if_freeze_authority_active: true  # ينفع يجمد محافظ الناس = خطر
+  max_buy_tax_pct: 10.0
+  max_sell_tax_pct: 10.0
+
+# -------- Scoring Weights (بعد ما تعدي الـHard Filters) --------
+# كل عامل بياخد نقط من 0 لـ 100، وبعدين بيتوزن حسب weight
+scoring_weights:
+  liquidity_depth: 0.20        # السيولة مقارنة بالـmarket cap
+  volume_activity: 0.13        # حجم التداول آخر 1h/6h/24h ونسبته للـliquidity
+  holder_distribution: 0.20    # كل ما التوزيع أعدل كل ما أحسن
+  buy_sell_pressure: 0.15      # نسبة الشراء للبيع في آخر فترة
+  holder_growth_rate: 0.10     # هل عدد الهولدرز بيزيد بشكل صحي ولا مشبوه (bot-like)
+  # wallet_reputation دلوقتي بتدمج مصدرين: خصم من warning flags سلبية،
+  # + Smart Money score من WalletReputationTracker (سمعة الحاملين بناءً
+  # على تاريخنا إحنا في صفقات سابقة — مش قاعدة بيانات خارجية)
+  wallet_reputation: 0.10
+  age_maturity: 0.07           # عملة أكبر شوية أأمن من عملة عمرها دقايق
+  # إشارة ضعيفة عمدًا — وجود روابط social موثقة في DexScreener بس،
+  # مش قياس فيروسية حقيقي (محتاج X API/LunarCrush مش موجود حاليًا)
+  social_presence: 0.05
+
+# الحد الأدنى للـScore عشان البوت يفكر يدخل أصلًا
+minimum_entry_score: 70
+
+# -------- Suspicious Activity Flags (بتقلل الـScore أو تستبعد فورًا حسب الخطورة) --------
+suspicious_flags:
+  # لو اتفعّل أي flag "critical" هنا -> استبعاد فوري بغض النظر عن الـScore
+  critical:
+    - honeypot_detected
+    - transfer_restrictions_detected
+    - liquidity_removal_in_progress
+    - known_rug_wallet_involved
+    - contract_not_verified_and_unaudited_pattern
+  # الـwarning flags بتخصم نقط من الـScore النهائي بدل الاستبعاد الفوري
+  warning_score_penalty:
+    sudden_holder_concentration_change: 15
+    abnormal_wash_trading_pattern: 20
+    low_unique_buyer_count: 10
+    dev_wallet_selling: 15

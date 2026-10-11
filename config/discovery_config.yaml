@@ -1,0 +1,31 @@
+# ============================================================
+# Discovery Layer Config
+# ============================================================
+# هدف الملف ده: فلترة رخيصة جدًا (من DexScreener بس، من غير RugCheck
+# أو Jupiter) قبل حتى ما نفكر نبعت العملة للـScanner الكامل. الهدف
+# مش أمان — الهدف توفير الـrate limit المحدود (RugCheck 10-60/min)
+# لعملات تستاهل فعلًا نفحصها بعمق.
+
+pre_filter:
+  min_liquidity_usd: 10000       # أقل شوية من hard_filters الأساسي (15000) — الفلتر النهائي في الـScanner
+  min_volume_5m_usd: 500         # لو مفيش نشاط تداول خالص، مالهاش داعي نكمل عليها
+  max_token_age_minutes: 720     # 12 ساعة — بعدها العملة بقت "قديمة" لأغراض discovery (لو حبيت تتابعها أكتر، استخدم watchlist يدوي)
+
+cooldown:
+  # لو عملة اترفضت أو اتفحصت قبل كده، منمنعش نعيد فحصها فورًا كل دورة
+  # (توفير requests) — بس نسمح نعيد النظر فيها بعد فترة لو حالتها اتغيرت
+  recheck_cooldown_minutes: 30
+
+discovery_sources:
+  use_token_profiles: true   # مشاريع سجّلت بيانات meta حديثًا (DexScreener)
+  use_token_boosts: true     # عملات دفعت "تعزيز" على DexScreener (إشارة ضعيفة، بس رخيصة)
+  # GeckoTerminal — مصدر إضافي، شوف core/data/geckoterminal_client.py.
+  # معطّلين افتراضيًا هنا عشان rate limit GeckoTerminal أضيق (30/min) —
+  # فعّلهم بوعي، ويفضل مش الاتنين مع كل حاجة تانية في نفس الدورة
+  use_geckoterminal_new_pools: false
+  use_geckoterminal_trending: false
+  # watchlist يدوي — عناوين تحب تتابعها بغض النظر عن مصادر الاكتشاف فوق
+  manual_watchlist_addresses: []
+
+limits:
+  max_candidates_per_cycle: 20   # حماية إضافية من استهلاك rate limit في دورة واحدة

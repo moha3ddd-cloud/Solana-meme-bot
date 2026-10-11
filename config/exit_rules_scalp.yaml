@@ -1,0 +1,25 @@
+# ============================================================
+# Exit Rules — مسار السكالب
+# ============================================================
+# فلسفة المسار ده: دخول وخروج سريع، أهداف ربح قريبة، الأولوية تأمين
+# الربح بسرعة مش انتظار حركة كبيرة. مناسب لعملات صغيرة سريعة الحركة
+# فين احتمال الارتداد لتحت عالي.
+#
+# ⚠️ تحذير مهم: الأهداف القريبة هنا معناها صفقات كتير وعمولات/slippage
+# متكررة أكتر. لازم execution_safety في risk_config.yaml (max_slippage,
+# min_liquidity) يفضل صارم — سكالب على عملة سيولتها ضعيفة هيدفع فرق
+# الـslippage نفسه أكتر من هدف الربح الأول.
+
+take_profit_levels:
+  - gain_pct: 8
+    close_position_pct: 40
+    move_stop_to_breakeven: true
+  - gain_pct: 15
+    close_position_pct: 40
+    move_stop_to_breakeven: true
+  - gain_pct: 25
+    close_position_pct: 20
+    move_stop_to_breakeven: true
+# الباقي (20%) trailing ضيق — نمسك زيادة بسيطة لو استمرت، من غير طمع
+trailing_stop_activation_pct: 15    # يتفعل بدري جدًا مقارنة بالمحافظ
+trailing_stop_distance_pct: 6       # مسافة ضيقة — نخرج بسرعة لو ارتدت
