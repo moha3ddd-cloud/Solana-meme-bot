@@ -1,0 +1,125 @@
+{
+  "all_core_passed": true,
+  "checks": [
+    {
+      "name": "dexscreener_profiles",
+      "ok": true,
+      "optional": false,
+      "detail": "24 عنصر Solana — مفاتيح العينة: ['chainId', 'cto', 'description', 'header', 'icon', 'links', 'openGraph', 'tokenAddress', 'url']"
+    },
+    {
+      "name": "dexscreener_boosts",
+      "ok": true,
+      "optional": false,
+      "detail": "29 عنصر Solana"
+    },
+    {
+      "name": "dexscreener_token_pairs",
+      "ok": true,
+      "optional": false,
+      "detail": "30 pair — priceUsd=0.000003443 liquidity=371131.32"
+    },
+    {
+      "name": "dexscreener_mapper",
+      "ok": true,
+      "optional": false,
+      "detail": "liquidity_usd=371131.32 age_min=1995881.5611310871 price_change_5m=0.04"
+    },
+    {
+      "name": "rugcheck_report",
+      "ok": true,
+      "optional": false,
+      "detail": "كل الحقول المتوقعة موجودة — topHolders=20 markets=1284"
+    },
+    {
+      "name": "rugcheck_mapper",
+      "ok": true,
+      "optional": false,
+      "detail": "top_holder_pct=8.83 top10=38.36 mint_active=False lp_locked=True"
+    },
+    {
+      "name": "full_pipeline_scanner",
+      "ok": true,
+      "optional": false,
+      "detail": "محافظ: score=42.96 passed_hard=True eligible=False | سكالب: score=42.89 passed_hard=True eligible=False  (مجرد فحص إن الخط شغال — مش قرار دخول)"
+    },
+    {
+      "name": "geckoterminal_trending",
+      "ok": true,
+      "optional": true,
+      "detail": "20 pool — أول رمز: UNKNOWN"
+    },
+    {
+      "name": "geckoterminal_ohlcv",
+      "ok": true,
+      "optional": true,
+      "detail": "44 شمعة — آخر إغلاق 4.51794234398865e-05"
+    }
+  ],
+  "rugcheck_shape": {
+    "top_level_keys": [
+      "creator",
+      "creatorBalance",
+      "creatorTokens",
+      "deployPlatform",
+      "detectedAt",
+      "events",
+      "fileMeta",
+      "freezeAuthority",
+      "graphInsidersDetected",
+      "insiderNetworks",
+      "knownAccounts",
+      "launchpad",
+      "lockerOwners",
+      "lockerScanStatus",
+      "lockers",
+      "markets",
+      "mint",
+      "mintAuthority",
+      "price",
+      "risks",
+      "rugged",
+      "score",
+      "score_normalised",
+      "token",
+      "tokenMeta",
+      "tokenProgram",
+      "tokenType",
+      "token_extensions",
+      "topHolders",
+      "totalHolders",
+      "totalLPProviders",
+      "totalMarketLiquidity",
+      "totalStableLiquidity",
+      "transferFee",
+      "validation",
+      "verification"
+    ],
+    "missing_expected_keys": [],
+    "topHolders_sample_keys": [
+      "address",
+      "amount",
+      "decimals",
+      "insider",
+      "owner",
+      "pct",
+      "uiAmount",
+      "uiAmountString"
+    ],
+    "markets_sample_keys": [
+      "liquidityA",
+      "liquidityAAccount",
+      "liquidityB",
+      "liquidityBAccount",
+      "lp",
+      "marketType",
+      "mintA",
+      "mintAAccount",
+      "mintB",
+      "mintBAccount",
+      "mintLP",
+      "mintLPAccount",
+      "pubkey"
+    ]
+  }
+}
