@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-12T15:43:45.614208",
+  "generated_at": "2026-10-12T15:46:40.834135",
   "mode": "paper",
   "portfolio": {
     "cash_usd": 987.08,
@@ -98,5 +98,57 @@
     "daily_loss_limit_pct": 2.0,
     "max_trades_per_day": 15,
     "emergency_drawdown_pct": 20.0
+  },
+  "cycle_log": [
+    {
+      "timestamp": "2026-10-12T15:46:40.834008",
+      "discovery": {
+        "addresses_collected": 47,
+        "skipped_recently_seen": 39,
+        "pairs_returned": 11,
+        "pre_filter_rejected": {
+          "low_liquidity": 9,
+          "low_volume_5m": 1
+        },
+        "passed_pre_filter": 1,
+        "batch_failures": 0
+      },
+      "candidates_discovered": 1,
+      "candidates_evaluated": 1,
+      "rugcheck_failures": 0,
+      "rejections": {
+        "scanner_hard_filter_failed": 1
+      },
+      "opened": [],
+      "closed": [],
+      "emergency": null,
+      "errors": [],
+      "details": [
+        {
+          "symbol": "ACAT",
+          "address": "Hx2B2Q8RCe7QTLy8oZGF1u6RwjXvTnAtWUS1VQ49pump",
+          "result": "scanner_hard_filter_failed",
+          "scanner_score": null,
+          "signal_score": null
+        }
+      ]
+    }
+  ],
+  "cycle_totals": {
+    "cycles": 1,
+    "addresses_collected": 47,
+    "skipped_recently_seen": 39,
+    "pairs_returned": 11,
+    "passed_pre_filter": 1,
+    "evaluated": 1,
+    "opened": 0,
+    "errors": 0,
+    "pre_filter_rejected": {
+      "low_liquidity": 9,
+      "low_volume_5m": 1
+    },
+    "rejections": {
+      "scanner_hard_filter_failed": 1
+    }
   }
 }
