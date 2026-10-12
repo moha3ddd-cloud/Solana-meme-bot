@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-10-12T10:07:56.009469",
+  "generated_at": "2026-10-12T10:43:18.159274",
   "mode": "paper",
   "portfolio": {
-    "cash_usd": 1000.0,
-    "open_positions_value_usd": 0,
+    "cash_usd": 900.0,
+    "open_positions_value_usd": 100.0,
     "estimated_total_equity_usd": 1000.0,
     "starting_capital_usd": 1000.0
   },
@@ -14,7 +14,7 @@
     "drawdown_risk_multiplier": 1.0,
     "daily_pnl_usd": 0.0,
     "daily_pnl_pct": 0.0,
-    "trades_opened_today": 0,
+    "trades_opened_today": 1,
     "trading_halted": false,
     "halt_reason": "none",
     "kill_switch_active": false
@@ -38,7 +38,7 @@
     }
   ],
   "stats": {
-    "open_positions_count": 0,
+    "open_positions_count": 1,
     "closed_trades_count": 0,
     "win_rate_pct": null,
     "profit_factor": null,
@@ -57,9 +57,34 @@
       }
     }
   },
-  "open_positions": [],
+  "open_positions": [
+    {
+      "symbol": "FIGHT",
+      "address": "A8JUiZLzjGAsKxE74evdspHcuW4hvhPbvryDhaDZpump",
+      "profile": "scalp",
+      "entry_price": 0.0003064,
+      "current_stop_price": 0.00027576,
+      "remaining_size_pct": 100.0,
+      "targets_hit": [],
+      "trailing_active": false,
+      "entry_reasons": "[scalp] scanner_score=79.4, signal_score=82.5",
+      "opened_at": "2026-10-12T10:43:18.107993"
+    }
+  ],
   "closed_trades": [],
-  "trade_log": [],
+  "trade_log": [
+    {
+      "timestamp": "2026-10-12T10:43:18.108005",
+      "symbol": "FIGHT",
+      "address": "A8JUiZLzjGAsKxE74evdspHcuW4hvhPbvryDhaDZpump",
+      "profile": "scalp",
+      "action": "entry",
+      "price": 0.0003064,
+      "size_usd": 100.0,
+      "reason": "[scalp] scanner_score=79.4, signal_score=82.5",
+      "pnl_usd": null
+    }
+  ],
   "config": {
     "risk_per_trade_pct": 1.0,
     "daily_loss_limit_pct": 2.0,

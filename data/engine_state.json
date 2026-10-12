@@ -1,8 +1,52 @@
 {
-  "cash_usd": 1000.0,
-  "open_positions": {},
+  "cash_usd": 900.0,
+  "open_positions": {
+    "A8JUiZLzjGAsKxE74evdspHcuW4hvhPbvryDhaDZpump": {
+      "position": {
+        "symbol": "FIGHT",
+        "address": "A8JUiZLzjGAsKxE74evdspHcuW4hvhPbvryDhaDZpump",
+        "entry_price": 0.0003064,
+        "initial_stop_price": 0.00027576,
+        "original_size_usd": 100.0,
+        "remaining_size_pct": 100.0,
+        "current_stop_price": 0.00027576,
+        "highest_price_seen": 0.0003064,
+        "targets_hit": [],
+        "trailing_active": false,
+        "opened_at": "2026-10-12T10:43:18.107993",
+        "top_holder_addresses": [
+          "ED173DRtP9bSFUAB3MwhtXosu1mfE5LswUakbsH2kvAT",
+          "8YCE6GKk6UtQKg6FCJHsV8mVzAbgmMrfEtmDgGgzwhxJ",
+          "qSa1woTJwzQ5vhUA1iYNrH2V3HZ7xAnrChCMAuZvuSD",
+          "JAzmePiSBhwGkmr8bcGkPTxPKvf5Q3NNYY2dPZUJY84s",
+          "5qMYMA7PVJWhkcEdCeEUtCWjaRYB1eszv3bRffDehiQx",
+          "ASpTNdrLVwf9TjefS5anJBNGhv9b69kzPYDZb4ir8M9L",
+          "Aqgot4CrWqxA7yb5NWUevU45teYkqHLqJcS2oukVDP7P",
+          "2HvRLBTNkP8Fjow3J26JWEd4foNJsMrNamQmEP1DNpAi",
+          "9b7d75MsnGo6TgAW8wNXapAv2gFk7c6yjeQTh27u7gKE",
+          "DYRU8emFz8Lo8mNBnMnnVGEp5vU7ypfqGmufEGD9C4fP"
+        ]
+      },
+      "profile": "scalp",
+      "entry_scanner_score": 79.4,
+      "entry_signal_score": 82.47,
+      "entry_reasons": "[scalp] scanner_score=79.4, signal_score=82.5"
+    }
+  },
   "closed_trades": [],
-  "trade_log": [],
+  "trade_log": [
+    {
+      "timestamp": "2026-10-12T10:43:18.108005",
+      "symbol": "FIGHT",
+      "address": "A8JUiZLzjGAsKxE74evdspHcuW4hvhPbvryDhaDZpump",
+      "profile": "scalp",
+      "action": "entry",
+      "price": 0.0003064,
+      "size_usd": 100.0,
+      "reason": "[scalp] scanner_score=79.4, signal_score=82.5",
+      "pnl_usd": null
+    }
+  ],
   "risk_engine_state": {
     "peak_equity_usd": 1000.0,
     "current_equity_usd": 1000.0,
@@ -11,7 +55,7 @@
       "trading_day": "2026-10-12",
       "starting_equity_usd": 1000.0,
       "realized_pnl_usd": 0.0,
-      "trades_opened": 0,
+      "trades_opened": 1,
       "consecutive_errors": 0,
       "halted": false,
       "halt_reason": "none"
