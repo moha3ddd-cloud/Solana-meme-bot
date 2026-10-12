@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-12T16:41:18.929709",
+  "generated_at": "2026-10-12T17:05:16.025559",
   "mode": "paper",
   "portfolio": {
     "cash_usd": 987.08,
@@ -327,32 +327,113 @@
           }
         }
       ]
+    },
+    {
+      "timestamp": "2026-10-12T17:05:16.025412",
+      "discovery": {
+        "addresses_collected": 43,
+        "skipped_recently_seen": 27,
+        "pairs_returned": 30,
+        "pre_filter_rejected": {
+          "low_liquidity": 25,
+          "low_volume_5m": 2
+        },
+        "passed_pre_filter": 3,
+        "batch_failures": 0
+      },
+      "candidates_discovered": 3,
+      "candidates_evaluated": 3,
+      "rugcheck_failures": 0,
+      "rejections": {
+        "scanner_score_too_low": 1,
+        "scanner_hard_filter_failed": 2
+      },
+      "hard_filter_reasons": {
+        "top_holder_too_concentrated": 2,
+        "top10_holders_too_concentrated": 2,
+        "token_too_new": 2,
+        "liquidity_below_min": 1
+      },
+      "opened": [],
+      "closed": [],
+      "emergency": null,
+      "errors": [],
+      "details": [
+        {
+          "symbol": "casino",
+          "address": "7aSRFYVupn5cS5ebNSnNf9PoJY94RbXje3hV6uzppump",
+          "result": "scanner_score_too_low",
+          "scanner_score": 51.3,
+          "signal_score": null,
+          "hard_filter_reasons": null
+        },
+        {
+          "symbol": "VALENTINO",
+          "address": "5zB4xQpjynELrbpq7sL6Vp7a7nN6BoQ4PQs1kT97pump",
+          "result": "scanner_hard_filter_failed",
+          "scanner_score": null,
+          "signal_score": null,
+          "hard_filter_reasons": {
+            "conservative": [
+              "token_too_new (11m)",
+              "top_holder_too_concentrated (72.9%)",
+              "top10_holders_too_concentrated (111.8%)"
+            ],
+            "scalp": [
+              "token_too_new (11m)",
+              "top_holder_too_concentrated (72.9%)",
+              "top10_holders_too_concentrated (111.8%)"
+            ]
+          }
+        },
+        {
+          "symbol": "CPAD",
+          "address": "GzYmiYSgHVAC4rhP4cK1aasdD2rzvc9x48k2G9zZRoto",
+          "result": "scanner_hard_filter_failed",
+          "scanner_score": null,
+          "signal_score": null,
+          "hard_filter_reasons": {
+            "conservative": [
+              "liquidity_below_min ($11,708)",
+              "token_too_new (7m)",
+              "top_holder_too_concentrated (22.3%)",
+              "top10_holders_too_concentrated (61.9%)"
+            ],
+            "scalp": [
+              "liquidity_below_min ($11,708)",
+              "token_too_new (7m)",
+              "top_holder_too_concentrated (22.3%)",
+              "top10_holders_too_concentrated (61.9%)"
+            ]
+          }
+        }
+      ]
     }
   ],
   "cycle_totals": {
-    "cycles": 4,
-    "addresses_collected": 189,
-    "skipped_recently_seen": 123,
-    "pairs_returned": 104,
-    "passed_pre_filter": 8,
-    "evaluated": 8,
+    "cycles": 5,
+    "addresses_collected": 232,
+    "skipped_recently_seen": 150,
+    "pairs_returned": 134,
+    "passed_pre_filter": 11,
+    "evaluated": 11,
     "opened": 0,
     "errors": 0,
     "pre_filter_rejected": {
-      "low_liquidity": 84,
-      "low_volume_5m": 11,
+      "low_liquidity": 109,
+      "low_volume_5m": 13,
       "too_old": 1
     },
     "rejections": {
-      "scanner_hard_filter_failed": 6,
-      "scanner_score_too_low": 2
+      "scanner_hard_filter_failed": 8,
+      "scanner_score_too_low": 3
     },
     "hard_filter_reasons": {
-      "liquidity_below_min": 1,
-      "top10_holders_too_concentrated": 4,
-      "top_holder_too_concentrated": 5,
+      "liquidity_below_min": 2,
+      "top10_holders_too_concentrated": 6,
+      "top_holder_too_concentrated": 7,
       "liquidity_not_locked_or_burned": 1,
-      "token_too_new": 1
+      "token_too_new": 3
     }
   }
 }
