@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-12T17:05:16.025559",
+  "generated_at": "2026-10-12T17:41:34.614544",
   "mode": "paper",
   "portfolio": {
     "cash_usd": 987.08,
@@ -408,32 +408,183 @@
           }
         }
       ]
+    },
+    {
+      "timestamp": "2026-10-12T17:41:34.614339",
+      "discovery": {
+        "addresses_collected": 43,
+        "skipped_recently_seen": 0,
+        "pairs_returned": 60,
+        "pre_filter_rejected": {
+          "low_liquidity": 40,
+          "too_old": 2,
+          "low_volume_5m": 10
+        },
+        "passed_pre_filter": 8,
+        "batch_failures": 0
+      },
+      "candidates_discovered": 8,
+      "candidates_evaluated": 8,
+      "rugcheck_failures": 0,
+      "rejections": {
+        "scanner_score_too_low": 2,
+        "scanner_hard_filter_failed": 6
+      },
+      "hard_filter_reasons": {
+        "token_too_new": 4,
+        "top10_holders_too_concentrated": 3,
+        "top_holder_too_concentrated": 5
+      },
+      "opened": [],
+      "closed": [],
+      "emergency": null,
+      "errors": [],
+      "details": [
+        {
+          "symbol": "MEGA",
+          "address": "3EFi7FeNcgmTWa9YgyHbfqFAUodLKg6xrQX3X2hFpump",
+          "result": "scanner_score_too_low",
+          "scanner_score": 76.46,
+          "signal_score": null,
+          "hard_filter_reasons": null
+        },
+        {
+          "symbol": "CASINU",
+          "address": "9qj1HN5n227FeRnHiiHoyGjzDZqcGh3mCdFahywzpump",
+          "result": "scanner_hard_filter_failed",
+          "scanner_score": null,
+          "signal_score": null,
+          "hard_filter_reasons": {
+            "conservative": [
+              "token_too_new (12m)"
+            ],
+            "scalp": [
+              "token_too_new (12m)"
+            ]
+          }
+        },
+        {
+          "symbol": "BATONA",
+          "address": "4hsJNmPComjTsbrDtoLjDMmsyZ1g2T1xy1xHnEE2pump",
+          "result": "scanner_score_too_low",
+          "scanner_score": 78.57,
+          "signal_score": null,
+          "hard_filter_reasons": null
+        },
+        {
+          "symbol": "WONDER",
+          "address": "mZkvmUh2SxGzipBkN8DcZE9hbWAHZXvjrDccGVxpump",
+          "result": "scanner_hard_filter_failed",
+          "scanner_score": null,
+          "signal_score": null,
+          "hard_filter_reasons": {
+            "conservative": [
+              "token_too_new (25m)",
+              "top_holder_too_concentrated (22.9%)",
+              "top10_holders_too_concentrated (64.2%)"
+            ],
+            "scalp": [
+              "token_too_new (25m)",
+              "top_holder_too_concentrated (22.9%)",
+              "top10_holders_too_concentrated (64.2%)"
+            ]
+          }
+        },
+        {
+          "symbol": "Bumo",
+          "address": "7yg2UT3Ksh7wwmAPAasaKU6SBbakRtzf2eYqjZZzpump",
+          "result": "scanner_hard_filter_failed",
+          "scanner_score": null,
+          "signal_score": null,
+          "hard_filter_reasons": {
+            "conservative": [
+              "token_too_new (24m)",
+              "top_holder_too_concentrated (24.3%)",
+              "top10_holders_too_concentrated (47.0%)"
+            ],
+            "scalp": [
+              "token_too_new (24m)",
+              "top_holder_too_concentrated (24.3%)",
+              "top10_holders_too_concentrated (47.0%)"
+            ]
+          }
+        },
+        {
+          "symbol": "SGORILLA",
+          "address": "8ubf4S7gMNDqeb1Kef8gU2TPibRjo3zQsBF9uEYsmW4Q",
+          "result": "scanner_hard_filter_failed",
+          "scanner_score": null,
+          "signal_score": null,
+          "hard_filter_reasons": {
+            "conservative": [
+              "top_holder_too_concentrated (18.8%)"
+            ],
+            "scalp": [
+              "top_holder_too_concentrated (18.8%)"
+            ]
+          }
+        },
+        {
+          "symbol": "VSWAP",
+          "address": "4VScHuqZ13uma3S34iNkiSAQvZDEeGebjbM5bPcapump",
+          "result": "scanner_hard_filter_failed",
+          "scanner_score": null,
+          "signal_score": null,
+          "hard_filter_reasons": {
+            "conservative": [
+              "top_holder_too_concentrated (17.0%)"
+            ],
+            "scalp": [
+              "top_holder_too_concentrated (17.0%)"
+            ]
+          }
+        },
+        {
+          "symbol": "USD",
+          "address": "USDCr7QqshWobMtH9JdgVoyR5mFY8egohfvVhxTQBvf",
+          "result": "scanner_hard_filter_failed",
+          "scanner_score": null,
+          "signal_score": null,
+          "hard_filter_reasons": {
+            "conservative": [
+              "token_too_new (13m)",
+              "top_holder_too_concentrated (21.2%)",
+              "top10_holders_too_concentrated (59.1%)"
+            ],
+            "scalp": [
+              "token_too_new (13m)",
+              "top_holder_too_concentrated (21.2%)",
+              "top10_holders_too_concentrated (59.1%)"
+            ]
+          }
+        }
+      ]
     }
   ],
   "cycle_totals": {
-    "cycles": 5,
-    "addresses_collected": 232,
+    "cycles": 6,
+    "addresses_collected": 275,
     "skipped_recently_seen": 150,
-    "pairs_returned": 134,
-    "passed_pre_filter": 11,
-    "evaluated": 11,
+    "pairs_returned": 194,
+    "passed_pre_filter": 19,
+    "evaluated": 19,
     "opened": 0,
     "errors": 0,
     "pre_filter_rejected": {
-      "low_liquidity": 109,
-      "low_volume_5m": 13,
-      "too_old": 1
+      "low_liquidity": 149,
+      "low_volume_5m": 23,
+      "too_old": 3
     },
     "rejections": {
-      "scanner_hard_filter_failed": 8,
-      "scanner_score_too_low": 3
+      "scanner_hard_filter_failed": 14,
+      "scanner_score_too_low": 5
     },
     "hard_filter_reasons": {
       "liquidity_below_min": 2,
-      "top10_holders_too_concentrated": 6,
-      "top_holder_too_concentrated": 7,
+      "top10_holders_too_concentrated": 9,
+      "top_holder_too_concentrated": 12,
       "liquidity_not_locked_or_burned": 1,
-      "token_too_new": 3
+      "token_too_new": 7
     }
   }
 }
