@@ -1,19 +1,19 @@
 {
-  "generated_at": "2026-10-12T11:07:40.309541",
+  "generated_at": "2026-10-12T11:43:53.809363",
   "mode": "paper",
   "portfolio": {
-    "cash_usd": 900.0,
-    "open_positions_value_usd": 100.0,
-    "estimated_total_equity_usd": 1000.0,
+    "cash_usd": 987.08,
+    "open_positions_value_usd": 0,
+    "estimated_total_equity_usd": 987.08,
     "starting_capital_usd": 1000.0
   },
   "risk_status": {
-    "current_equity_usd": 1000.0,
+    "current_equity_usd": 987.08,
     "peak_equity_usd": 1000.0,
-    "current_drawdown_pct": 0.0,
+    "current_drawdown_pct": 1.29,
     "drawdown_risk_multiplier": 1.0,
-    "daily_pnl_usd": 0.0,
-    "daily_pnl_pct": 0.0,
+    "daily_pnl_usd": -12.92,
+    "daily_pnl_pct": -1.29,
     "trades_opened_today": 1,
     "trading_halted": false,
     "halt_reason": "none",
@@ -38,10 +38,10 @@
     }
   ],
   "stats": {
-    "open_positions_count": 1,
-    "closed_trades_count": 0,
-    "win_rate_pct": null,
-    "profit_factor": null,
+    "open_positions_count": 0,
+    "closed_trades_count": 1,
+    "win_rate_pct": 0.0,
+    "profit_factor": 0.0,
     "by_profile": {
       "conservative": {
         "closed_trades_count": 0,
@@ -50,28 +50,25 @@
         "total_pnl_usd": 0
       },
       "scalp": {
-        "closed_trades_count": 0,
-        "win_rate_pct": null,
-        "profit_factor": null,
-        "total_pnl_usd": 0
+        "closed_trades_count": 1,
+        "win_rate_pct": 0.0,
+        "profit_factor": 0.0,
+        "total_pnl_usd": -12.92
       }
     }
   },
-  "open_positions": [
+  "open_positions": [],
+  "closed_trades": [
     {
       "symbol": "FIGHT",
       "address": "A8JUiZLzjGAsKxE74evdspHcuW4hvhPbvryDhaDZpump",
       "profile": "scalp",
       "entry_price": 0.0003064,
-      "current_stop_price": 0.00027576,
-      "remaining_size_pct": 100.0,
-      "targets_hit": [],
-      "trailing_active": false,
       "entry_reasons": "[scalp] scanner_score=79.4, signal_score=82.5",
-      "opened_at": "2026-10-12T10:43:18.107993"
+      "total_pnl_usd": -12.92,
+      "win": false
     }
   ],
-  "closed_trades": [],
   "trade_log": [
     {
       "timestamp": "2026-10-12T10:43:18.108005",
@@ -83,6 +80,17 @@
       "size_usd": 100.0,
       "reason": "[scalp] scanner_score=79.4, signal_score=82.5",
       "pnl_usd": null
+    },
+    {
+      "timestamp": "2026-10-12T11:43:52.721946",
+      "symbol": "FIGHT",
+      "address": "A8JUiZLzjGAsKxE74evdspHcuW4hvhPbvryDhaDZpump",
+      "profile": "scalp",
+      "action": "full_exit",
+      "price": 0.0002668,
+      "size_usd": 100.0,
+      "reason": "stop_hit_at_0.0002668",
+      "pnl_usd": -12.924281984334215
     }
   ],
   "config": {
