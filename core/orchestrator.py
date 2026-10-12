@@ -41,6 +41,26 @@ class CycleResult:
     emergency_triggered: bool = False
     emergency_reason: Optional[str] = None
     errors: list = field(default_factory=list)
+    # --- شفافية: ليه مفيش صفقات؟ (بتتسجل في الـsnapshot) ---
+    discovery_stats: dict = field(default_factory=dict)
+    rejection_counts: dict = field(default_factory=dict)   # سبب الرفض -> عدد
+    rugcheck_failures: int = 0
+    candidate_details: list = field(default_factory=list)  # أول N مرشح: symbol/scores/reason
+
+    def to_log_entry(self, max_details: int = 10) -> dict:
+        """ملخص دورة واحدة جاهز للـJSON (من غير timestamp — الـcaller بيضيفه)."""
+        return {
+            "discovery": self.discovery_stats,
+            "candidates_discovered": self.candidates_discovered,
+            "candidates_evaluated": self.candidates_evaluated,
+            "rugcheck_failures": self.rugcheck_failures,
+            "rejections": self.rejection_counts,
+            "opened": list(self.positions_opened),
+            "closed": list(self.positions_closed),
+            "emergency": self.emergency_reason if self.emergency_triggered else None,
+            "errors": list(self.errors),
+            "details": self.candidate_details[:max_details],
+        }
 
 
 class Orchestrator:
@@ -151,6 +171,7 @@ class Orchestrator:
             result.errors.append(f"discovery_failed:{e}")
             candidates = []
         result.candidates_discovered = len(candidates)
+        result.discovery_stats = dict(getattr(self.discovery, "last_stats", {}) or {})
 
         # 4) تقييم كل مرشح
         for candidate in candidates:
@@ -160,17 +181,33 @@ class Orchestrator:
 
             built = self._build_token_and_signals(candidate)
             if built is None:
+                result.rugcheck_failures += 1
+                result.rejection_counts["rugcheck_failed"] = result.rejection_counts.get("rugcheck_failed", 0) + 1
                 continue
             token, signals = built
             result.candidates_evaluated += 1
 
             entry_stop = self._entry_price_and_stop(candidate.pair)
             if entry_stop is None:
+                result.rejection_counts["no_valid_price"] = result.rejection_counts.get("no_valid_price", 0) + 1
                 continue
             entry_price, stop_loss_price = entry_stop
 
             decision = self.engine.evaluate_candidate_auto(token, signals, entry_price, stop_loss_price)
             if decision.opened:
                 result.positions_opened.append(candidate.address)
+                reason = "opened"
+            else:
+                reason = decision.rejection_reason or "unknown"
+            # نجمّع السبب بدون تفاصيل متغيرة (قبل أول ":") عشان العدّاد يبقى مقروء
+            key = reason.split(":")[0] if reason != "opened" else "opened"
+            result.rejection_counts[key] = result.rejection_counts.get(key, 0) + 1
+            result.candidate_details.append({
+                "symbol": candidate.symbol,
+                "address": candidate.address,
+                "result": reason,
+                "scanner_score": decision.scanner_score,
+                "signal_score": decision.signal_score,
+            })
 
         return result

@@ -31,7 +31,7 @@ def _performance_by_day(closed_trades_with_time: list[dict]) -> list[dict]:
     return [{"date": d, "pnl_usd": round(pnl, 2)} for d, pnl in sorted(by_day.items())]
 
 
-def build_dashboard_snapshot(engine: PaperTradingEngine) -> dict:
+def build_dashboard_snapshot(engine: PaperTradingEngine, extra: dict | None = None) -> dict:
     portfolio = engine.portfolio_snapshot()
     risk_status = portfolio["risk_engine_status"]
 
@@ -66,7 +66,7 @@ def build_dashboard_snapshot(engine: PaperTradingEngine) -> dict:
         for e in engine.trade_log
     ]
 
-    return {
+    snapshot = {
         "generated_at": datetime.now().isoformat(),
         "mode": "paper",
         "portfolio": {
@@ -105,9 +105,13 @@ def build_dashboard_snapshot(engine: PaperTradingEngine) -> dict:
             "emergency_drawdown_pct": engine.risk_engine.config["emergency"]["emergency_drawdown_pct"],
         },
     }
+    if extra:
+        snapshot.update(extra)  # مثلًا cycle_log / cycle_totals من run_bot_cycle
+    return snapshot
 
 
-def save_dashboard_snapshot(engine: PaperTradingEngine, path: str = "dashboard/snapshot.json") -> None:
-    snapshot = build_dashboard_snapshot(engine)
+def save_dashboard_snapshot(engine: PaperTradingEngine, path: str = "dashboard/snapshot.json",
+                            extra: dict | None = None) -> None:
+    snapshot = build_dashboard_snapshot(engine, extra=extra)
     with open(path, "w", encoding="utf-8") as f:
         json.dump(snapshot, f, ensure_ascii=False, indent=2)

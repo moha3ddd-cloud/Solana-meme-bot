@@ -106,6 +106,9 @@ class DiscoveryLayer:
         # اختياري — لو موجود، new_pools/trending_pools بتاعته بتتضاف
         # كمصدر عناوين إضافي (شوف geckoterminal_mappers.pools_response_to_candidates)
         self.geckoterminal_client = geckoterminal_client
+        # إحصائيات آخر discover(): بتتقرا من الـOrchestrator وبتتسجل في الـsnapshot
+        # عشان نعرف سبب "مفيش صفقات": مفيش عملات اتكتشفت؟ ولا اتكتشفت واترفضت؟
+        self.last_stats: dict = {}
         self._load_config()
 
     def _load_config(self) -> None:
@@ -169,27 +172,42 @@ class DiscoveryLayer:
     # ------------------------------------------------------------------
     # الفلترة الرخيصة على بيانات الـpair الفعلية
     # ------------------------------------------------------------------
-    def _passes_pre_filter(self, pair: dict) -> bool:
+    def _pre_filter_reason(self, pair: dict) -> Optional[str]:
+        """بيرجع سبب الرفض (str) أو None لو العملة عدّت الفلترة."""
         cfg = self.config["pre_filter"]
         liquidity = (pair.get("liquidity") or {}).get("usd") or 0
         volume_5m = (pair.get("volume") or {}).get("m5") or 0
         pair_created_at_ms = pair.get("pairCreatedAt")
 
         if liquidity < cfg["min_liquidity_usd"]:
-            return False
+            return "low_liquidity"
         if volume_5m < cfg["min_volume_5m_usd"]:
-            return False
+            return "low_volume_5m"
         if pair_created_at_ms:
             age_minutes = (time.time() * 1000 - pair_created_at_ms) / 60000.0
             if age_minutes > cfg["max_token_age_minutes"]:
-                return False
-        return True
+                return "too_old"
+        return None
+
+    def _passes_pre_filter(self, pair: dict) -> bool:
+        return self._pre_filter_reason(pair) is None
 
     # ------------------------------------------------------------------
     # نقطة الدخول الرئيسية — بتتنادى دوريًا من الـMain Loop (لسه هنبنيه)
     # ------------------------------------------------------------------
     def discover(self) -> list[DiscoveredCandidate]:
+        stats = {
+            "addresses_collected": 0,
+            "skipped_recently_seen": 0,
+            "pairs_returned": 0,
+            "pre_filter_rejected": {},
+            "passed_pre_filter": 0,
+            "batch_failures": 0,
+        }
+        self.last_stats = stats
+
         addresses = self._collect_candidate_addresses()
+        stats["addresses_collected"] = len(addresses)
         if not addresses:
             return []
 
@@ -198,6 +216,7 @@ class DiscoveryLayer:
 
         # نفلتر الـaddresses اللي شفناها مؤخرًا قبل حتى ما نعمل batch request
         fresh_addresses = [a for a in addresses if not self.seen_store.is_recently_seen(a, cooldown)]
+        stats["skipped_recently_seen"] = len(addresses) - len(fresh_addresses)
         if not fresh_addresses:
             return []
 
@@ -211,8 +230,10 @@ class DiscoveryLayer:
                 pairs = self.client.get_pairs_by_token_addresses(batch)
             except Exception as e:
                 logger.warning(f"discovery_batch_failed error={e}")
+                stats["batch_failures"] += 1
                 continue  # batch فشل، نكمل اللي بعده بدل ما نوقف كله
 
+            stats["pairs_returned"] += len(pairs)
             for pair in pairs:
                 if len(results) >= max_candidates:
                     break
@@ -223,7 +244,9 @@ class DiscoveryLayer:
 
                 self.seen_store.mark_seen(address)  # نسجل إننا شفناها، بغض النظر عن نتيجة الفلتر
 
-                if not self._passes_pre_filter(pair):
+                reason = self._pre_filter_reason(pair)
+                if reason is not None:
+                    stats["pre_filter_rejected"][reason] = stats["pre_filter_rejected"].get(reason, 0) + 1
                     continue
 
                 results.append(DiscoveredCandidate(
@@ -232,4 +255,5 @@ class DiscoveryLayer:
                     pair=pair,
                 ))
 
+        stats["passed_pre_filter"] = len(results)
         return results

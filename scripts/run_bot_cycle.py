@@ -16,9 +16,11 @@ import json
 import logging
 import os
 import sys
+from datetime import datetime
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
+from core.cycle_log import update_cycle_history
 from core.dashboard_export import save_dashboard_snapshot
 from core.data.dexscreener_client import DexScreenerClient
 from core.data.rugcheck_client import RugCheckClient
@@ -33,6 +35,7 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(me
 logger = logging.getLogger("run_bot_cycle")
 
 STATE_PATH = "data/engine_state.json"
+SNAPSHOT_PATH = "dashboard/snapshot.json"
 
 
 def build_engine() -> PaperTradingEngine:
@@ -94,7 +97,18 @@ def main():
     with open(STATE_PATH, "w", encoding="utf-8") as f:
         json.dump(engine.export_state(), f, indent=2)
 
-    save_dashboard_snapshot(engine, path="dashboard/snapshot.json")
+    # سجل الدورات: بنقرا الـsnapshot القديم ونضيف عليه (cycle_log + cycle_totals)
+    previous_snapshot = None
+    if os.path.exists(SNAPSHOT_PATH):
+        try:
+            with open(SNAPSHOT_PATH, "r", encoding="utf-8") as f:
+                previous_snapshot = json.load(f)
+        except (OSError, ValueError) as e:
+            logger.warning(f"Could not read previous snapshot, starting a new cycle log: {e}")
+    history = update_cycle_history(previous_snapshot, result.to_log_entry(), datetime.now().isoformat())
+    logger.info(f"Cycle detail: discovery={result.discovery_stats} rejections={result.rejection_counts}")
+
+    save_dashboard_snapshot(engine, path=SNAPSHOT_PATH, extra=history)
     logger.info("State and dashboard snapshot saved.")
 
 
