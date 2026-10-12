@@ -23,10 +23,36 @@ def test_normal_position_sizing_respects_1pct_risk():
     engine = fresh_engine()  # $1000 account, 1% risk config
     result = engine.calculate_position_size(entry_price=1.0, stop_loss_price=0.9)
     assert result.approved
-    # 1% of $1000 = $10 max loss. Stop distance = 10%.
-    # position_size * 10% = $10  ->  position_size = $100
+    # 1% of $1000 = $10 risk. الحجم بيتحسب على (مسافة الستوب 10% + الفجوة
+    # الافتراضية stop_gap_buffer_pct من الـconfig) مش على الستوب لوحده.
+    buffer = engine.config["position_sizing"]["stop_gap_buffer_pct"] / 100
     assert result.risk_amount_usd == 10.0
-    assert result.position_size_usd == 100.0
+    assert result.position_size_usd == round(10.0 / (0.10 + buffer), 2)
+
+
+def test_gap_buffer_sizes_position_so_a_gapped_stop_costs_the_risk_budget():
+    engine = fresh_engine()
+    buffer_pct = engine.config["position_sizing"]["stop_gap_buffer_pct"]
+    assert buffer_pct > 0  # الافتراضي الجديد: فيه فجوة أمان
+    result = engine.calculate_position_size(entry_price=1.0, stop_loss_price=0.9)
+    # الستوب 10% + فجوة buffer_pct => الخسارة الفعلية بالنسبة دي = 1% من الحساب
+    loss_if_gapped = result.position_size_usd * (0.10 + buffer_pct / 100)
+    assert abs(loss_if_gapped - result.risk_amount_usd) < 0.05
+
+
+def test_zero_gap_buffer_keeps_old_sizing_behavior():
+    engine = fresh_engine()
+    engine.config["position_sizing"]["stop_gap_buffer_pct"] = 0.0
+    result = engine.calculate_position_size(entry_price=1.0, stop_loss_price=0.9)
+    assert result.position_size_usd == 100.0  # 10$ / 10%
+
+
+def test_execution_success_resets_consecutive_errors():
+    engine = fresh_engine()
+    engine.record_execution_error()
+    engine.record_execution_error()
+    engine.record_execution_success()
+    assert engine.daily_state.consecutive_errors == 0
 
 
 def test_daily_loss_limit_halts_trading():

@@ -222,7 +222,12 @@ class RiskEngine:
 
         risk_amount_usd = self.current_equity_usd * (effective_risk_pct / 100)
         stop_distance_pct = (entry_price - stop_loss_price) / entry_price
-        position_size_usd = risk_amount_usd / stop_distance_pct
+        # الستوب مش بيتنفّذ بالظبط عند سعره: البوت بيفحص السعر كل فترة،
+        # وعملات الميم بتعدّي الستوب بفجوة (gap). بنفترض فجوة إضافية
+        # (stop_gap_buffer_pct) ونحسب الحجم على أساس مسافة ستوب أوسع،
+        # فالخسارة الفعلية المتوقعة لو الستوب اتجاوز بالفجوة دي = نسبة المخاطرة.
+        gap_buffer = self.config["position_sizing"].get("stop_gap_buffer_pct", 0.0) / 100
+        position_size_usd = risk_amount_usd / (stop_distance_pct + gap_buffer)
 
         # حماية: الصفقة متتجاوزش رأس المال المتاح
         position_size_usd = min(position_size_usd, self.current_equity_usd)

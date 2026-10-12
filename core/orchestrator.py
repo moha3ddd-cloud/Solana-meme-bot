@@ -17,6 +17,7 @@ Main Loop / Orchestration
 from __future__ import annotations
 
 import logging
+import time
 from dataclasses import dataclass, field
 from typing import Optional
 
@@ -47,6 +48,7 @@ class CycleResult:
     rugcheck_failures: int = 0
     hard_filter_reasons: dict = field(default_factory=dict)  # سبب فشل Hard Filter -> عدد (من كل المسارات)
     candidate_details: list = field(default_factory=list)  # أول N مرشح: symbol/scores/reason
+    watch: dict = field(default_factory=dict)  # ملخص المراقبة اللصيقة (polls/closed) لو اشتغلت
 
     def to_log_entry(self, max_details: int = 10) -> dict:
         """ملخص دورة واحدة جاهز للـJSON (من غير timestamp — الـcaller بيضيفه)."""
@@ -62,6 +64,7 @@ class CycleResult:
             "emergency": self.emergency_reason if self.emergency_triggered else None,
             "errors": list(self.errors),
             "details": self.candidate_details[:max_details],
+            "watch": self.watch,
         }
 
 
@@ -92,7 +95,11 @@ class Orchestrator:
             if not pairs:
                 return None
             price = pairs[0].get("priceUsd")
-            return float(price) if price is not None else None
+            if price is None:
+                return None
+            # نجاح فعلي: نصفّر عدّاد الأخطاء المتتالية (كان بيزيد بس ومحدش بيصفّره)
+            self.engine.risk_engine.record_execution_success()
+            return float(price)
         except Exception as e:
             self.engine.risk_engine.record_execution_error()
             logger.warning(f"price_fetch_failed address={address} error={e}")
@@ -126,6 +133,7 @@ class Orchestrator:
             logger.warning(f"rugcheck_failed address={candidate.address} error={e}")
             return None
 
+        self.engine.risk_engine.record_execution_success()
         onchain_fields = build_onchain_fields(report)
         token = merge_into_token_metrics(dex_fields, onchain_fields)
         signals = pair_to_timing_signals(pair)
@@ -141,6 +149,63 @@ class Orchestrator:
         stop_pct = self.config["default_initial_stop_loss_pct"] / 100.0
         stop_loss_price = entry_price * (1 - stop_pct)
         return entry_price, stop_loss_price
+
+    # ------------------------------------------------------------------
+    # مراقبة لصيقة: لما فيه صفقة مفتوحة، نفحص السعر كل interval ثانية
+    # لحد max_seconds بدل ما نستنى الدورة الجاية (نص ساعة). السبب: عملات
+    # الميم بتتحرك أكتر من نسبة الستوب في دقايق (صفقتين Paper خسروا 12.9%
+    # و29% على ستوب 10%). بتقف لما مفيش صفقات مفتوحة أو الوقت يخلص أو
+    # الطوارئ تتفعّل. sleep_fn/clock_fn بيتبدلوا في الاختبارات.
+    # ------------------------------------------------------------------
+    def watch_positions(
+        self,
+        result: CycleResult,
+        max_seconds: float,
+        interval_seconds: float = 60.0,
+        sleep_fn=time.sleep,
+        clock_fn=time.monotonic,
+        on_change=None,
+    ) -> dict:
+        start = clock_fn()
+        polls = 0
+        closed_during_watch: list = []
+        stopped_because = "time_up"
+
+        while True:
+            if not self.engine.open_positions:
+                stopped_because = "no_open_positions"
+                break
+            if clock_fn() - start >= max_seconds:
+                break
+
+            sleep_fn(interval_seconds)
+            if clock_fn() - start > max_seconds + interval_seconds:
+                break  # حماية لو الـsleep طوّل أكتر من المتوقع
+
+            polls += 1
+            before = set(self.engine.open_positions)
+            prices = self._update_open_positions(result)
+            emergency = self.engine.run_emergency_check(prices)
+            closed_now = sorted(before - set(self.engine.open_positions))
+            for addr in closed_now:
+                closed_during_watch.append(addr)
+                if addr not in result.positions_closed:
+                    result.positions_closed.append(addr)
+
+            if emergency["triggered"]:
+                result.emergency_triggered = True
+                result.emergency_reason = emergency.get("reason")
+                stopped_because = "emergency"
+                if on_change:
+                    on_change()
+                break
+            if closed_now and on_change:
+                on_change()  # نحفظ الحالة أول ما صفقة تتقفل (لو الـjob اتقطع بعدها)
+
+        summary = {"polls": polls, "closed": closed_during_watch, "stopped_because": stopped_because,
+                   "interval_seconds": interval_seconds}
+        result.watch = summary
+        return summary
 
     # ------------------------------------------------------------------
     # دورة واحدة كاملة — دي اللي بتتنادى من scripts/run_bot.py جوه loop

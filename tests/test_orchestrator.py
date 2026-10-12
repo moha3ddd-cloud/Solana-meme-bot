@@ -231,6 +231,103 @@ def test_cannot_trade_blocks_further_candidate_evaluation():
     assert result.candidates_evaluated == 0  # اتوقفنا قبل أول مرشح
 
 
+# ---------------- Watch loop (مراقبة لصيقة) + إصلاح عدّاد الأخطاء ----------------
+
+class _FakeClock:
+    """ساعة وهمية: sleep بيقدّم الوقت بدل ما ينام فعلًا."""
+    def __init__(self):
+        self.now = 0.0
+
+    def clock(self):
+        return self.now
+
+    def sleep(self, seconds):
+        self.now += seconds
+
+
+class _SequenceDexClient:
+    """بيرجع سعر مختلف في كل نداء (لكل عنوان) حسب قايمة."""
+    def __init__(self, prices):
+        self._prices = list(prices)
+        self.calls = 0
+
+    def get_pairs_by_token_addresses(self, addresses):
+        price = self._prices[min(self.calls, len(self._prices) - 1)]
+        self.calls += 1
+        return [{"priceUsd": str(price)}]
+
+
+def _engine_with_open_position(address="TokenAddr1"):
+    from tests.test_scanner import healthy_token
+    from tests.test_strategy import strong_signals
+    engine = build_engine()
+    engine.evaluate_candidate("conservative", healthy_token(address=address), strong_signals(),
+                              entry_price=1.0, stop_loss_price=0.9)
+    assert address in engine.open_positions
+    return engine
+
+
+def test_watch_closes_position_as_soon_as_stop_is_hit_not_next_cycle():
+    engine = _engine_with_open_position()
+    dex = _SequenceDexClient([1.0, 1.0, 0.85, 0.5])  # الستوب (0.9) بيتكسر في النداء التالت
+    orch = build_orchestrator(_FakeDiscovery([]), dex, _FakeRugCheckClient(), engine=engine)
+    clk = _FakeClock()
+    from core.orchestrator import CycleResult
+    result = CycleResult()
+    summary = orch.watch_positions(result, max_seconds=1500, interval_seconds=60,
+                                   sleep_fn=clk.sleep, clock_fn=clk.clock)
+    assert "TokenAddr1" not in engine.open_positions
+    assert summary["stopped_because"] == "no_open_positions"
+    assert summary["polls"] == 3  # وقفنا فورًا بعد ما الستوب اتضرب، مكمّلناش لآخر الوقت
+    assert "TokenAddr1" in result.positions_closed
+    assert result.watch["polls"] == 3
+    assert engine.closed_trades[-1]["total_pnl_usd"] < 0
+
+
+def test_watch_stops_when_time_is_up_and_position_stays_open():
+    engine = _engine_with_open_position()
+    dex = _SequenceDexClient([1.0])
+    orch = build_orchestrator(_FakeDiscovery([]), dex, _FakeRugCheckClient(), engine=engine)
+    clk = _FakeClock()
+    from core.orchestrator import CycleResult
+    summary = orch.watch_positions(CycleResult(), max_seconds=300, interval_seconds=60,
+                                   sleep_fn=clk.sleep, clock_fn=clk.clock)
+    assert summary["stopped_because"] == "time_up"
+    assert 4 <= summary["polls"] <= 6
+    assert "TokenAddr1" in engine.open_positions
+
+
+def test_watch_does_nothing_without_open_positions():
+    orch = build_orchestrator(_FakeDiscovery([]), _SequenceDexClient([1.0]), _FakeRugCheckClient())
+    clk = _FakeClock()
+    from core.orchestrator import CycleResult
+    summary = orch.watch_positions(CycleResult(), max_seconds=600, interval_seconds=60,
+                                   sleep_fn=clk.sleep, clock_fn=clk.clock)
+    assert summary["polls"] == 0 and summary["stopped_because"] == "no_open_positions"
+    assert clk.now == 0  # ما نامش خالص
+
+
+def test_watch_calls_on_change_when_a_position_closes():
+    engine = _engine_with_open_position()
+    orch = build_orchestrator(_FakeDiscovery([]), _SequenceDexClient([0.5]), _FakeRugCheckClient(), engine=engine)
+    clk = _FakeClock()
+    from core.orchestrator import CycleResult
+    saved = []
+    orch.watch_positions(CycleResult(), max_seconds=600, interval_seconds=60,
+                         sleep_fn=clk.sleep, clock_fn=clk.clock, on_change=lambda: saved.append(1))
+    assert saved  # الحالة اتحفظت أول ما الصفقة اتقفلت
+
+
+def test_successful_price_fetch_resets_consecutive_error_counter():
+    engine = _engine_with_open_position()
+    engine.risk_engine.record_execution_error()
+    engine.risk_engine.record_execution_error()  # خطأين متتاليين (الحد 3)
+    orch = build_orchestrator(_FakeDiscovery([]), _SequenceDexClient([1.0]), _FakeRugCheckClient(), engine=engine)
+    from core.orchestrator import CycleResult
+    orch._update_open_positions(CycleResult())
+    assert engine.risk_engine.daily_state.consecutive_errors == 0  # قبل كده كان بيفضل 2 للأبد
+
+
 if __name__ == "__main__":
     import traceback
 

@@ -35,6 +35,11 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(me
 logger = logging.getLogger("run_bot_cycle")
 
 STATE_PATH = "data/engine_state.json"
+
+# مراقبة لصيقة للصفقات المفتوحة بعد الدورة (شوف Orchestrator.watch_positions).
+# 0 = مقفولة (التشغيل المحلي العادي). الـworkflow بيحط WATCH_MAX_MINUTES.
+WATCH_MAX_MINUTES = float(os.environ.get("WATCH_MAX_MINUTES", "0") or 0)
+WATCH_INTERVAL_SECONDS = float(os.environ.get("WATCH_INTERVAL_SECONDS", "60") or 60)
 SNAPSHOT_PATH = "dashboard/snapshot.json"
 
 
@@ -94,8 +99,24 @@ def main():
     for err in result.errors:
         logger.warning(f"Cycle error: {err}")
 
-    with open(STATE_PATH, "w", encoding="utf-8") as f:
-        json.dump(engine.export_state(), f, indent=2)
+    def save_state():
+        with open(STATE_PATH, "w", encoding="utf-8") as f:
+            json.dump(engine.export_state(), f, indent=2)
+
+    save_state()
+
+    # لو فيه صفقات مفتوحة (قديمة أو لسه مفتوحة الدورة دي) نراقبها لصيقًا
+    if WATCH_MAX_MINUTES > 0 and engine.open_positions and not result.emergency_triggered:
+        logger.info(f"Watching {len(engine.open_positions)} open position(s) for up to "
+                    f"{WATCH_MAX_MINUTES:g} min (every {WATCH_INTERVAL_SECONDS:g}s)")
+        summary = orchestrator.watch_positions(
+            result, max_seconds=WATCH_MAX_MINUTES * 60, interval_seconds=WATCH_INTERVAL_SECONDS,
+            on_change=save_state,
+        )
+        logger.info(f"Watch done: {summary}")
+        if result.emergency_triggered:
+            logger.warning(f"EMERGENCY MODE TRIGGERED during watch: {result.emergency_reason}")
+        save_state()
 
     # سجل الدورات: بنقرا الـsnapshot القديم ونضيف عليه (cycle_log + cycle_totals)
     previous_snapshot = None
