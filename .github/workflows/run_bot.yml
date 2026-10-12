@@ -15,7 +15,7 @@ concurrency:
 jobs:
   run-cycle:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 35  # الدورة (~1 د) + مراقبة لصيقة لحد 24 د لو فيه صفقة مفتوحة
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -28,10 +28,18 @@ jobs:
       - name: Install dependencies
         run: pip install pyyaml requests
 
-      - name: Run one bot cycle
+      - name: Run one bot cycle (+ watch open positions)
+        # لو فيه صفقة مفتوحة، البوت بيفضل يفحص سعرها كل دقيقة لحد 24 دقيقة
+        # بدل ما يستنى الدورة الجاية، عشان الستوب يتنفذ قريب من سعره.
+        # الخطوة ليها timeout خاص عشان خطوة الـcommit (if: always()) تلحق تشتغل.
+        timeout-minutes: 28
+        env:
+          WATCH_MAX_MINUTES: "24"
+          WATCH_INTERVAL_SECONDS: "60"
         run: python3 scripts/run_bot_cycle.py
 
       - name: Commit updated state
+        if: always()
         run: |
           git config user.name "solana-meme-bot"
           git config user.email "bot@users.noreply.github.com"
