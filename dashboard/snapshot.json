@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-12T19:41:33.204313",
+  "generated_at": "2026-10-12T20:05:28.100517",
   "mode": "paper",
   "portfolio": {
     "cash_usd": 888.37,
@@ -1067,33 +1067,119 @@
           }
         }
       ]
+    },
+    {
+      "timestamp": "2026-10-12T20:05:28.100371",
+      "discovery": {
+        "addresses_collected": 48,
+        "skipped_recently_seen": 35,
+        "pairs_returned": 24,
+        "pre_filter_rejected": {
+          "low_liquidity": 21
+        },
+        "passed_pre_filter": 3,
+        "batch_failures": 0
+      },
+      "candidates_discovered": 3,
+      "candidates_evaluated": 3,
+      "rugcheck_failures": 0,
+      "rejections": {
+        "scanner_hard_filter_failed": 3
+      },
+      "hard_filter_reasons": {
+        "token_too_new": 3,
+        "liquidity_below_min": 1,
+        "top10_holders_too_concentrated": 2,
+        "top_holder_too_concentrated": 2
+      },
+      "opened": [],
+      "closed": [],
+      "emergency": null,
+      "errors": [],
+      "details": [
+        {
+          "symbol": "Catcoin",
+          "address": "DtfFjRociWGWZWgjZe1scJeUKRSYyeEGQXeznVcapump",
+          "result": "scanner_hard_filter_failed",
+          "scanner_score": null,
+          "signal_score": null,
+          "hard_filter_reasons": {
+            "conservative": [
+              "token_too_new (25m)"
+            ],
+            "scalp": [
+              "token_too_new (25m)"
+            ]
+          }
+        },
+        {
+          "symbol": "Monke",
+          "address": "Ak4cZZkr4AdcHBorJvggMziofQe4wzskys3BmSxMpump",
+          "result": "scanner_hard_filter_failed",
+          "scanner_score": null,
+          "signal_score": null,
+          "hard_filter_reasons": {
+            "conservative": [
+              "liquidity_below_min ($12,410)",
+              "token_too_new (24m)",
+              "top_holder_too_concentrated (24.3%)",
+              "top10_holders_too_concentrated (53.6%)"
+            ],
+            "scalp": [
+              "liquidity_below_min ($12,410)",
+              "token_too_new (24m)",
+              "top_holder_too_concentrated (24.3%)",
+              "top10_holders_too_concentrated (53.6%)"
+            ]
+          }
+        },
+        {
+          "symbol": "bruv",
+          "address": "dgsySn8sVzZwobMz6fibAPkYVYezJsbYAPxCkuqpump",
+          "result": "scanner_hard_filter_failed",
+          "scanner_score": null,
+          "signal_score": null,
+          "hard_filter_reasons": {
+            "conservative": [
+              "token_too_new (18m)",
+              "top_holder_too_concentrated (30.8%)",
+              "top10_holders_too_concentrated (73.7%)"
+            ],
+            "scalp": [
+              "token_too_new (18m)",
+              "top_holder_too_concentrated (30.8%)",
+              "top10_holders_too_concentrated (73.7%)"
+            ]
+          }
+        }
+      ]
     }
   ],
   "cycle_totals": {
-    "cycles": 10,
-    "addresses_collected": 457,
-    "skipped_recently_seen": 205,
-    "pairs_returned": 374,
-    "passed_pre_filter": 43,
-    "evaluated": 43,
+    "cycles": 11,
+    "addresses_collected": 505,
+    "skipped_recently_seen": 240,
+    "pairs_returned": 398,
+    "passed_pre_filter": 46,
+    "evaluated": 46,
     "opened": 1,
     "errors": 0,
     "pre_filter_rejected": {
-      "low_liquidity": 279,
+      "low_liquidity": 300,
       "low_volume_5m": 42,
       "too_old": 10
     },
     "rejections": {
-      "scanner_hard_filter_failed": 32,
+      "scanner_hard_filter_failed": 35,
       "scanner_score_too_low": 10,
       "opened": 1
     },
     "hard_filter_reasons": {
-      "liquidity_below_min": 3,
-      "top10_holders_too_concentrated": 24,
-      "top_holder_too_concentrated": 29,
+      "liquidity_below_min": 4,
+      "top10_holders_too_concentrated": 26,
+      "top_holder_too_concentrated": 31,
       "liquidity_not_locked_or_burned": 2,
-      "token_too_new": 15
+      "token_too_new": 18
     }
   }
 }
