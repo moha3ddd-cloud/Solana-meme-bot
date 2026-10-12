@@ -118,6 +118,20 @@ def test_orchestrator_counts_rugcheck_failures():
     assert r.rejection_counts == {"rugcheck_failed": 1}
 
 
+def test_hard_filter_reasons_are_recorded_and_accumulated():
+    pair = healthy_pair(address="Weak1")
+    c = DiscoveredCandidate(address="Weak1", symbol="WEAK", pair=pair)
+    orch = build_orchestrator(_FakeDiscovery([c]), _FakeDexClient(), _FakeRugCheckClient())
+    # نخلّي السيولة تحت حد الـScanner (15000) عشان نضمن فشل Hard Filter
+    c.pair["liquidity"] = {"usd": 12000}
+    r = orch.run_cycle()
+    assert r.rejection_counts.get("scanner_hard_filter_failed") == 1
+    assert any("liquidity" in k for k in r.hard_filter_reasons), r.hard_filter_reasons
+    assert r.candidate_details[0]["hard_filter_reasons"]
+    h = update_cycle_history(update_cycle_history(None, r.to_log_entry(), "t0"), r.to_log_entry(), "t1")
+    assert any(v == 2 for v in h["cycle_totals"]["hard_filter_reasons"].values())
+
+
 def test_snapshot_includes_extra_cycle_history():
     engine = build_engine()
     extra = update_cycle_history(None, CycleResult().to_log_entry(), "t0")

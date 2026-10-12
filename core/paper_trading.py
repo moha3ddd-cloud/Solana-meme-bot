@@ -92,6 +92,8 @@ class CandidateDecision:
     # SignalEngine بتاعها (name -> score)، للشفافية — تعرف مين "كان
     # ممكن" يفتح الصفقة ده حتى لو اتفتحت تحت مسار تاني في الآخر
     profiles_considered: Optional[dict[str, float]] = None
+    # أسباب فشل الـHard Filters لكل مسار (name -> list) — للشفافية بس
+    scanner_rejection_reasons: Optional[dict[str, list]] = None
 
 
 class PaperTradingEngine:
@@ -212,9 +214,12 @@ class PaperTradingEngine:
         approved_scanner_scores: dict[str, float] = {}
         best_scanner_score = None
         best_rejection = None
+        scan_reasons: dict[str, list] = {}
         for name, profile in self.profiles.items():
             scanner = profile.scanner or self.scanner
             scan_result = scanner.scan(token_metrics)
+            if scan_result.rejection_reasons:
+                scan_reasons[name] = list(scan_result.rejection_reasons)
             if best_scanner_score is None or (scan_result.score or 0) > best_scanner_score:
                 best_scanner_score = scan_result.score
 
@@ -236,6 +241,7 @@ class PaperTradingEngine:
                 opened=False, profile="auto",
                 rejection_reason=best_rejection or "no_profile_signal_approved",
                 scanner_score=best_scanner_score,
+                scanner_rejection_reasons=scan_reasons or None,
             )
 
         # أعلى signal_score هو اللي بيفوز؛ عند التعادل، أول واحد بترتيب

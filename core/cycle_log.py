@@ -48,4 +48,8 @@ def update_cycle_history(previous_snapshot: dict | None, entry: dict, timestamp_
     _add_counts(rej, entry.get("rejections"))
     totals["rejections"] = rej
 
+    hf = dict(totals.get("hard_filter_reasons") or {})
+    _add_counts(hf, entry.get("hard_filter_reasons"))
+    totals["hard_filter_reasons"] = hf
+
     return {"cycle_log": log, "cycle_totals": totals}

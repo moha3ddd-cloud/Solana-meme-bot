@@ -45,6 +45,7 @@ class CycleResult:
     discovery_stats: dict = field(default_factory=dict)
     rejection_counts: dict = field(default_factory=dict)   # سبب الرفض -> عدد
     rugcheck_failures: int = 0
+    hard_filter_reasons: dict = field(default_factory=dict)  # سبب فشل Hard Filter -> عدد (من كل المسارات)
     candidate_details: list = field(default_factory=list)  # أول N مرشح: symbol/scores/reason
 
     def to_log_entry(self, max_details: int = 10) -> dict:
@@ -55,6 +56,7 @@ class CycleResult:
             "candidates_evaluated": self.candidates_evaluated,
             "rugcheck_failures": self.rugcheck_failures,
             "rejections": self.rejection_counts,
+            "hard_filter_reasons": self.hard_filter_reasons,
             "opened": list(self.positions_opened),
             "closed": list(self.positions_closed),
             "emergency": self.emergency_reason if self.emergency_triggered else None,
@@ -202,12 +204,19 @@ class Orchestrator:
             # نجمّع السبب بدون تفاصيل متغيرة (قبل أول ":") عشان العدّاد يبقى مقروء
             key = reason.split(":")[0] if reason != "opened" else "opened"
             result.rejection_counts[key] = result.rejection_counts.get(key, 0) + 1
+            scan_reasons = decision.scanner_rejection_reasons or {}
+            # كل سبب بيتعد مرة واحدة لكل مرشح (حتى لو المسارين رفضوه لنفس السبب)،
+            # وبدون الأرقام المتغيرة اللي بين الأقواس عشان العدّاد يبقى مقروء
+            unique_reasons = {x.split(" (")[0] for reasons in scan_reasons.values() for x in reasons}
+            for r in unique_reasons:
+                result.hard_filter_reasons[r] = result.hard_filter_reasons.get(r, 0) + 1
             result.candidate_details.append({
                 "symbol": candidate.symbol,
                 "address": candidate.address,
                 "result": reason,
                 "scanner_score": decision.scanner_score,
                 "signal_score": decision.signal_score,
+                "hard_filter_reasons": scan_reasons or None,
             })
 
         return result
