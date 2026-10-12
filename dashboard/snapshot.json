@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-12T18:04:14.076433",
+  "generated_at": "2026-10-12T18:46:23.969466",
   "mode": "paper",
   "portfolio": {
     "cash_usd": 987.08,
@@ -648,32 +648,193 @@
           }
         }
       ]
+    },
+    {
+      "timestamp": "2026-10-12T18:46:23.969283",
+      "discovery": {
+        "addresses_collected": 49,
+        "skipped_recently_seen": 0,
+        "pairs_returned": 60,
+        "pre_filter_rejected": {
+          "low_liquidity": 39,
+          "too_old": 2,
+          "low_volume_5m": 12
+        },
+        "passed_pre_filter": 7,
+        "batch_failures": 0
+      },
+      "candidates_discovered": 7,
+      "candidates_evaluated": 7,
+      "rugcheck_failures": 0,
+      "rejections": {
+        "scanner_hard_filter_failed": 7
+      },
+      "hard_filter_reasons": {
+        "top_holder_too_concentrated": 7,
+        "top10_holders_too_concentrated": 7,
+        "liquidity_not_locked_or_burned": 1,
+        "token_too_new": 2,
+        "liquidity_below_min": 1
+      },
+      "opened": [],
+      "closed": [],
+      "emergency": null,
+      "errors": [],
+      "details": [
+        {
+          "symbol": "MarsX",
+          "address": "Fak3rJEBfR4Vb8DoFpecf6yoxbkkr1gGUH5tdj2rpump",
+          "result": "scanner_hard_filter_failed",
+          "scanner_score": null,
+          "signal_score": null,
+          "hard_filter_reasons": {
+            "conservative": [
+              "top_holder_too_concentrated (22.6%)",
+              "top10_holders_too_concentrated (57.6%)"
+            ],
+            "scalp": [
+              "top_holder_too_concentrated (22.6%)",
+              "top10_holders_too_concentrated (57.6%)"
+            ]
+          }
+        },
+        {
+          "symbol": "MarsX",
+          "address": "Fak3rJEBfR4Vb8DoFpecf6yoxbkkr1gGUH5tdj2rpump",
+          "result": "scanner_hard_filter_failed",
+          "scanner_score": null,
+          "signal_score": null,
+          "hard_filter_reasons": {
+            "conservative": [
+              "top_holder_too_concentrated (22.6%)",
+              "top10_holders_too_concentrated (57.6%)"
+            ],
+            "scalp": [
+              "top_holder_too_concentrated (22.6%)",
+              "top10_holders_too_concentrated (57.6%)"
+            ]
+          }
+        },
+        {
+          "symbol": "BOTS",
+          "address": "BihhV6n9X4BwfKMQSzsRzLgAvjMnvtFjseofZCNDiUoD",
+          "result": "scanner_hard_filter_failed",
+          "scanner_score": null,
+          "signal_score": null,
+          "hard_filter_reasons": {
+            "conservative": [
+              "top_holder_too_concentrated (20.9%)",
+              "top10_holders_too_concentrated (70.5%)",
+              "liquidity_not_locked_or_burned"
+            ],
+            "scalp": [
+              "top_holder_too_concentrated (20.9%)",
+              "top10_holders_too_concentrated (70.5%)",
+              "liquidity_not_locked_or_burned"
+            ]
+          }
+        },
+        {
+          "symbol": "ALIVE",
+          "address": "317FCQ6W6UUyVUGUc1oNFFR7GxyM3aFZ2P8s77nCpump",
+          "result": "scanner_hard_filter_failed",
+          "scanner_score": null,
+          "signal_score": null,
+          "hard_filter_reasons": {
+            "conservative": [
+              "top_holder_too_concentrated (22.2%)",
+              "top10_holders_too_concentrated (55.8%)"
+            ],
+            "scalp": [
+              "top_holder_too_concentrated (22.2%)",
+              "top10_holders_too_concentrated (55.8%)"
+            ]
+          }
+        },
+        {
+          "symbol": "Angelique",
+          "address": "CT5Wnp85gY6HtUEXhWwZmMKEMNX1jJrpb2vWA3nepump",
+          "result": "scanner_hard_filter_failed",
+          "scanner_score": null,
+          "signal_score": null,
+          "hard_filter_reasons": {
+            "conservative": [
+              "token_too_new (12m)",
+              "top_holder_too_concentrated (21.9%)",
+              "top10_holders_too_concentrated (55.6%)"
+            ],
+            "scalp": [
+              "token_too_new (12m)",
+              "top_holder_too_concentrated (21.9%)",
+              "top10_holders_too_concentrated (55.6%)"
+            ]
+          }
+        },
+        {
+          "symbol": "Angelique",
+          "address": "GqVY1kHXijyp57rvYR2J6mqCc7ZdhwFu9dAp6JYVpump",
+          "result": "scanner_hard_filter_failed",
+          "scanner_score": null,
+          "signal_score": null,
+          "hard_filter_reasons": {
+            "conservative": [
+              "liquidity_below_min ($10,792)",
+              "token_too_new (13m)",
+              "top_holder_too_concentrated (22.8%)",
+              "top10_holders_too_concentrated (68.2%)"
+            ],
+            "scalp": [
+              "liquidity_below_min ($10,792)",
+              "token_too_new (13m)",
+              "top_holder_too_concentrated (22.8%)",
+              "top10_holders_too_concentrated (68.2%)"
+            ]
+          }
+        },
+        {
+          "symbol": "Bumo",
+          "address": "7yg2UT3Ksh7wwmAPAasaKU6SBbakRtzf2eYqjZZzpump",
+          "result": "scanner_hard_filter_failed",
+          "scanner_score": null,
+          "signal_score": null,
+          "hard_filter_reasons": {
+            "conservative": [
+              "top_holder_too_concentrated (24.3%)",
+              "top10_holders_too_concentrated (48.5%)"
+            ],
+            "scalp": [
+              "top_holder_too_concentrated (24.3%)",
+              "top10_holders_too_concentrated (48.5%)"
+            ]
+          }
+        }
+      ]
     }
   ],
   "cycle_totals": {
-    "cycles": 7,
-    "addresses_collected": 316,
+    "cycles": 8,
+    "addresses_collected": 365,
     "skipped_recently_seen": 175,
-    "pairs_returned": 224,
-    "passed_pre_filter": 22,
-    "evaluated": 22,
+    "pairs_returned": 284,
+    "passed_pre_filter": 29,
+    "evaluated": 29,
     "opened": 0,
     "errors": 0,
     "pre_filter_rejected": {
-      "low_liquidity": 173,
-      "low_volume_5m": 25,
-      "too_old": 4
+      "low_liquidity": 212,
+      "low_volume_5m": 37,
+      "too_old": 6
     },
     "rejections": {
-      "scanner_hard_filter_failed": 17,
+      "scanner_hard_filter_failed": 24,
       "scanner_score_too_low": 5
     },
     "hard_filter_reasons": {
-      "liquidity_below_min": 2,
-      "top10_holders_too_concentrated": 12,
-      "top_holder_too_concentrated": 15,
-      "liquidity_not_locked_or_burned": 1,
-      "token_too_new": 10
+      "liquidity_below_min": 3,
+      "top10_holders_too_concentrated": 19,
+      "top_holder_too_concentrated": 22,
+      "liquidity_not_locked_or_burned": 2,
+      "token_too_new": 12
     }
   }
 }
