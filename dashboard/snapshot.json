@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-12T17:41:34.614544",
+  "generated_at": "2026-10-12T18:04:14.076433",
   "mode": "paper",
   "portfolio": {
     "cash_usd": 987.08,
@@ -559,32 +559,121 @@
           }
         }
       ]
+    },
+    {
+      "timestamp": "2026-10-12T18:04:14.076273",
+      "discovery": {
+        "addresses_collected": 41,
+        "skipped_recently_seen": 25,
+        "pairs_returned": 30,
+        "pre_filter_rejected": {
+          "low_liquidity": 24,
+          "low_volume_5m": 2,
+          "too_old": 1
+        },
+        "passed_pre_filter": 3,
+        "batch_failures": 0
+      },
+      "candidates_discovered": 3,
+      "candidates_evaluated": 3,
+      "rugcheck_failures": 0,
+      "rejections": {
+        "scanner_hard_filter_failed": 3
+      },
+      "hard_filter_reasons": {
+        "top_holder_too_concentrated": 3,
+        "top10_holders_too_concentrated": 3,
+        "token_too_new": 3
+      },
+      "opened": [],
+      "closed": [],
+      "emergency": null,
+      "errors": [],
+      "details": [
+        {
+          "symbol": "MarsX",
+          "address": "Fak3rJEBfR4Vb8DoFpecf6yoxbkkr1gGUH5tdj2rpump",
+          "result": "scanner_hard_filter_failed",
+          "scanner_score": null,
+          "signal_score": null,
+          "hard_filter_reasons": {
+            "conservative": [
+              "token_too_new (26m)",
+              "top_holder_too_concentrated (22.6%)",
+              "top10_holders_too_concentrated (52.5%)"
+            ],
+            "scalp": [
+              "token_too_new (26m)",
+              "top_holder_too_concentrated (22.6%)",
+              "top10_holders_too_concentrated (52.5%)"
+            ]
+          }
+        },
+        {
+          "symbol": "CYBERTROLL",
+          "address": "CNgPqjMETjTsFt1jSxFytc5XP5nksL1fbiZugGWApump",
+          "result": "scanner_hard_filter_failed",
+          "scanner_score": null,
+          "signal_score": null,
+          "hard_filter_reasons": {
+            "conservative": [
+              "token_too_new (27m)",
+              "top_holder_too_concentrated (46.1%)",
+              "top10_holders_too_concentrated (94.1%)"
+            ],
+            "scalp": [
+              "token_too_new (27m)",
+              "top_holder_too_concentrated (46.1%)",
+              "top10_holders_too_concentrated (94.1%)"
+            ]
+          }
+        },
+        {
+          "symbol": "MarsX",
+          "address": "Fak3rJEBfR4Vb8DoFpecf6yoxbkkr1gGUH5tdj2rpump",
+          "result": "scanner_hard_filter_failed",
+          "scanner_score": null,
+          "signal_score": null,
+          "hard_filter_reasons": {
+            "conservative": [
+              "token_too_new (19m)",
+              "top_holder_too_concentrated (22.6%)",
+              "top10_holders_too_concentrated (52.5%)"
+            ],
+            "scalp": [
+              "token_too_new (19m)",
+              "top_holder_too_concentrated (22.6%)",
+              "top10_holders_too_concentrated (52.5%)"
+            ]
+          }
+        }
+      ]
     }
   ],
   "cycle_totals": {
-    "cycles": 6,
-    "addresses_collected": 275,
-    "skipped_recently_seen": 150,
-    "pairs_returned": 194,
-    "passed_pre_filter": 19,
-    "evaluated": 19,
+    "cycles": 7,
+    "addresses_collected": 316,
+    "skipped_recently_seen": 175,
+    "pairs_returned": 224,
+    "passed_pre_filter": 22,
+    "evaluated": 22,
     "opened": 0,
     "errors": 0,
     "pre_filter_rejected": {
-      "low_liquidity": 149,
-      "low_volume_5m": 23,
-      "too_old": 3
+      "low_liquidity": 173,
+      "low_volume_5m": 25,
+      "too_old": 4
     },
     "rejections": {
-      "scanner_hard_filter_failed": 14,
+      "scanner_hard_filter_failed": 17,
       "scanner_score_too_low": 5
     },
     "hard_filter_reasons": {
       "liquidity_below_min": 2,
-      "top10_holders_too_concentrated": 9,
-      "top_holder_too_concentrated": 12,
+      "top10_holders_too_concentrated": 12,
+      "top_holder_too_concentrated": 15,
       "liquidity_not_locked_or_burned": 1,
-      "token_too_new": 7
+      "token_too_new": 10
     }
   }
 }
