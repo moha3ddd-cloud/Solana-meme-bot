@@ -1,22 +1,22 @@
 {
-  "generated_at": "2026-10-12T20:05:28.100517",
+  "generated_at": "2026-10-12T20:42:24.056802",
   "mode": "paper",
   "portfolio": {
-    "cash_usd": 888.37,
-    "open_positions_value_usd": 98.71,
-    "estimated_total_equity_usd": 987.08,
+    "cash_usd": 958.39,
+    "open_positions_value_usd": 0,
+    "estimated_total_equity_usd": 958.39,
     "starting_capital_usd": 1000.0
   },
   "risk_status": {
-    "current_equity_usd": 987.08,
+    "current_equity_usd": 958.39,
     "peak_equity_usd": 1000.0,
-    "current_drawdown_pct": 1.29,
+    "current_drawdown_pct": 4.16,
     "drawdown_risk_multiplier": 1.0,
-    "daily_pnl_usd": -12.92,
-    "daily_pnl_pct": -1.29,
+    "daily_pnl_usd": -41.61,
+    "daily_pnl_pct": -4.16,
     "trades_opened_today": 2,
-    "trading_halted": false,
-    "halt_reason": "none",
+    "trading_halted": true,
+    "halt_reason": "daily_loss_limit_hit",
     "kill_switch_active": false
   },
   "drawdown_tiers": [
@@ -38,8 +38,8 @@
     }
   ],
   "stats": {
-    "open_positions_count": 1,
-    "closed_trades_count": 1,
+    "open_positions_count": 0,
+    "closed_trades_count": 2,
     "win_rate_pct": 0.0,
     "profit_factor": 0.0,
     "by_profile": {
@@ -50,27 +50,14 @@
         "total_pnl_usd": 0
       },
       "scalp": {
-        "closed_trades_count": 1,
+        "closed_trades_count": 2,
         "win_rate_pct": 0.0,
         "profit_factor": 0.0,
-        "total_pnl_usd": -12.92
+        "total_pnl_usd": -41.6
       }
     }
   },
-  "open_positions": [
-    {
-      "symbol": "COINPUTER",
-      "address": "gogxD5VKgKFy5e3nFLyJQFSMntdYs6U64WYWwZ6pump",
-      "profile": "scalp",
-      "entry_price": 0.0004467,
-      "current_stop_price": 0.00040203,
-      "remaining_size_pct": 100.0,
-      "targets_hit": [],
-      "trailing_active": false,
-      "entry_reasons": "[scalp] scanner_score=77.4, signal_score=83.1",
-      "opened_at": "2026-10-12T19:40:33.117388"
-    }
-  ],
+  "open_positions": [],
   "closed_trades": [
     {
       "symbol": "FIGHT",
@@ -79,6 +66,15 @@
       "entry_price": 0.0003064,
       "entry_reasons": "[scalp] scanner_score=79.4, signal_score=82.5",
       "total_pnl_usd": -12.92,
+      "win": false
+    },
+    {
+      "symbol": "COINPUTER",
+      "address": "gogxD5VKgKFy5e3nFLyJQFSMntdYs6U64WYWwZ6pump",
+      "profile": "scalp",
+      "entry_price": 0.0004467,
+      "entry_reasons": "[scalp] scanner_score=77.4, signal_score=83.1",
+      "total_pnl_usd": -28.68,
       "win": false
     }
   ],
@@ -115,6 +111,17 @@
       "size_usd": 98.71,
       "reason": "[scalp] scanner_score=77.4, signal_score=83.1",
       "pnl_usd": null
+    },
+    {
+      "timestamp": "2026-10-12T20:42:23.804684",
+      "symbol": "COINPUTER",
+      "address": "gogxD5VKgKFy5e3nFLyJQFSMntdYs6U64WYWwZ6pump",
+      "profile": "scalp",
+      "action": "full_exit",
+      "price": 0.0003169,
+      "size_usd": 98.71,
+      "reason": "stop_hit_at_0.0003169",
+      "pnl_usd": -28.682690843966867
     }
   ],
   "config": {
@@ -1153,21 +1160,48 @@
           }
         }
       ]
+    },
+    {
+      "timestamp": "2026-10-12T20:42:24.056664",
+      "discovery": {
+        "addresses_collected": 47,
+        "skipped_recently_seen": 0,
+        "pairs_returned": 60,
+        "pre_filter_rejected": {
+          "low_liquidity": 44,
+          "low_volume_5m": 5,
+          "too_old": 2
+        },
+        "passed_pre_filter": 9,
+        "batch_failures": 0
+      },
+      "candidates_discovered": 9,
+      "candidates_evaluated": 0,
+      "rugcheck_failures": 0,
+      "rejections": {},
+      "hard_filter_reasons": {},
+      "opened": [],
+      "closed": [
+        "gogxD5VKgKFy5e3nFLyJQFSMntdYs6U64WYWwZ6pump"
+      ],
+      "emergency": null,
+      "errors": [],
+      "details": []
     }
   ],
   "cycle_totals": {
-    "cycles": 11,
-    "addresses_collected": 505,
+    "cycles": 12,
+    "addresses_collected": 552,
     "skipped_recently_seen": 240,
-    "pairs_returned": 398,
-    "passed_pre_filter": 46,
+    "pairs_returned": 458,
+    "passed_pre_filter": 55,
     "evaluated": 46,
     "opened": 1,
     "errors": 0,
     "pre_filter_rejected": {
-      "low_liquidity": 300,
-      "low_volume_5m": 42,
-      "too_old": 10
+      "low_liquidity": 344,
+      "low_volume_5m": 47,
+      "too_old": 12
     },
     "rejections": {
       "scanner_hard_filter_failed": 35,

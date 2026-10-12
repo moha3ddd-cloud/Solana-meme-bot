@@ -1,38 +1,6 @@
 {
-  "cash_usd": 888.3657180156657,
-  "open_positions": {
-    "gogxD5VKgKFy5e3nFLyJQFSMntdYs6U64WYWwZ6pump": {
-      "position": {
-        "symbol": "COINPUTER",
-        "address": "gogxD5VKgKFy5e3nFLyJQFSMntdYs6U64WYWwZ6pump",
-        "entry_price": 0.0004467,
-        "initial_stop_price": 0.00040203,
-        "original_size_usd": 98.71,
-        "remaining_size_pct": 100.0,
-        "current_stop_price": 0.00040203,
-        "highest_price_seen": 0.0004612,
-        "targets_hit": [],
-        "trailing_active": false,
-        "opened_at": "2026-10-12T19:40:33.117388",
-        "top_holder_addresses": [
-          "GBYguhxR6BAQrtY42cmieSVZrsQqzRhKm668QbgWGLVT",
-          "9VARc75saMcaMbMrjtJud185Tstr8KJU6WNShyGi686w",
-          "AV57ptNHMQQASJFmNRUJVB4CKxcrdtxf5WPgNncB5srq",
-          "EUF2kKYjfcprBMhQZfB1oP2aPDpyQrB1tkWXHzjC2GA",
-          "FRLFC6vmZANQPgUsGbjAqsfJ5svDT81TwFPD4xvN1ky2",
-          "BpLVZx9JAAVBsh4aQgPa7qdoEZBQVoWNDnrHDNHbh4A5",
-          "28Svkm43dvpu7f7gbgCjbpFVnpWpmniqAxNgxaVwAs4L",
-          "HeqeWjXFSiPK9iTiGG1zz8sm8jtpfoXR5YR5WTarMmDg",
-          "9n5A58JXuifVdTTu7eNy9SWYd2vCihmyKCppn6s3bm4G",
-          "B7FTTMcTBvdstn36JYdwAQUJLwgmGvYRdaRpPV7s9Jno"
-        ]
-      },
-      "profile": "scalp",
-      "entry_scanner_score": 77.37,
-      "entry_signal_score": 83.11,
-      "entry_reasons": "[scalp] scanner_score=77.4, signal_score=83.1"
-    }
-  },
+  "cash_usd": 958.3930271716988,
+  "open_positions": {},
   "closed_trades": [
     {
       "symbol": "FIGHT",
@@ -41,6 +9,15 @@
       "entry_price": 0.0003064,
       "entry_reasons": "[scalp] scanner_score=79.4, signal_score=82.5",
       "total_pnl_usd": -12.92,
+      "win": false
+    },
+    {
+      "symbol": "COINPUTER",
+      "address": "gogxD5VKgKFy5e3nFLyJQFSMntdYs6U64WYWwZ6pump",
+      "profile": "scalp",
+      "entry_price": 0.0004467,
+      "entry_reasons": "[scalp] scanner_score=77.4, signal_score=83.1",
+      "total_pnl_usd": -28.68,
       "win": false
     }
   ],
@@ -77,20 +54,31 @@
       "size_usd": 98.71,
       "reason": "[scalp] scanner_score=77.4, signal_score=83.1",
       "pnl_usd": null
+    },
+    {
+      "timestamp": "2026-10-12T20:42:23.804684",
+      "symbol": "COINPUTER",
+      "address": "gogxD5VKgKFy5e3nFLyJQFSMntdYs6U64WYWwZ6pump",
+      "profile": "scalp",
+      "action": "full_exit",
+      "price": 0.0003169,
+      "size_usd": 98.71,
+      "reason": "stop_hit_at_0.0003169",
+      "pnl_usd": -28.682690843966867
     }
   ],
   "risk_engine_state": {
     "peak_equity_usd": 1000.0,
-    "current_equity_usd": 987.0757180156658,
+    "current_equity_usd": 958.3930271716989,
     "kill_switch_active": false,
     "daily_state": {
       "trading_day": "2026-10-12",
       "starting_equity_usd": 1000.0,
-      "realized_pnl_usd": -12.924281984334215,
+      "realized_pnl_usd": -41.60697282830108,
       "trades_opened": 2,
       "consecutive_errors": 1,
-      "halted": false,
-      "halt_reason": "none"
+      "halted": true,
+      "halt_reason": "daily_loss_limit_hit"
     }
   }
 }
