@@ -214,6 +214,7 @@ class PaperTradingEngine:
         approved_scanner_scores: dict[str, float] = {}
         best_scanner_score = None
         best_rejection = None
+        best_rejection_rank = -1  # أبعد مرحلة وصلها أي مسار: hard_filter(0) < score(1) < signal(2)
         scan_reasons: dict[str, list] = {}
         for name, profile in self.profiles.items():
             scanner = profile.scanner or self.scanner
@@ -224,17 +225,21 @@ class PaperTradingEngine:
                 best_scanner_score = scan_result.score
 
             if not scan_result.eligible_for_entry:
-                if best_rejection is None:
-                    reason = "scanner_hard_filter_failed" if not scan_result.passed_hard_filters else "scanner_score_too_low"
-                    best_rejection = reason
+                if not scan_result.passed_hard_filters:
+                    reason, rank = "scanner_hard_filter_failed", 0
+                else:
+                    reason, rank = "scanner_score_too_low", 1
+                if rank > best_rejection_rank:
+                    best_rejection, best_rejection_rank = reason, rank
                 continue
 
             signal_decision = profile.signal_engine.evaluate_entry(timing_signals)
             if signal_decision.approved:
                 approved[name] = signal_decision.signal_score
                 approved_scanner_scores[name] = scan_result.score
-            elif best_rejection is None:
-                best_rejection = f"signal_rejected:{signal_decision.rejection_reason}"
+            elif 2 > best_rejection_rank:
+                # الرفض في مرحلة الإشارات = أبعد مرحلة، فبيكسب على رفض Scanner من مسار تاني
+                best_rejection, best_rejection_rank = f"signal_rejected:{signal_decision.rejection_reason}", 2
 
         if not approved:
             return CandidateDecision(
