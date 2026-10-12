@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-12T15:46:40.834135",
+  "generated_at": "2026-10-12T15:48:50.214349",
   "mode": "paper",
   "portfolio": {
     "cash_usd": 987.08,
@@ -132,23 +132,59 @@
           "signal_score": null
         }
       ]
+    },
+    {
+      "timestamp": "2026-10-12T15:48:50.214235",
+      "discovery": {
+        "addresses_collected": 49,
+        "skipped_recently_seen": 47,
+        "pairs_returned": 3,
+        "pre_filter_rejected": {
+          "low_liquidity": 2
+        },
+        "passed_pre_filter": 1,
+        "batch_failures": 0
+      },
+      "candidates_discovered": 1,
+      "candidates_evaluated": 1,
+      "rugcheck_failures": 0,
+      "rejections": {
+        "scanner_score_too_low": 1
+      },
+      "hard_filter_reasons": {},
+      "opened": [],
+      "closed": [],
+      "emergency": null,
+      "errors": [],
+      "details": [
+        {
+          "symbol": "KnightDog",
+          "address": "92mh3xFUZfR4wy7zeiMmkpd7hCkmwjK4aWHC7zMpump",
+          "result": "scanner_score_too_low",
+          "scanner_score": 74.49,
+          "signal_score": null,
+          "hard_filter_reasons": null
+        }
+      ]
     }
   ],
   "cycle_totals": {
-    "cycles": 1,
-    "addresses_collected": 47,
-    "skipped_recently_seen": 39,
-    "pairs_returned": 11,
-    "passed_pre_filter": 1,
-    "evaluated": 1,
+    "cycles": 2,
+    "addresses_collected": 96,
+    "skipped_recently_seen": 86,
+    "pairs_returned": 14,
+    "passed_pre_filter": 2,
+    "evaluated": 2,
     "opened": 0,
     "errors": 0,
     "pre_filter_rejected": {
-      "low_liquidity": 9,
+      "low_liquidity": 11,
       "low_volume_5m": 1
     },
     "rejections": {
-      "scanner_hard_filter_failed": 1
-    }
+      "scanner_hard_filter_failed": 1,
+      "scanner_score_too_low": 1
+    },
+    "hard_filter_reasons": {}
   }
 }
