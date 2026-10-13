@@ -56,6 +56,10 @@ class StrategyProfile:
     signal_engine: SignalEngine
     position_manager: PositionManager
     scanner: Optional[ScannerEngine] = None
+    # shadow_only: المسار بيتقيّم وبيتسجّل قراره (shadow_evaluate) لكن عمره ما
+    # بيفتح صفقة. بنستخدمه نوقف السكالب من التداول ونفضل نقيس هل اختياراته
+    # كانت هتبقى مفيدة (core/shadow_log.py).
+    shadow_only: bool = False
 
 
 @dataclass
@@ -217,6 +221,8 @@ class PaperTradingEngine:
         best_rejection_rank = -1  # أبعد مرحلة وصلها أي مسار: hard_filter(0) < score(1) < signal(2)
         scan_reasons: dict[str, list] = {}
         for name, profile in self.profiles.items():
+            if profile.shadow_only:
+                continue  # بيتقيّم في shadow_evaluate بس، مابيفتحش صفقات
             scanner = profile.scanner or self.scanner
             scan_result = scanner.scan(token_metrics)
             if scan_result.rejection_reasons:
@@ -282,6 +288,30 @@ class PaperTradingEngine:
             position_size_usd=size_result.position_size_usd,
             profiles_considered=approved,
         )
+
+    def shadow_evaluate(self, token_metrics: TokenMetrics, timing_signals: TimingSignals) -> dict:
+        """
+        بيقيّم العملة بكل المسارات (الشغّال والـshadow_only) من غير Risk Engine
+        ومن غير ما يفتح أي صفقة — للتسجيل بس (core/shadow_log.py). بيرجع:
+        {name: {"stage": hard_filter_failed|score_too_low|signal_rejected|approved,
+                "scanner_score":..., "signal_score":..., "shadow_only":...}}
+        """
+        results = {}
+        for name, profile in self.profiles.items():
+            scanner = profile.scanner or self.scanner
+            scan_result = scanner.scan(token_metrics)
+            entry = {"scanner_score": scan_result.score, "signal_score": None,
+                     "shadow_only": profile.shadow_only}
+            if not scan_result.passed_hard_filters:
+                entry["stage"] = "hard_filter_failed"
+            elif not scan_result.eligible_for_entry:
+                entry["stage"] = "score_too_low"
+            else:
+                signal_decision = profile.signal_engine.evaluate_entry(timing_signals)
+                entry["signal_score"] = signal_decision.signal_score
+                entry["stage"] = "approved" if signal_decision.approved else "signal_rejected"
+            results[name] = entry
+        return results
 
     def _open_position(
         self, profile_name: str, m: TokenMetrics, entry_price: float, stop_loss_price: float,

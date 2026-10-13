@@ -18,6 +18,8 @@ import os
 import sys
 from datetime import datetime
 
+import yaml
+
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from core.cycle_log import update_cycle_history
@@ -28,6 +30,7 @@ from core.discovery import DiscoveryLayer, SeenTokensStore
 from core.orchestrator import Orchestrator
 from core.paper_trading import PaperTradingEngine, StrategyProfile
 from core.risk_engine import RiskEngine
+from core.shadow_log import ShadowLog
 from core.scanner import ScannerEngine
 from core.strategy import PositionManager, SignalEngine
 
@@ -41,10 +44,17 @@ STATE_PATH = "data/engine_state.json"
 WATCH_MAX_MINUTES = float(os.environ.get("WATCH_MAX_MINUTES", "0") or 0)
 WATCH_INTERVAL_SECONDS = float(os.environ.get("WATCH_INTERVAL_SECONDS", "60") or 60)
 SNAPSHOT_PATH = "dashboard/snapshot.json"
+SHADOW_LOG_PATH = "data/shadow_log.json"
+ORCHESTRATOR_CONFIG_PATH = "config/orchestrator_config.yaml"
 
 
-def build_engine() -> PaperTradingEngine:
-    return PaperTradingEngine(
+def load_orchestrator_config() -> dict:
+    with open(ORCHESTRATOR_CONFIG_PATH, "r", encoding="utf-8") as f:
+        return yaml.safe_load(f) or {}
+
+
+def build_engine(shadow_only_profiles=()) -> PaperTradingEngine:
+    engine = PaperTradingEngine(
         risk_engine=RiskEngine(config_path="config/risk_config.yaml"),
         scanner=ScannerEngine(config_path="config/scanner_config.yaml"),
         profiles={
@@ -60,13 +70,22 @@ def build_engine() -> PaperTradingEngine:
             ),
         },
     )
+    for name in shadow_only_profiles:
+        if name in engine.profiles:
+            engine.profiles[name].shadow_only = True
+    return engine
 
 
 def main():
     os.makedirs("data", exist_ok=True)
     os.makedirs("dashboard", exist_ok=True)
 
-    engine = build_engine()
+    config = load_orchestrator_config()
+    shadow_only = config.get("shadow_only_profiles") or []
+    engine = build_engine(shadow_only_profiles=shadow_only)
+    logger.info(f"Shadow-only profiles (evaluated, never traded): {shadow_only or 'none'}")
+    shadow_log = ShadowLog(path=SHADOW_LOG_PATH,
+                           horizons_min=config.get("shadow_horizons_minutes") or (30, 60, 120))
 
     if os.path.exists(STATE_PATH):
         with open(STATE_PATH, "r", encoding="utf-8") as f:
@@ -85,7 +104,7 @@ def main():
     )
     orchestrator = Orchestrator(
         discovery=discovery, dex_client=dex_client, rugcheck_client=rugcheck_client,
-        engine=engine, config_path="config/orchestrator_config.yaml",
+        engine=engine, config_path=ORCHESTRATOR_CONFIG_PATH, shadow_log=shadow_log,
     )
 
     result = orchestrator.run_cycle()
@@ -126,7 +145,9 @@ def main():
                 previous_snapshot = json.load(f)
         except (OSError, ValueError) as e:
             logger.warning(f"Could not read previous snapshot, starting a new cycle log: {e}")
+    shadow_log.save()
     history = update_cycle_history(previous_snapshot, result.to_log_entry(), datetime.now().isoformat())
+    history["shadow_summary"] = shadow_log.summarize()
     logger.info(f"Cycle detail: discovery={result.discovery_stats} rejections={result.rejection_counts}")
 
     save_dashboard_snapshot(engine, path=SNAPSHOT_PATH, extra=history)

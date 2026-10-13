@@ -76,7 +76,9 @@ class Orchestrator:
         rugcheck_client: RugCheckClient,
         engine: PaperTradingEngine,
         config_path: str = "config/orchestrator_config.yaml",
+        shadow_log=None,
     ):
+        self.shadow_log = shadow_log  # اختياري: core/shadow_log.ShadowLog
         self.discovery = discovery
         self.dex_client = dex_client
         self.rugcheck_client = rugcheck_client
@@ -107,6 +109,60 @@ class Orchestrator:
             self.engine.risk_engine.record_execution_error()
             logger.warning(f"price_fetch_failed address={address} error={e}")
             return None
+
+    def _fetch_prices_quiet(self, addresses: list) -> dict:
+        """
+        أسعار الـshadow follow-ups: batch لحد 30 عنوان في الطلب، والـpair الحي
+        لكل عملة. الأخطاء هنا مابتتسجلش كـexecution errors (القياس ده
+        معلوماتي بس، مايصحش يوقف التداول).
+        """
+        prices: dict = {}
+        for i in range(0, len(addresses), 30):
+            batch = addresses[i:i + 30]
+            try:
+                pairs = self.dex_client.get_pairs_by_token_addresses(batch)
+            except Exception as e:
+                logger.warning(f"shadow_price_fetch_failed error={e}")
+                continue
+            for addr in batch:
+                pair = select_primary_pair(pairs, addr)
+                price = pair.get("priceUsd") if pair else None
+                if price is not None:
+                    try:
+                        prices[addr] = float(price)
+                    except (TypeError, ValueError):
+                        pass
+        return prices
+
+    def _update_shadow_followups(self) -> None:
+        if self.shadow_log is None:
+            return
+        try:
+            stats = self.shadow_log.update_followups(self._fetch_prices_quiet)
+            logger.info(f"shadow_followups {stats}")
+        except Exception as e:  # noqa: BLE001 — القياس مايوقفش دورة التداول أبدًا
+            logger.warning(f"shadow_followups_failed error={e}")
+
+    def _record_shadow(self, candidate: DiscoveredCandidate, token, signals, trading_allowed: bool) -> None:
+        if self.shadow_log is None:
+            return
+        try:
+            profiles = self.engine.shadow_evaluate(token, signals)
+            price = candidate.pair.get("priceUsd")
+            self.shadow_log.add(
+                address=candidate.address, symbol=candidate.symbol,
+                entry_price=float(price) if price is not None else 0.0,
+                profiles=profiles,
+                context={
+                    "trading_allowed": trading_allowed,
+                    "liquidity_usd": (candidate.pair.get("liquidity") or {}).get("usd"),
+                    "price_change_m5": (candidate.pair.get("priceChange") or {}).get("m5"),
+                    "price_change_h1": (candidate.pair.get("priceChange") or {}).get("h1"),
+                    "dex": candidate.pair.get("dexId"),
+                },
+            )
+        except Exception as e:  # noqa: BLE001
+            logger.warning(f"shadow_record_failed address={candidate.address} error={e}")
 
     def _update_open_positions(self, result: CycleResult) -> dict:
         current_prices = {}
@@ -233,6 +289,9 @@ class Orchestrator:
             # في نفس الدورة اللي قفلنا فيها كل حاجة لسبب خطير
             return result
 
+        # 2.5) قياس أسعار عملات الـshadow log اللي وصلت أفق قياس
+        self._update_shadow_followups()
+
         # 3) اكتشاف عملات جديدة
         try:
             candidates = self.discovery.discover()
@@ -246,8 +305,10 @@ class Orchestrator:
         # 4) تقييم كل مرشح
         for candidate in candidates:
             can_trade, _ = self.engine.risk_engine.can_open_new_trade()
-            if not can_trade:
+            if not can_trade and self.shadow_log is None:
                 break  # ممنوعين نفتح صفقات جديدة أصلًا — مفيش داعي نكمل
+            # لو الـshadow log شغّال بنكمل نسجّل العملات حتى والتداول موقوف،
+            # عشان يوم الخسارة القصوى مايبقاش ثغرة في البيانات
 
             built = self._build_token_and_signals(candidate)
             if built is None:
@@ -256,6 +317,10 @@ class Orchestrator:
                 continue
             token, signals = built
             result.candidates_evaluated += 1
+            self._record_shadow(candidate, token, signals, trading_allowed=can_trade)
+            if not can_trade:
+                result.rejection_counts["trading_halted"] = result.rejection_counts.get("trading_halted", 0) + 1
+                continue
 
             entry_stop = self._entry_price_and_stop(candidate.pair)
             if entry_stop is None:
