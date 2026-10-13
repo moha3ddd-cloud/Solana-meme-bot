@@ -1,5 +1,5 @@
 {
-  "cash_usd": 958.3930271716988,
+  "cash_usd": 915.8931568530851,
   "open_positions": {},
   "closed_trades": [
     {
@@ -18,6 +18,15 @@
       "entry_price": 0.0004467,
       "entry_reasons": "[scalp] scanner_score=77.4, signal_score=83.1",
       "total_pnl_usd": -28.68,
+      "win": false
+    },
+    {
+      "symbol": "Bear",
+      "address": "49PU6ENTpYc3zkhgCruzCSBzgVAdix5muP2oVzRGpump",
+      "profile": "scalp",
+      "entry_price": 0.0003578,
+      "entry_reasons": "[scalp] scanner_score=72.2, signal_score=77.7",
+      "total_pnl_usd": -42.5,
       "win": false
     }
   ],
@@ -65,20 +74,42 @@
       "size_usd": 98.71,
       "reason": "stop_hit_at_0.0003169",
       "pnl_usd": -28.682690843966867
+    },
+    {
+      "timestamp": "2026-10-13T02:42:54.491966",
+      "symbol": "Bear",
+      "address": "49PU6ENTpYc3zkhgCruzCSBzgVAdix5muP2oVzRGpump",
+      "profile": "scalp",
+      "action": "entry",
+      "price": 0.0003578,
+      "size_usd": 47.92,
+      "reason": "[scalp] scanner_score=72.2, signal_score=77.7",
+      "pnl_usd": null
+    },
+    {
+      "timestamp": "2026-10-13T02:43:55.322771",
+      "symbol": "Bear",
+      "address": "49PU6ENTpYc3zkhgCruzCSBzgVAdix5muP2oVzRGpump",
+      "profile": "scalp",
+      "action": "full_exit",
+      "price": 4.047e-05,
+      "size_usd": 47.92,
+      "reason": "stop_hit_at_4.047e-05",
+      "pnl_usd": -42.49987031861375
     }
   ],
   "risk_engine_state": {
     "peak_equity_usd": 1000.0,
-    "current_equity_usd": 958.3930271716989,
+    "current_equity_usd": 915.8931568530852,
     "kill_switch_active": false,
     "daily_state": {
       "trading_day": "2026-10-13",
       "starting_equity_usd": 958.3930271716989,
-      "realized_pnl_usd": 0.0,
-      "trades_opened": 0,
+      "realized_pnl_usd": -42.49987031861375,
+      "trades_opened": 1,
       "consecutive_errors": 0,
-      "halted": false,
-      "halt_reason": "none"
+      "halted": true,
+      "halt_reason": "daily_loss_limit_hit"
     }
   }
 }
