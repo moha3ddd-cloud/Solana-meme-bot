@@ -63,6 +63,34 @@ def _safe_float(value, default: float = 0.0) -> float:
         return default
 
 
+def select_primary_pair(pairs: list, address: Optional[str] = None) -> Optional[dict]:
+    """
+    بيختار الـpair "الحي" لعملة واحدة من قايمة pairs DexScreener.
+
+    ليه ده مهم: عملات pump.fun بتبقى ليها pair على bonding curve (dexId
+    "pumpfun") وبعد الـmigration pair تاني على pumpswap/raydium. الـpair
+    القديم بيفضل ظاهر في الرد بسعر **متجمّد** وبدون liquidity.usd. لو
+    خدنا pairs[0] ممكن ناخد السعر القديم المتجمّد، وده اللي حصل في صفقة
+    Bear (سعر خروج غلط خلّى الستوب يتضرب بخسارة وهمية 89%).
+
+    القاعدة: أعلى liquidity.usd ثم أعلى volume.h24. الـpair اللي من غير
+    liquidity بيخسر دايمًا قدام أي pair فيه سيولة حقيقية.
+    """
+    candidates = [
+        p for p in pairs or []
+        if address is None or (p.get("baseToken") or {}).get("address") == address
+    ]
+    if not candidates:
+        return None
+
+    def rank(pair: dict):
+        liquidity = _safe_float((pair.get("liquidity") or {}).get("usd"))
+        volume_24h = _safe_float((pair.get("volume") or {}).get("h24"))
+        return (liquidity, volume_24h)
+
+    return max(candidates, key=rank)
+
+
 def _safe_int(value, default: int = 0) -> int:
     try:
         return int(value)

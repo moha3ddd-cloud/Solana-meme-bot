@@ -29,6 +29,7 @@ from typing import Optional
 import yaml
 
 from core.data.dexscreener_client import DexScreenerClient, SOLANA_CHAIN_ID
+from core.data.mappers import select_primary_pair
 
 
 logger = logging.getLogger("discovery")
@@ -234,7 +235,18 @@ class DiscoveryLayer:
                 continue  # batch فشل، نكمل اللي بعده بدل ما نوقف كله
 
             stats["pairs_returned"] += len(pairs)
+            # عملة واحدة = pair واحد (الحي/الأعلى سيولة). قبل كده كل pair
+            # كان بيتقيّم لوحده، فعملة ليها pair bonding curve قديم + pair
+            # pumpswap كانت بتتقيّم مرتين، وممكن الدخول يتم على pair والخروج
+            # يتسعّر من التاني.
+            by_token: dict[str, list] = {}
             for pair in pairs:
+                addr = (pair.get("baseToken") or {}).get("address")
+                if addr:
+                    by_token.setdefault(addr, []).append(pair)
+            primary_pairs = [select_primary_pair(group) for group in by_token.values()]
+
+            for pair in primary_pairs:
                 if len(results) >= max_candidates:
                     break
                 base_token = pair.get("baseToken") or {}

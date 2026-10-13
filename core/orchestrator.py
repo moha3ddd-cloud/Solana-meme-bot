@@ -24,7 +24,7 @@ from typing import Optional
 import yaml
 
 from core.data.dexscreener_client import DexScreenerClient
-from core.data.mappers import build_dex_fields, pair_to_timing_signals
+from core.data.mappers import build_dex_fields, pair_to_timing_signals, select_primary_pair
 from core.data.onchain_mappers import build_onchain_fields, merge_into_token_metrics
 from core.data.rugcheck_client import RugCheckClient
 from core.discovery import DiscoveredCandidate, DiscoveryLayer
@@ -92,9 +92,12 @@ class Orchestrator:
     def _fetch_current_price(self, address: str) -> Optional[float]:
         try:
             pairs = self.dex_client.get_pairs_by_token_addresses([address])
-            if not pairs:
+            # الـpair الحي (أعلى سيولة) مش pairs[0]: pairs[0] ممكن يبقى pair
+            # bonding curve قديم بسعر متجمّد بعد الـmigration (صفقة Bear)
+            pair = select_primary_pair(pairs, address) or select_primary_pair(pairs)
+            if pair is None:
                 return None
-            price = pairs[0].get("priceUsd")
+            price = pair.get("priceUsd")
             if price is None:
                 return None
             # نجاح فعلي: نصفّر عدّاد الأخطاء المتتالية (كان بيزيد بس ومحدش بيصفّره)
