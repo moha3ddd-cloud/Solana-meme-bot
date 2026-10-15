@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-15T15:59:24.574440",
+  "generated_at": "2026-10-15T16:23:04.669903",
   "mode": "paper",
   "portfolio": {
     "cash_usd": 989.12,
@@ -9421,25 +9421,61 @@
         }
       ],
       "watch": {}
+    },
+    {
+      "timestamp": "2026-10-15T16:23:04.668742",
+      "discovery": {
+        "addresses_collected": 41,
+        "skipped_recently_seen": 28,
+        "pairs_returned": 18,
+        "pre_filter_rejected": {
+          "low_liquidity": 11,
+          "low_volume_5m": 1
+        },
+        "passed_pre_filter": 1,
+        "batch_failures": 0
+      },
+      "candidates_discovered": 1,
+      "candidates_evaluated": 1,
+      "rugcheck_failures": 0,
+      "rejections": {
+        "scanner_score_too_low": 1
+      },
+      "hard_filter_reasons": {},
+      "opened": [],
+      "closed": [],
+      "emergency": null,
+      "errors": [],
+      "details": [
+        {
+          "symbol": "KnightDog",
+          "address": "ocjMSsFzMf4anB91fVdHv1MDWoqZjkM48rGsx75pump",
+          "result": "scanner_score_too_low",
+          "scanner_score": 57.06,
+          "signal_score": null,
+          "hard_filter_reasons": null
+        }
+      ],
+      "watch": {}
     }
   ],
   "cycle_totals": {
-    "cycles": 136,
-    "addresses_collected": 6324,
-    "skipped_recently_seen": 2249,
-    "pairs_returned": 5562,
-    "passed_pre_filter": 615,
-    "evaluated": 423,
+    "cycles": 137,
+    "addresses_collected": 6365,
+    "skipped_recently_seen": 2277,
+    "pairs_returned": 5580,
+    "passed_pre_filter": 616,
+    "evaluated": 424,
     "opened": 3,
     "errors": 0,
     "pre_filter_rejected": {
-      "low_liquidity": 3197,
-      "low_volume_5m": 550,
+      "low_liquidity": 3208,
+      "low_volume_5m": 551,
       "too_old": 200
     },
     "rejections": {
       "scanner_hard_filter_failed": 306,
-      "scanner_score_too_low": 108,
+      "scanner_score_too_low": 109,
       "opened": 3,
       "signal_rejected": 5,
       "position_already_open": 1,
@@ -9459,13 +9495,13 @@
       60,
       120
     ],
-    "records_total": 359,
-    "pending": 29,
-    "completed": 330,
+    "records_total": 360,
+    "pending": 22,
+    "completed": 338,
     "groups": {
       "all": {
-        "records": 359,
-        "unique_tokens": 208,
+        "records": 360,
+        "unique_tokens": 209,
         "by_horizon": {
           "30": {
             "n": 349,
@@ -9484,10 +9520,10 @@
             "unresolved": 0
           },
           "120": {
-            "n": 330,
-            "mean_return_pct": -38.27,
+            "n": 338,
+            "mean_return_pct": -37.7,
             "median_return_pct": -59.51,
-            "pct_positive": 24.5,
+            "pct_positive": 24.3,
             "pct_dumped_30": 64.5,
             "unresolved": 0
           }
@@ -9524,8 +9560,8 @@
         }
       },
       "conservative_not_entered": {
-        "records": 358,
-        "unique_tokens": 207,
+        "records": 359,
+        "unique_tokens": 208,
         "by_horizon": {
           "30": {
             "n": 348,
@@ -9544,10 +9580,10 @@
             "unresolved": 0
           },
           "120": {
-            "n": 329,
-            "mean_return_pct": -38.17,
+            "n": 337,
+            "mean_return_pct": -37.6,
             "median_return_pct": -58.61,
-            "pct_positive": 24.6,
+            "pct_positive": 24.3,
             "pct_dumped_30": 64.4,
             "unresolved": 0
           }
@@ -9584,8 +9620,8 @@
         }
       },
       "scalp_not_entered": {
-        "records": 353,
-        "unique_tokens": 206,
+        "records": 354,
+        "unique_tokens": 207,
         "by_horizon": {
           "30": {
             "n": 343,
@@ -9604,10 +9640,10 @@
             "unresolved": 0
           },
           "120": {
-            "n": 324,
-            "mean_return_pct": -38.58,
+            "n": 332,
+            "mean_return_pct": -37.98,
             "median_return_pct": -59.51,
-            "pct_positive": 24.1,
+            "pct_positive": 23.8,
             "pct_dumped_30": 64.8,
             "unresolved": 0
           }
