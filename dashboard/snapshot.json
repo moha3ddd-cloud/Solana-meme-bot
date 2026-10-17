@@ -1,20 +1,20 @@
 {
-  "generated_at": "2026-10-17T01:04:56.859826",
+  "generated_at": "2026-10-17T01:55:41.340620",
   "mode": "paper",
   "portfolio": {
-    "cash_usd": 989.12,
+    "cash_usd": 983.83,
     "open_positions_value_usd": 0,
-    "estimated_total_equity_usd": 989.12,
+    "estimated_total_equity_usd": 983.83,
     "starting_capital_usd": 1000.0
   },
   "risk_status": {
-    "current_equity_usd": 989.12,
+    "current_equity_usd": 983.83,
     "peak_equity_usd": 1000.0,
-    "current_drawdown_pct": 1.09,
+    "current_drawdown_pct": 1.62,
     "drawdown_risk_multiplier": 1.0,
-    "daily_pnl_usd": 0.0,
-    "daily_pnl_pct": 0.0,
-    "trades_opened_today": 0,
+    "daily_pnl_usd": -5.28,
+    "daily_pnl_pct": -0.53,
+    "trades_opened_today": 1,
     "trading_halted": false,
     "halt_reason": "none",
     "kill_switch_active": false
@@ -39,15 +39,15 @@
   ],
   "stats": {
     "open_positions_count": 0,
-    "closed_trades_count": 1,
+    "closed_trades_count": 2,
     "win_rate_pct": 0.0,
     "profit_factor": 0.0,
     "by_profile": {
       "conservative": {
-        "closed_trades_count": 1,
+        "closed_trades_count": 2,
         "win_rate_pct": 0.0,
         "profit_factor": 0.0,
-        "total_pnl_usd": -10.88
+        "total_pnl_usd": -16.16
       },
       "scalp": {
         "closed_trades_count": 0,
@@ -66,6 +66,15 @@
       "entry_price": 0.0002614,
       "entry_reasons": "[conservative] scanner_score=70.5, signal_score=84.5",
       "total_pnl_usd": -10.88,
+      "win": false
+    },
+    {
+      "symbol": "FMR",
+      "address": "A6Gk99cY86ir38nbL9WBZ67G3hyVjNx7jmx8oDcspump",
+      "profile": "conservative",
+      "entry_price": 0.000294,
+      "entry_reasons": "[conservative] scanner_score=70.1, signal_score=70.3",
+      "total_pnl_usd": -5.28,
       "win": false
     }
   ],
@@ -91,6 +100,28 @@
       "size_usd": 50.0,
       "reason": "stop_hit_at_0.0002045",
       "pnl_usd": -10.883703136954859
+    },
+    {
+      "timestamp": "2026-10-17T01:52:40.456700",
+      "symbol": "FMR",
+      "address": "A6Gk99cY86ir38nbL9WBZ67G3hyVjNx7jmx8oDcspump",
+      "profile": "conservative",
+      "action": "entry",
+      "price": 0.000294,
+      "size_usd": 49.46,
+      "reason": "[conservative] scanner_score=70.1, signal_score=70.3",
+      "pnl_usd": null
+    },
+    {
+      "timestamp": "2026-10-17T01:55:41.294586",
+      "symbol": "FMR",
+      "address": "A6Gk99cY86ir38nbL9WBZ67G3hyVjNx7jmx8oDcspump",
+      "profile": "conservative",
+      "action": "full_exit",
+      "price": 0.0002626,
+      "size_usd": 49.46,
+      "reason": "stop_hit_at_0.0002626",
+      "pnl_usd": -5.282462585034015
     }
   ],
   "config": {
@@ -15023,36 +15054,194 @@
         }
       ],
       "watch": {}
+    },
+    {
+      "timestamp": "2026-10-17T01:55:41.336827",
+      "discovery": {
+        "addresses_collected": 48,
+        "skipped_recently_seen": 0,
+        "pairs_returned": 60,
+        "pre_filter_rejected": {
+          "low_liquidity": 29,
+          "low_volume_5m": 8
+        },
+        "passed_pre_filter": 10,
+        "batch_failures": 0
+      },
+      "candidates_discovered": 10,
+      "candidates_evaluated": 10,
+      "rugcheck_failures": 0,
+      "rejections": {
+        "opened": 1,
+        "scanner_score_too_low": 3,
+        "scanner_hard_filter_failed": 6
+      },
+      "hard_filter_reasons": {
+        "top_holder_too_concentrated": 6,
+        "liquidity_below_min": 2,
+        "top10_holders_too_concentrated": 4,
+        "token_too_new": 2
+      },
+      "opened": [
+        "A6Gk99cY86ir38nbL9WBZ67G3hyVjNx7jmx8oDcspump"
+      ],
+      "closed": [
+        "A6Gk99cY86ir38nbL9WBZ67G3hyVjNx7jmx8oDcspump"
+      ],
+      "emergency": null,
+      "errors": [],
+      "details": [
+        {
+          "symbol": "FMR",
+          "address": "A6Gk99cY86ir38nbL9WBZ67G3hyVjNx7jmx8oDcspump",
+          "result": "opened",
+          "scanner_score": 70.07,
+          "signal_score": 70.35,
+          "hard_filter_reasons": null
+        },
+        {
+          "symbol": "FDR",
+          "address": "A27SALLyyyik4wjaGrzrij77534fxGkE91YPeFp9pump",
+          "result": "scanner_score_too_low",
+          "scanner_score": 66.0,
+          "signal_score": null,
+          "hard_filter_reasons": null
+        },
+        {
+          "symbol": "GTATRUMP",
+          "address": "CMGgEYqtKA4e634ZJ3U18ed2WHqTkNZoZ9FBX9z1pump",
+          "result": "scanner_hard_filter_failed",
+          "scanner_score": null,
+          "signal_score": null,
+          "hard_filter_reasons": {
+            "conservative": [
+              "top_holder_too_concentrated (22.6%)"
+            ]
+          }
+        },
+        {
+          "symbol": "CAPE",
+          "address": "4by8accPvdRcmDEvJy1svdSJMwfVcNGyWqgQw9EPpump",
+          "result": "scanner_hard_filter_failed",
+          "scanner_score": null,
+          "signal_score": null,
+          "hard_filter_reasons": {
+            "conservative": [
+              "top_holder_too_concentrated (15.8%)"
+            ]
+          }
+        },
+        {
+          "symbol": "HIVEMIND",
+          "address": "7tdX2xCUdH7aKRAtzpZ1gtipkJNzB7QMyimksn5ByCzX",
+          "result": "scanner_hard_filter_failed",
+          "scanner_score": null,
+          "signal_score": null,
+          "hard_filter_reasons": {
+            "conservative": [
+              "liquidity_below_min ($13,957)",
+              "top_holder_too_concentrated (26.8%)",
+              "top10_holders_too_concentrated (48.7%)"
+            ]
+          }
+        },
+        {
+          "symbol": "Ananke",
+          "address": "FAnnWwYY2BnHCk2NJMejs7eawBfXb3VhZnD6cGLjpump",
+          "result": "scanner_hard_filter_failed",
+          "scanner_score": null,
+          "signal_score": null,
+          "hard_filter_reasons": {
+            "conservative": [
+              "token_too_new (15m)",
+              "top_holder_too_concentrated (22.8%)",
+              "top10_holders_too_concentrated (48.0%)"
+            ]
+          }
+        },
+        {
+          "symbol": "Dory",
+          "address": "HQt92H7FtQK7oQEirvCxwQXNMAQsd3sRe2bEdgzPpump",
+          "result": "scanner_hard_filter_failed",
+          "scanner_score": null,
+          "signal_score": null,
+          "hard_filter_reasons": {
+            "conservative": [
+              "liquidity_below_min ($10,107)",
+              "token_too_new (19m)",
+              "top_holder_too_concentrated (34.3%)",
+              "top10_holders_too_concentrated (56.8%)"
+            ]
+          }
+        },
+        {
+          "symbol": "NUBI",
+          "address": "2e3zQiA8JWeDjjVeuqzv9X1Q3aqRRaPqL8UYEbxVpump",
+          "result": "scanner_score_too_low",
+          "scanner_score": 59.44,
+          "signal_score": null,
+          "hard_filter_reasons": null
+        },
+        {
+          "symbol": "XSTOK",
+          "address": "nPD9vif19C2oY1jhHRrAJSSpMu9tJQtibfxoZ4qcxph",
+          "result": "scanner_hard_filter_failed",
+          "scanner_score": null,
+          "signal_score": null,
+          "hard_filter_reasons": {
+            "conservative": [
+              "top_holder_too_concentrated (30.2%)",
+              "top10_holders_too_concentrated (59.0%)"
+            ]
+          }
+        },
+        {
+          "symbol": "OMNI",
+          "address": "3dgGDYKaab1pAZhaEC6gZQS3PrbZdShXMcoWeVZJpump",
+          "result": "scanner_score_too_low",
+          "scanner_score": 57.58,
+          "signal_score": null,
+          "hard_filter_reasons": null
+        }
+      ],
+      "watch": {
+        "polls": 3,
+        "closed": [
+          "A6Gk99cY86ir38nbL9WBZ67G3hyVjNx7jmx8oDcspump"
+        ],
+        "stopped_because": "no_open_positions",
+        "interval_seconds": 60.0
+      }
     }
   ],
   "cycle_totals": {
-    "cycles": 197,
-    "addresses_collected": 9210,
+    "cycles": 198,
+    "addresses_collected": 9258,
     "skipped_recently_seen": 3248,
-    "pairs_returned": 8111,
-    "passed_pre_filter": 938,
-    "evaluated": 740,
-    "opened": 3,
+    "pairs_returned": 8171,
+    "passed_pre_filter": 948,
+    "evaluated": 750,
+    "opened": 4,
     "errors": 0,
     "pre_filter_rejected": {
-      "low_liquidity": 4365,
-      "low_volume_5m": 816,
+      "low_liquidity": 4394,
+      "low_volume_5m": 824,
       "too_old": 280
     },
     "rejections": {
-      "scanner_hard_filter_failed": 529,
-      "scanner_score_too_low": 202,
-      "opened": 3,
+      "scanner_hard_filter_failed": 535,
+      "scanner_score_too_low": 205,
+      "opened": 4,
       "signal_rejected": 5,
       "position_already_open": 1,
       "rugcheck_failed": 39
     },
     "hard_filter_reasons": {
-      "liquidity_below_min": 132,
-      "top10_holders_too_concentrated": 342,
-      "top_holder_too_concentrated": 447,
+      "liquidity_below_min": 134,
+      "top10_holders_too_concentrated": 346,
+      "top_holder_too_concentrated": 453,
       "liquidity_not_locked_or_burned": 49,
-      "token_too_new": 231
+      "token_too_new": 233
     }
   },
   "shadow_summary": {
@@ -15061,43 +15250,43 @@
       60,
       120
     ],
-    "records_total": 676,
-    "pending": 19,
-    "completed": 657,
+    "records_total": 686,
+    "pending": 21,
+    "completed": 665,
     "groups": {
       "all": {
-        "records": 676,
-        "unique_tokens": 409,
+        "records": 686,
+        "unique_tokens": 414,
         "by_horizon": {
           "30": {
-            "n": 669,
-            "mean_return_pct": -11.59,
-            "median_return_pct": -23.19,
-            "pct_positive": 34.4,
-            "pct_dumped_30": 45.7,
+            "n": 676,
+            "mean_return_pct": -11.34,
+            "median_return_pct": -22.94,
+            "pct_positive": 34.6,
+            "pct_dumped_30": 45.6,
             "unresolved": 0
           },
           "60": {
-            "n": 665,
-            "mean_return_pct": -17.67,
+            "n": 669,
+            "mean_return_pct": -17.26,
             "median_return_pct": -34.21,
-            "pct_positive": 32.2,
+            "pct_positive": 32.3,
             "pct_dumped_30": 51.9,
             "unresolved": 0
           },
           "120": {
-            "n": 657,
-            "mean_return_pct": -33.34,
+            "n": 665,
+            "mean_return_pct": -33.54,
             "median_return_pct": -55.47,
-            "pct_positive": 25.1,
+            "pct_positive": 25.0,
             "pct_dumped_30": 60.9,
             "unresolved": 0
           }
         }
       },
       "conservative_would_enter": {
-        "records": 1,
-        "unique_tokens": 1,
+        "records": 2,
+        "unique_tokens": 2,
         "by_horizon": {
           "30": {
             "n": 1,
@@ -15126,30 +15315,30 @@
         }
       },
       "conservative_not_entered": {
-        "records": 675,
-        "unique_tokens": 408,
+        "records": 684,
+        "unique_tokens": 412,
         "by_horizon": {
           "30": {
-            "n": 668,
-            "mean_return_pct": -11.6,
-            "median_return_pct": -23.26,
-            "pct_positive": 34.4,
-            "pct_dumped_30": 45.8,
+            "n": 675,
+            "mean_return_pct": -11.35,
+            "median_return_pct": -23.18,
+            "pct_positive": 34.7,
+            "pct_dumped_30": 45.6,
             "unresolved": 0
           },
           "60": {
-            "n": 664,
-            "mean_return_pct": -17.61,
+            "n": 668,
+            "mean_return_pct": -17.2,
             "median_return_pct": -34.2,
-            "pct_positive": 32.2,
+            "pct_positive": 32.3,
             "pct_dumped_30": 51.8,
             "unresolved": 0
           },
           "120": {
-            "n": 656,
-            "mean_return_pct": -33.28,
+            "n": 664,
+            "mean_return_pct": -33.48,
             "median_return_pct": -55.39,
-            "pct_positive": 25.2,
+            "pct_positive": 25.0,
             "pct_dumped_30": 60.8,
             "unresolved": 0
           }
@@ -15186,30 +15375,30 @@
         }
       },
       "scalp_not_entered": {
-        "records": 664,
-        "unique_tokens": 405,
+        "records": 674,
+        "unique_tokens": 410,
         "by_horizon": {
           "30": {
-            "n": 657,
-            "mean_return_pct": -12.07,
-            "median_return_pct": -23.39,
-            "pct_positive": 34.6,
-            "pct_dumped_30": 46.0,
+            "n": 664,
+            "mean_return_pct": -11.81,
+            "median_return_pct": -23.19,
+            "pct_positive": 34.8,
+            "pct_dumped_30": 45.8,
             "unresolved": 0
           },
           "60": {
-            "n": 653,
-            "mean_return_pct": -17.24,
+            "n": 657,
+            "mean_return_pct": -16.83,
             "median_return_pct": -34.19,
-            "pct_positive": 32.3,
+            "pct_positive": 32.4,
             "pct_dumped_30": 51.8,
             "unresolved": 0
           },
           "120": {
-            "n": 645,
-            "mean_return_pct": -33.09,
+            "n": 653,
+            "mean_return_pct": -33.3,
             "median_return_pct": -55.32,
-            "pct_positive": 25.1,
+            "pct_positive": 25.0,
             "pct_dumped_30": 60.9,
             "unresolved": 0
           }
