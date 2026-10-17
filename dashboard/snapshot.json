@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-17T03:55:49.256967",
+  "generated_at": "2026-10-17T04:14:45.910800",
   "mode": "paper",
   "portfolio": {
     "cash_usd": 983.83,
@@ -131,75 +131,6 @@
     "emergency_drawdown_pct": 20.0
   },
   "cycle_log": [
-    {
-      "timestamp": "2026-10-12T16:06:57.890760",
-      "discovery": {
-        "addresses_collected": 49,
-        "skipped_recently_seen": 37,
-        "pairs_returned": 30,
-        "pre_filter_rejected": {
-          "low_liquidity": 28
-        },
-        "passed_pre_filter": 2,
-        "batch_failures": 0
-      },
-      "candidates_discovered": 2,
-      "candidates_evaluated": 2,
-      "rugcheck_failures": 0,
-      "rejections": {
-        "scanner_hard_filter_failed": 2
-      },
-      "hard_filter_reasons": {
-        "liquidity_below_min": 1,
-        "top10_holders_too_concentrated": 2,
-        "top_holder_too_concentrated": 2,
-        "liquidity_not_locked_or_burned": 1
-      },
-      "opened": [],
-      "closed": [],
-      "emergency": null,
-      "errors": [],
-      "details": [
-        {
-          "symbol": "Ahmed",
-          "address": "8YszuxNXg82kicUakd24y2KrQHyosKDabqHopHtpump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "liquidity_below_min ($13,462)",
-              "top_holder_too_concentrated (35.4%)",
-              "top10_holders_too_concentrated (78.2%)"
-            ],
-            "scalp": [
-              "liquidity_below_min ($13,462)",
-              "top_holder_too_concentrated (35.4%)",
-              "top10_holders_too_concentrated (78.2%)"
-            ]
-          }
-        },
-        {
-          "symbol": "UNKNOWN",
-          "address": "9PiG7wNVVxfhe7F7feVn8LRm9dH75U4Lt5cfdSx8void",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "top_holder_too_concentrated (62.7%)",
-              "top10_holders_too_concentrated (80.8%)",
-              "liquidity_not_locked_or_burned"
-            ],
-            "scalp": [
-              "top_holder_too_concentrated (62.7%)",
-              "top10_holders_too_concentrated (80.8%)",
-              "liquidity_not_locked_or_burned"
-            ]
-          }
-        }
-      ]
-    },
     {
       "timestamp": "2026-10-12T16:41:18.929512",
       "discovery": {
@@ -15602,24 +15533,67 @@
         }
       ],
       "watch": {}
+    },
+    {
+      "timestamp": "2026-10-17T04:14:45.906984",
+      "discovery": {
+        "addresses_collected": 50,
+        "skipped_recently_seen": 46,
+        "pairs_returned": 8,
+        "pre_filter_rejected": {
+          "low_liquidity": 3
+        },
+        "passed_pre_filter": 1,
+        "batch_failures": 0
+      },
+      "candidates_discovered": 1,
+      "candidates_evaluated": 1,
+      "rugcheck_failures": 0,
+      "rejections": {
+        "scanner_hard_filter_failed": 1
+      },
+      "hard_filter_reasons": {
+        "top_holder_too_concentrated": 1,
+        "token_too_new": 1
+      },
+      "opened": [],
+      "closed": [],
+      "emergency": null,
+      "errors": [],
+      "details": [
+        {
+          "symbol": "EGG",
+          "address": "219ZL89b7TSRSv8bqf7Fy2WrU5BJJVCntg1srHnypurp",
+          "result": "scanner_hard_filter_failed",
+          "scanner_score": null,
+          "signal_score": null,
+          "hard_filter_reasons": {
+            "conservative": [
+              "token_too_new (13m)",
+              "top_holder_too_concentrated (20.5%)"
+            ]
+          }
+        }
+      ],
+      "watch": {}
     }
   ],
   "cycle_totals": {
-    "cycles": 202,
-    "addresses_collected": 9455,
-    "skipped_recently_seen": 3328,
-    "pairs_returned": 8320,
-    "passed_pre_filter": 977,
-    "evaluated": 779,
+    "cycles": 203,
+    "addresses_collected": 9505,
+    "skipped_recently_seen": 3374,
+    "pairs_returned": 8328,
+    "passed_pre_filter": 978,
+    "evaluated": 780,
     "opened": 4,
     "errors": 0,
     "pre_filter_rejected": {
-      "low_liquidity": 4460,
+      "low_liquidity": 4463,
       "low_volume_5m": 839,
       "too_old": 286
     },
     "rejections": {
-      "scanner_hard_filter_failed": 556,
+      "scanner_hard_filter_failed": 557,
       "scanner_score_too_low": 213,
       "opened": 4,
       "signal_rejected": 5,
@@ -15629,9 +15603,9 @@
     "hard_filter_reasons": {
       "liquidity_below_min": 141,
       "top10_holders_too_concentrated": 358,
-      "top_holder_too_concentrated": 470,
+      "top_holder_too_concentrated": 471,
       "liquidity_not_locked_or_burned": 50,
-      "token_too_new": 243
+      "token_too_new": 244
     }
   },
   "shadow_summary": {
@@ -15640,13 +15614,13 @@
       60,
       120
     ],
-    "records_total": 715,
-    "pending": 29,
+    "records_total": 716,
+    "pending": 30,
     "completed": 686,
     "groups": {
       "all": {
-        "records": 715,
-        "unique_tokens": 429,
+        "records": 716,
+        "unique_tokens": 430,
         "by_horizon": {
           "30": {
             "n": 703,
@@ -15705,8 +15679,8 @@
         }
       },
       "conservative_not_entered": {
-        "records": 713,
-        "unique_tokens": 427,
+        "records": 714,
+        "unique_tokens": 428,
         "by_horizon": {
           "30": {
             "n": 701,
@@ -15765,8 +15739,8 @@
         }
       },
       "scalp_not_entered": {
-        "records": 703,
-        "unique_tokens": 425,
+        "records": 704,
+        "unique_tokens": 426,
         "by_horizon": {
           "30": {
             "n": 691,
