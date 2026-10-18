@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-18T08:51:52.867163",
+  "generated_at": "2026-10-18T09:13:00.949665",
   "mode": "paper",
   "portfolio": {
     "cash_usd": 983.83,
@@ -131,103 +131,6 @@
     "emergency_drawdown_pct": 20.0
   },
   "cycle_log": [
-    {
-      "timestamp": "2026-10-13T19:54:31.775684",
-      "discovery": {
-        "addresses_collected": 44,
-        "skipped_recently_seen": 0,
-        "pairs_returned": 55,
-        "pre_filter_rejected": {
-          "low_liquidity": 24,
-          "low_volume_5m": 9,
-          "too_old": 1
-        },
-        "passed_pre_filter": 5,
-        "batch_failures": 0
-      },
-      "candidates_discovered": 5,
-      "candidates_evaluated": 5,
-      "rugcheck_failures": 0,
-      "rejections": {
-        "scanner_hard_filter_failed": 4,
-        "scanner_score_too_low": 1
-      },
-      "hard_filter_reasons": {
-        "token_too_new": 2,
-        "top_holder_too_concentrated": 4,
-        "top10_holders_too_concentrated": 1,
-        "liquidity_below_min": 1,
-        "liquidity_not_locked_or_burned": 1
-      },
-      "opened": [],
-      "closed": [],
-      "emergency": null,
-      "errors": [],
-      "details": [
-        {
-          "symbol": "PICK",
-          "address": "CJERbMbTRZTH8nWwfNHdE6Gsb81MZHtTFJXg4Nkpump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "token_too_new (17m)",
-              "top_holder_too_concentrated (20.8%)"
-            ]
-          }
-        },
-        {
-          "symbol": "CLAUDE",
-          "address": "DnMszBSMJhfh8St9Zhp4vABw9KFdFsNtyGWnt9rNpump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "liquidity_below_min ($10,759)",
-              "top_holder_too_concentrated (34.2%)",
-              "top10_holders_too_concentrated (53.3%)"
-            ]
-          }
-        },
-        {
-          "symbol": "VRAXGUY",
-          "address": "FToVFniKy6H791uFYehBtLY8euRCbbi2pfDzL6Hopump",
-          "result": "scanner_score_too_low",
-          "scanner_score": 57.44,
-          "signal_score": null,
-          "hard_filter_reasons": null
-        },
-        {
-          "symbol": "NAUTO",
-          "address": "326XZZ8o5DSBczXKSkv7mCrtZuP9mqcW2BW8ntobJRE2",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "top_holder_too_concentrated (16.4%)",
-              "liquidity_not_locked_or_burned"
-            ]
-          }
-        },
-        {
-          "symbol": "Kirk",
-          "address": "5jhRCo21HuE8Rq5wyvvuHxs2iaCydT6pr44oyBVBKsqM",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "token_too_new (24m)",
-              "top_holder_too_concentrated (20.3%)"
-            ]
-          }
-        }
-      ],
-      "watch": {}
-    },
     {
       "timestamp": "2026-10-13T20:16:03.082096",
       "discovery": {
@@ -17426,19 +17329,43 @@
         }
       ],
       "watch": {}
+    },
+    {
+      "timestamp": "2026-10-18T09:13:00.944295",
+      "discovery": {
+        "addresses_collected": 44,
+        "skipped_recently_seen": 34,
+        "pairs_returned": 16,
+        "pre_filter_rejected": {
+          "low_liquidity": 10
+        },
+        "passed_pre_filter": 0,
+        "batch_failures": 0
+      },
+      "candidates_discovered": 0,
+      "candidates_evaluated": 0,
+      "rugcheck_failures": 0,
+      "rejections": {},
+      "hard_filter_reasons": {},
+      "opened": [],
+      "closed": [],
+      "emergency": null,
+      "errors": [],
+      "details": [],
+      "watch": {}
     }
   ],
   "cycle_totals": {
-    "cycles": 257,
-    "addresses_collected": 12007,
-    "skipped_recently_seen": 4283,
-    "pairs_returned": 10533,
+    "cycles": 258,
+    "addresses_collected": 12051,
+    "skipped_recently_seen": 4317,
+    "pairs_returned": 10549,
     "passed_pre_filter": 1209,
     "evaluated": 1011,
     "opened": 4,
     "errors": 0,
     "pre_filter_rejected": {
-      "low_liquidity": 5414,
+      "low_liquidity": 5424,
       "low_volume_5m": 1130,
       "too_old": 389
     },
@@ -17465,8 +17392,8 @@
       120
     ],
     "records_total": 947,
-    "pending": 20,
-    "completed": 927,
+    "pending": 13,
+    "completed": 934,
     "groups": {
       "all": {
         "records": 947,
@@ -17489,10 +17416,10 @@
             "unresolved": 0
           },
           "120": {
-            "n": 927,
-            "mean_return_pct": 27.49,
-            "median_return_pct": -49.37,
-            "pct_positive": 26.4,
+            "n": 934,
+            "mean_return_pct": 27.35,
+            "median_return_pct": -49.0,
+            "pct_positive": 26.6,
             "pct_dumped_30": 58.5,
             "unresolved": 0
           }
@@ -17549,10 +17476,10 @@
             "unresolved": 0
           },
           "120": {
-            "n": 925,
-            "mean_return_pct": 27.74,
-            "median_return_pct": -49.2,
-            "pct_positive": 26.5,
+            "n": 932,
+            "mean_return_pct": 27.59,
+            "median_return_pct": -48.82,
+            "pct_positive": 26.6,
             "pct_dumped_30": 58.4,
             "unresolved": 0
           }
@@ -17609,10 +17536,10 @@
             "unresolved": 0
           },
           "120": {
-            "n": 909,
-            "mean_return_pct": 28.72,
-            "median_return_pct": -49.2,
-            "pct_positive": 26.4,
+            "n": 916,
+            "mean_return_pct": 28.56,
+            "median_return_pct": -48.82,
+            "pct_positive": 26.5,
             "pct_dumped_30": 58.4,
             "unresolved": 0
           }
