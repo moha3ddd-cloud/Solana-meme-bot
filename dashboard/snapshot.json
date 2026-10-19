@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-19T14:06:28.341676",
+  "generated_at": "2026-10-19T15:02:25.766991",
   "mode": "paper",
   "portfolio": {
     "cash_usd": 983.83,
@@ -131,94 +131,6 @@
     "emergency_drawdown_pct": 20.0
   },
   "cycle_log": [
-    {
-      "timestamp": "2026-10-14T23:46:33.034606",
-      "discovery": {
-        "addresses_collected": 45,
-        "skipped_recently_seen": 0,
-        "pairs_returned": 60,
-        "pre_filter_rejected": {
-          "low_liquidity": 31,
-          "too_old": 1,
-          "low_volume_5m": 5
-        },
-        "passed_pre_filter": 7,
-        "batch_failures": 0
-      },
-      "candidates_discovered": 7,
-      "candidates_evaluated": 5,
-      "rugcheck_failures": 2,
-      "rejections": {
-        "scanner_score_too_low": 3,
-        "scanner_hard_filter_failed": 2,
-        "rugcheck_failed": 2
-      },
-      "hard_filter_reasons": {
-        "top10_holders_too_concentrated": 2,
-        "top_holder_too_concentrated": 2,
-        "liquidity_below_min": 1,
-        "liquidity_not_locked_or_burned": 1
-      },
-      "opened": [],
-      "closed": [],
-      "emergency": null,
-      "errors": [],
-      "details": [
-        {
-          "symbol": "STREAM",
-          "address": "9a98oQHtxfqmr4EyzsP6wfw69uYAK3JbUeVEuNW1pump",
-          "result": "scanner_score_too_low",
-          "scanner_score": 58.3,
-          "signal_score": null,
-          "hard_filter_reasons": null
-        },
-        {
-          "symbol": "PEGE",
-          "address": "37KvSZ4ht3hFXc9fhTpXpHGtqeyaPXTyC3SF5Gt2pump",
-          "result": "scanner_score_too_low",
-          "scanner_score": 64.92,
-          "signal_score": null,
-          "hard_filter_reasons": null
-        },
-        {
-          "symbol": "PEDO",
-          "address": "4uWm1gPcWn6K9MRhQhXxgnhBq1cG2tnpBze8pNDJpump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "top_holder_too_concentrated (82.2%)",
-              "top10_holders_too_concentrated (112.7%)"
-            ]
-          }
-        },
-        {
-          "symbol": "PEDO",
-          "address": "8EDmp9WRic4ns7eBo5RxWNFznw2Td1fs3E41eyHapump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "liquidity_below_min ($14,795)",
-              "top_holder_too_concentrated (25.3%)",
-              "top10_holders_too_concentrated (72.4%)",
-              "liquidity_not_locked_or_burned"
-            ]
-          }
-        },
-        {
-          "symbol": "VEILTRUMP",
-          "address": "7fumw7GYTHZJJxkKJ8sSh1CqTdHmB234vX3xsKjepump",
-          "result": "scanner_score_too_low",
-          "scanner_score": 64.04,
-          "signal_score": null,
-          "hard_filter_reasons": null
-        }
-      ],
-      "watch": {}
-    },
     {
       "timestamp": "2026-10-15T00:10:49.528091",
       "discovery": {
@@ -16121,10 +16033,25 @@
       "errors": [],
       "details": [],
       "watch": {}
+    },
+    {
+      "timestamp": "2026-10-19T15:02:25.763933",
+      "discovery": {},
+      "candidates_discovered": 0,
+      "candidates_evaluated": 0,
+      "rugcheck_failures": 0,
+      "rejections": {},
+      "hard_filter_reasons": {},
+      "opened": [],
+      "closed": [],
+      "emergency": "consecutive_execution_errors",
+      "errors": [],
+      "details": [],
+      "watch": {}
     }
   ],
   "cycle_totals": {
-    "cycles": 308,
+    "cycles": 309,
     "addresses_collected": 13517,
     "skipped_recently_seen": 4853,
     "pairs_returned": 11847,
