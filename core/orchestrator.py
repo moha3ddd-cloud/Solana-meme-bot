@@ -26,7 +26,7 @@ import yaml
 from core.data.dexscreener_client import DexScreenerClient
 from core.data.mappers import build_dex_fields, pair_to_timing_signals, select_primary_pair
 from core.data.onchain_mappers import build_onchain_fields, merge_into_token_metrics
-from core.data.rugcheck_client import RugCheckClient
+from core.data.rugcheck_client import RugCheckClient, RugCheckError, RugCheckRateLimitError
 from core.discovery import DiscoveredCandidate, DiscoveryLayer
 from core.paper_trading import PaperTradingEngine
 
@@ -79,6 +79,8 @@ class Orchestrator:
         shadow_log=None,
     ):
         self.shadow_log = shadow_log  # اختياري: core/shadow_log.ShadowLog
+        self._rugcheck_blocked = False       # آخر محاولة RugCheck خدت rate limit
+        self._rugcheck_not_indexed = False   # آخر محاولة: العملة لسه مش متحلّلة
         self.discovery = discovery
         self.dex_client = dex_client
         self.rugcheck_client = rugcheck_client
@@ -187,6 +189,23 @@ class Orchestrator:
 
         try:
             report = self.rugcheck_client.get_token_report(candidate.address)
+        except RugCheckRateLimitError as e:
+            # لا ننتظر ونكرر على باقي المرشحين: نسجّل خطأ واحد ونوقف التقييم الدورة دي
+            self.engine.risk_engine.record_execution_error()
+            logger.warning(f"rugcheck_rate_limited address={candidate.address} error={e}")
+            self._rugcheck_blocked = True
+            return None
+        except RugCheckError as e:
+            if str(e).startswith("token_not_found"):
+                # عملة جديدة لسه RugCheck ماحلّلهاش: دي حالة عادية مش عطل في الشبكة.
+                # بنرفض المرشح (من غير تقرير أمان مانعرفش نقيّمه) من غير ما نحسبها
+                # execution error — قبل كده الحالة دي كانت بتقفل البوت يوم كامل.
+                logger.info(f"rugcheck_not_indexed address={candidate.address}")
+                self._rugcheck_not_indexed = True
+                return None
+            self.engine.risk_engine.record_execution_error()
+            logger.warning(f"rugcheck_failed address={candidate.address} error={e}")
+            return None
         except Exception as e:
             self.engine.risk_engine.record_execution_error()
             logger.warning(f"rugcheck_failed address={candidate.address} error={e}")
@@ -284,7 +303,16 @@ class Orchestrator:
             if addr not in result.positions_closed:
                 result.positions_closed.append(addr)
 
-        if result.emergency_triggered:
+        # أخطاء الشبكة المتتالية من غير أي صفقة مفتوحة = مفيش حاجة نحميها، وكمان
+        # الدورة هي الوحيدة اللي بتقدر تعمل نجاح يصفّر العدّاد. لو وقفنا هنا
+        # البوت بيفضل واقف لحد منتصف الليل (حصل فعلًا ~19 ساعة). فنكمّل: التداول
+        # لسه ممنوع بالـhalt لحد أول نجاح فعلي.
+        recovery_path = (
+            result.emergency_triggered
+            and result.emergency_reason == "consecutive_execution_errors"
+            and not result.positions_closed
+        )
+        if result.emergency_triggered and not recovery_path:
             # لو الطوارئ اتفعّلت، نوقف هنا — مفيش داعي نفتح صفقات جديدة
             # في نفس الدورة اللي قفلنا فيها كل حاجة لسبب خطير
             return result
@@ -304,19 +332,30 @@ class Orchestrator:
 
         # 4) تقييم كل مرشح
         for candidate in candidates:
-            can_trade, _ = self.engine.risk_engine.can_open_new_trade()
-            if not can_trade and self.shadow_log is None:
+            can_trade, halt_reason = self.engine.risk_engine.can_open_new_trade()
+            if (not can_trade and self.shadow_log is None
+                    and halt_reason != "consecutive_execution_errors"):
                 break  # ممنوعين نفتح صفقات جديدة أصلًا — مفيش داعي نكمل
+            # (الإيقاف بسبب أخطاء متتالية استثناء: لازم نحاول، لأن نجاح فعلي هو اللي بيرفعه)
             # لو الـshadow log شغّال بنكمل نسجّل العملات حتى والتداول موقوف،
             # عشان يوم الخسارة القصوى مايبقاش ثغرة في البيانات
 
+            self._rugcheck_blocked = False
+            self._rugcheck_not_indexed = False
             built = self._build_token_and_signals(candidate)
             if built is None:
+                if self._rugcheck_not_indexed:
+                    result.rejection_counts["rugcheck_not_indexed"] = result.rejection_counts.get("rugcheck_not_indexed", 0) + 1
+                    continue
                 result.rugcheck_failures += 1
                 result.rejection_counts["rugcheck_failed"] = result.rejection_counts.get("rugcheck_failed", 0) + 1
+                if self._rugcheck_blocked:
+                    break  # rate limit: كمّلنا كفاية الدورة دي
                 continue
             token, signals = built
             result.candidates_evaluated += 1
+            # الـbuild الناجح ممكن يكون رفع إيقاف الأخطاء المتتالية — نعيد الفحص
+            can_trade, _ = self.engine.risk_engine.can_open_new_trade()
             self._record_shadow(candidate, token, signals, trading_allowed=can_trade)
             if not can_trade:
                 result.rejection_counts["trading_halted"] = result.rejection_counts.get("trading_halted", 0) + 1

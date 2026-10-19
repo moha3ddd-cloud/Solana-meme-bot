@@ -139,6 +139,15 @@ class RiskEngine:
 
     def record_execution_success(self) -> None:
         self.daily_state.consecutive_errors = 0
+        # الإيقاف بسبب أخطاء متتالية مؤقت بطبيعته: أول نجاح فعلي بيرفعه. من غير
+        # كده الـhalted كان بيفضل True لحد منتصف الليل حتى لو المشكلة اتحلت.
+        # (الإيقافات التانية: خسارة يومية/عدد صفقات/drawdown/kill switch بتفضل زي ما هي.)
+        if (self.daily_state.halted
+                and self.daily_state.halt_reason == TradingHaltReason.CONSECUTIVE_ERRORS):
+            self.daily_state.halted = False
+            self.daily_state.halt_reason = TradingHaltReason.NONE
+            logger.info("Trading resumed: execution recovered")
+            self._evaluate_halts()  # لو فيه سبب إيقاف تاني لسه قايم يرجع يتفعّل
 
     def activate_kill_switch(self) -> None:
         self.kill_switch_active = True
