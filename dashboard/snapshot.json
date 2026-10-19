@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-19T07:22:07.133626",
+  "generated_at": "2026-10-19T08:08:26.999930",
   "mode": "paper",
   "portfolio": {
     "cash_usd": 983.83,
@@ -131,95 +131,6 @@
     "emergency_drawdown_pct": 20.0
   },
   "cycle_log": [
-    {
-      "timestamp": "2026-10-14T19:04:26.927980",
-      "discovery": {
-        "addresses_collected": 49,
-        "skipped_recently_seen": 0,
-        "pairs_returned": 60,
-        "pre_filter_rejected": {
-          "low_liquidity": 34,
-          "too_old": 4,
-          "low_volume_5m": 3
-        },
-        "passed_pre_filter": 6,
-        "batch_failures": 0
-      },
-      "candidates_discovered": 6,
-      "candidates_evaluated": 5,
-      "rugcheck_failures": 1,
-      "rejections": {
-        "scanner_score_too_low": 2,
-        "scanner_hard_filter_failed": 3,
-        "rugcheck_failed": 1
-      },
-      "hard_filter_reasons": {
-        "top10_holders_too_concentrated": 3,
-        "top_holder_too_concentrated": 3
-      },
-      "opened": [],
-      "closed": [],
-      "emergency": null,
-      "errors": [],
-      "details": [
-        {
-          "symbol": "VEILTRUMP",
-          "address": "DfxPxPLt7GqeF2ScAHKZdrPoQa5jFHH6bfjbe87fpump",
-          "result": "scanner_score_too_low",
-          "scanner_score": 68.07,
-          "signal_score": null,
-          "hard_filter_reasons": null
-        },
-        {
-          "symbol": "REVERSO",
-          "address": "5XXsFp5y47ZJ5BB8NLD8Gkugaz1YmfvSmUeF5F6Npump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "top_holder_too_concentrated (22.0%)",
-              "top10_holders_too_concentrated (80.7%)"
-            ]
-          }
-        },
-        {
-          "symbol": "PAIR",
-          "address": "4Y3erznsVSJaC7eaw7Row24etKoX8pT2XsG9oCG5pump",
-          "result": "scanner_score_too_low",
-          "scanner_score": 55.6,
-          "signal_score": null,
-          "hard_filter_reasons": null
-        },
-        {
-          "symbol": "DIKSHIT",
-          "address": "AMQ8BusAhpwbt3ufSCTi4k3BEQ7AecX9u12Jnk6Spump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "top_holder_too_concentrated (23.2%)",
-              "top10_holders_too_concentrated (49.2%)"
-            ]
-          }
-        },
-        {
-          "symbol": "1EDGE",
-          "address": "1EwcGE6WrssiY2sKSadB5E5DE9WhPDQvBC6kev1EDGE",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "top_holder_too_concentrated (40.2%)",
-              "top10_holders_too_concentrated (66.4%)"
-            ]
-          }
-        }
-      ],
-      "watch": {}
-    },
     {
       "timestamp": "2026-10-14T19:56:29.769119",
       "discovery": {
@@ -16699,10 +16610,25 @@
       "errors": [],
       "details": [],
       "watch": {}
+    },
+    {
+      "timestamp": "2026-10-19T08:08:26.994598",
+      "discovery": {},
+      "candidates_discovered": 0,
+      "candidates_evaluated": 0,
+      "rugcheck_failures": 0,
+      "rejections": {},
+      "hard_filter_reasons": {},
+      "opened": [],
+      "closed": [],
+      "emergency": "consecutive_execution_errors",
+      "errors": [],
+      "details": [],
+      "watch": {}
     }
   ],
   "cycle_totals": {
-    "cycles": 299,
+    "cycles": 300,
     "addresses_collected": 13517,
     "skipped_recently_seen": 4853,
     "pairs_returned": 11847,
