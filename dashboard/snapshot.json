@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-19T03:19:31.019535",
+  "generated_at": "2026-10-19T04:01:09.518583",
   "mode": "paper",
   "portfolio": {
     "cash_usd": 983.83,
@@ -131,94 +131,6 @@
     "emergency_drawdown_pct": 20.0
   },
   "cycle_log": [
-    {
-      "timestamp": "2026-10-14T15:24:59.023937",
-      "discovery": {
-        "addresses_collected": 43,
-        "skipped_recently_seen": 25,
-        "pairs_returned": 30,
-        "pre_filter_rejected": {
-          "low_liquidity": 12,
-          "too_old": 1,
-          "low_volume_5m": 1
-        },
-        "passed_pre_filter": 4,
-        "batch_failures": 0
-      },
-      "candidates_discovered": 4,
-      "candidates_evaluated": 4,
-      "rugcheck_failures": 0,
-      "rejections": {
-        "scanner_hard_filter_failed": 4
-      },
-      "hard_filter_reasons": {
-        "top_holder_too_concentrated": 3,
-        "top10_holders_too_concentrated": 3,
-        "token_too_new": 3,
-        "liquidity_not_locked_or_burned": 1
-      },
-      "opened": [],
-      "closed": [],
-      "emergency": null,
-      "errors": [],
-      "details": [
-        {
-          "symbol": "ELON2028",
-          "address": "ke27KPPQkD3Fp6HSfiR9egmZZzjzJf6HseziLXipump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "top_holder_too_concentrated (22.0%)",
-              "top10_holders_too_concentrated (58.0%)"
-            ]
-          }
-        },
-        {
-          "symbol": "VEILEXE",
-          "address": "3qU7PvZhCzvNzLtZSJWSDJeeHMeQAUUtepVRWvp9pump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "token_too_new (21m)",
-              "top_holder_too_concentrated (23.2%)",
-              "top10_holders_too_concentrated (56.9%)",
-              "liquidity_not_locked_or_burned"
-            ]
-          }
-        },
-        {
-          "symbol": "LILDOGO",
-          "address": "HgUVRimsYGYZ2eNaJDjABi3fgXdEKxtDRwfetEXopump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "token_too_new (27m)"
-            ]
-          }
-        },
-        {
-          "symbol": "SNIFFR",
-          "address": "HoJYDeP1swXsLNxX91gKFyzbxtkZC5ax6tJziuyxpump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "token_too_new (23m)",
-              "top_holder_too_concentrated (23.4%)",
-              "top10_holders_too_concentrated (68.3%)"
-            ]
-          }
-        }
-      ],
-      "watch": {}
-    },
     {
       "timestamp": "2026-10-14T16:01:56.659172",
       "discovery": {
@@ -17129,10 +17041,25 @@
       "errors": [],
       "details": [],
       "watch": {}
+    },
+    {
+      "timestamp": "2026-10-19T04:01:09.514023",
+      "discovery": {},
+      "candidates_discovered": 0,
+      "candidates_evaluated": 0,
+      "rugcheck_failures": 0,
+      "rejections": {},
+      "hard_filter_reasons": {},
+      "opened": [],
+      "closed": [],
+      "emergency": "consecutive_execution_errors",
+      "errors": [],
+      "details": [],
+      "watch": {}
     }
   ],
   "cycle_totals": {
-    "cycles": 293,
+    "cycles": 294,
     "addresses_collected": 13517,
     "skipped_recently_seen": 4853,
     "pairs_returned": 11847,
