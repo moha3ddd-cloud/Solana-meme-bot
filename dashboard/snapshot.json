@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-19T02:17:32.734836",
+  "generated_at": "2026-10-19T02:55:56.348874",
   "mode": "paper",
   "portfolio": {
     "cash_usd": 983.83,
@@ -131,52 +131,6 @@
     "emergency_drawdown_pct": 20.0
   },
   "cycle_log": [
-    {
-      "timestamp": "2026-10-14T14:24:46.591888",
-      "discovery": {
-        "addresses_collected": 42,
-        "skipped_recently_seen": 32,
-        "pairs_returned": 14,
-        "pre_filter_rejected": {
-          "low_liquidity": 9
-        },
-        "passed_pre_filter": 1,
-        "batch_failures": 0
-      },
-      "candidates_discovered": 1,
-      "candidates_evaluated": 1,
-      "rugcheck_failures": 0,
-      "rejections": {
-        "opened": 1
-      },
-      "hard_filter_reasons": {},
-      "opened": [
-        "98fkUoDNjowLZxFZdoeq6nZyoHaawpqWnyDeuotWpump"
-      ],
-      "closed": [
-        "98fkUoDNjowLZxFZdoeq6nZyoHaawpqWnyDeuotWpump"
-      ],
-      "emergency": null,
-      "errors": [],
-      "details": [
-        {
-          "symbol": "Musclecat",
-          "address": "98fkUoDNjowLZxFZdoeq6nZyoHaawpqWnyDeuotWpump",
-          "result": "opened",
-          "scanner_score": 70.52,
-          "signal_score": 84.55,
-          "hard_filter_reasons": null
-        }
-      ],
-      "watch": {
-        "polls": 1,
-        "closed": [
-          "98fkUoDNjowLZxFZdoeq6nZyoHaawpqWnyDeuotWpump"
-        ],
-        "stopped_because": "no_open_positions",
-        "interval_seconds": 60.0
-      }
-    },
     {
       "timestamp": "2026-10-14T14:57:37.489144",
       "discovery": {
@@ -17219,10 +17173,25 @@
       "errors": [],
       "details": [],
       "watch": {}
+    },
+    {
+      "timestamp": "2026-10-19T02:55:56.343558",
+      "discovery": {},
+      "candidates_discovered": 0,
+      "candidates_evaluated": 0,
+      "rugcheck_failures": 0,
+      "rejections": {},
+      "hard_filter_reasons": {},
+      "opened": [],
+      "closed": [],
+      "emergency": "consecutive_execution_errors",
+      "errors": [],
+      "details": [],
+      "watch": {}
     }
   ],
   "cycle_totals": {
-    "cycles": 291,
+    "cycles": 292,
     "addresses_collected": 13517,
     "skipped_recently_seen": 4853,
     "pairs_returned": 11847,
