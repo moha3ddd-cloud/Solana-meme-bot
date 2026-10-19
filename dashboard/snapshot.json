@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-19T02:55:56.348874",
+  "generated_at": "2026-10-19T03:19:31.019535",
   "mode": "paper",
   "portfolio": {
     "cash_usd": 983.83,
@@ -131,80 +131,6 @@
     "emergency_drawdown_pct": 20.0
   },
   "cycle_log": [
-    {
-      "timestamp": "2026-10-14T14:57:37.489144",
-      "discovery": {
-        "addresses_collected": 40,
-        "skipped_recently_seen": 0,
-        "pairs_returned": 53,
-        "pre_filter_rejected": {
-          "too_old": 3,
-          "low_liquidity": 24,
-          "low_volume_5m": 7
-        },
-        "passed_pre_filter": 3,
-        "batch_failures": 0
-      },
-      "candidates_discovered": 3,
-      "candidates_evaluated": 3,
-      "rugcheck_failures": 0,
-      "rejections": {
-        "scanner_hard_filter_failed": 3
-      },
-      "hard_filter_reasons": {
-        "token_too_new": 2,
-        "top10_holders_too_concentrated": 3,
-        "top_holder_too_concentrated": 3
-      },
-      "opened": [],
-      "closed": [],
-      "emergency": null,
-      "errors": [],
-      "details": [
-        {
-          "symbol": "WATT",
-          "address": "4z1XrCszQHz9XvxuNTJ3ctqdcXSAKGVNodrFKcEJWATT",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "token_too_new (0m)",
-              "top_holder_too_concentrated (39.4%)",
-              "top10_holders_too_concentrated (84.5%)"
-            ]
-          }
-        },
-        {
-          "symbol": "angrykitten",
-          "address": "DutcPngjK2QaChfiKAZKQpcGLJYkCZrenDJ4bdY3pump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "top_holder_too_concentrated (21.2%)",
-              "top10_holders_too_concentrated (54.0%)"
-            ]
-          }
-        },
-        {
-          "symbol": "Crime",
-          "address": "9K6ZboVwA37egHLMsJ9s3c3j5mp8KZVGiWvSVsnWpump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "token_too_new (20m)",
-              "top_holder_too_concentrated (23.1%)",
-              "top10_holders_too_concentrated (55.6%)"
-            ]
-          }
-        }
-      ],
-      "watch": {}
-    },
     {
       "timestamp": "2026-10-14T15:24:59.023937",
       "discovery": {
@@ -17188,10 +17114,25 @@
       "errors": [],
       "details": [],
       "watch": {}
+    },
+    {
+      "timestamp": "2026-10-19T03:19:31.014186",
+      "discovery": {},
+      "candidates_discovered": 0,
+      "candidates_evaluated": 0,
+      "rugcheck_failures": 0,
+      "rejections": {},
+      "hard_filter_reasons": {},
+      "opened": [],
+      "closed": [],
+      "emergency": "consecutive_execution_errors",
+      "errors": [],
+      "details": [],
+      "watch": {}
     }
   ],
   "cycle_totals": {
-    "cycles": 292,
+    "cycles": 293,
     "addresses_collected": 13517,
     "skipped_recently_seen": 4853,
     "pairs_returned": 11847,
