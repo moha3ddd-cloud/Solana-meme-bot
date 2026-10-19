@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-19T01:07:03.654498",
+  "generated_at": "2026-10-19T01:54:57.835932",
   "mode": "paper",
   "portfolio": {
     "cash_usd": 983.83,
@@ -131,82 +131,6 @@
     "emergency_drawdown_pct": 20.0
   },
   "cycle_log": [
-    {
-      "timestamp": "2026-10-14T13:07:19.159486",
-      "discovery": {
-        "addresses_collected": 41,
-        "skipped_recently_seen": 0,
-        "pairs_returned": 60,
-        "pre_filter_rejected": {
-          "too_old": 4,
-          "low_liquidity": 23,
-          "low_volume_5m": 6
-        },
-        "passed_pre_filter": 3,
-        "batch_failures": 0
-      },
-      "candidates_discovered": 3,
-      "candidates_evaluated": 3,
-      "rugcheck_failures": 0,
-      "rejections": {
-        "scanner_hard_filter_failed": 3
-      },
-      "hard_filter_reasons": {
-        "liquidity_below_min": 1,
-        "top10_holders_too_concentrated": 3,
-        "top_holder_too_concentrated": 3,
-        "token_too_new": 2
-      },
-      "opened": [],
-      "closed": [],
-      "emergency": null,
-      "errors": [],
-      "details": [
-        {
-          "symbol": "TRENCH",
-          "address": "DPdH8mWRCntu8dDyWrrnDo1byHSYkeRz2BN6Vk21pump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "liquidity_below_min ($10,992)",
-              "top_holder_too_concentrated (38.5%)",
-              "top10_holders_too_concentrated (54.2%)"
-            ]
-          }
-        },
-        {
-          "symbol": "Musclecat",
-          "address": "89SbHFg9k4fCmFEYhgwsxWdgopQPyPMHqzUKK16spump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "token_too_new (11m)",
-              "top_holder_too_concentrated (22.3%)",
-              "top10_holders_too_concentrated (55.7%)"
-            ]
-          }
-        },
-        {
-          "symbol": "Polarpine",
-          "address": "5ZxkhR5QzsBYRCEg7WS15559qxCyLSBmD5LBBHAypump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "token_too_new (4m)",
-              "top_holder_too_concentrated (25.8%)",
-              "top10_holders_too_concentrated (71.8%)"
-            ]
-          }
-        }
-      ],
-      "watch": {}
-    },
     {
       "timestamp": "2026-10-14T13:58:32.384291",
       "discovery": {
@@ -17380,10 +17304,25 @@
       "errors": [],
       "details": [],
       "watch": {}
+    },
+    {
+      "timestamp": "2026-10-19T01:54:57.831437",
+      "discovery": {},
+      "candidates_discovered": 0,
+      "candidates_evaluated": 0,
+      "rugcheck_failures": 0,
+      "rejections": {},
+      "hard_filter_reasons": {},
+      "opened": [],
+      "closed": [],
+      "emergency": "consecutive_execution_errors",
+      "errors": [],
+      "details": [],
+      "watch": {}
     }
   ],
   "cycle_totals": {
-    "cycles": 289,
+    "cycles": 290,
     "addresses_collected": 13517,
     "skipped_recently_seen": 4853,
     "pairs_returned": 11847,
