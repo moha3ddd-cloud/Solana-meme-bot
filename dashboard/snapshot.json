@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-19T00:09:14.595991",
+  "generated_at": "2026-10-19T01:07:03.654498",
   "mode": "paper",
   "portfolio": {
     "cash_usd": 983.83,
@@ -131,54 +131,6 @@
     "emergency_drawdown_pct": 20.0
   },
   "cycle_log": [
-    {
-      "timestamp": "2026-10-14T12:20:26.456721",
-      "discovery": {
-        "addresses_collected": 41,
-        "skipped_recently_seen": 36,
-        "pairs_returned": 14,
-        "pre_filter_rejected": {
-          "low_liquidity": 4,
-          "low_volume_5m": 1
-        },
-        "passed_pre_filter": 1,
-        "batch_failures": 0
-      },
-      "candidates_discovered": 1,
-      "candidates_evaluated": 1,
-      "rugcheck_failures": 0,
-      "rejections": {
-        "scanner_hard_filter_failed": 1
-      },
-      "hard_filter_reasons": {
-        "top10_holders_too_concentrated": 1,
-        "top_holder_too_concentrated": 1,
-        "token_too_new": 1,
-        "liquidity_below_min": 1
-      },
-      "opened": [],
-      "closed": [],
-      "emergency": null,
-      "errors": [],
-      "details": [
-        {
-          "symbol": "pENGINE",
-          "address": "GLPbc2tSS844kLztd4Zj1NTSy8zjvHsFud75jnGZpump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "liquidity_below_min ($12,949)",
-              "token_too_new (26m)",
-              "top_holder_too_concentrated (29.5%)",
-              "top10_holders_too_concentrated (50.7%)"
-            ]
-          }
-        }
-      ],
-      "watch": {}
-    },
     {
       "timestamp": "2026-10-14T13:07:19.159486",
       "discovery": {
@@ -17413,10 +17365,25 @@
       "errors": [],
       "details": [],
       "watch": {}
+    },
+    {
+      "timestamp": "2026-10-19T01:07:03.650067",
+      "discovery": {},
+      "candidates_discovered": 0,
+      "candidates_evaluated": 0,
+      "rugcheck_failures": 0,
+      "rejections": {},
+      "hard_filter_reasons": {},
+      "opened": [],
+      "closed": [],
+      "emergency": "consecutive_execution_errors",
+      "errors": [],
+      "details": [],
+      "watch": {}
     }
   ],
   "cycle_totals": {
-    "cycles": 288,
+    "cycles": 289,
     "addresses_collected": 13517,
     "skipped_recently_seen": 4853,
     "pairs_returned": 11847,
