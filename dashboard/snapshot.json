@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-19T15:02:25.766991",
+  "generated_at": "2026-10-19T15:56:04.136250",
   "mode": "paper",
   "portfolio": {
     "cash_usd": 983.83,
@@ -131,93 +131,6 @@
     "emergency_drawdown_pct": 20.0
   },
   "cycle_log": [
-    {
-      "timestamp": "2026-10-15T00:10:49.528091",
-      "discovery": {
-        "addresses_collected": 46,
-        "skipped_recently_seen": 30,
-        "pairs_returned": 24,
-        "pre_filter_rejected": {
-          "low_liquidity": 10
-        },
-        "passed_pre_filter": 6,
-        "batch_failures": 0
-      },
-      "candidates_discovered": 6,
-      "candidates_evaluated": 4,
-      "rugcheck_failures": 2,
-      "rejections": {
-        "scanner_hard_filter_failed": 4,
-        "rugcheck_failed": 2
-      },
-      "hard_filter_reasons": {
-        "liquidity_not_locked_or_burned": 1,
-        "token_too_new": 1,
-        "top10_holders_too_concentrated": 3,
-        "top_holder_too_concentrated": 3,
-        "liquidity_below_min": 1
-      },
-      "opened": [],
-      "closed": [],
-      "emergency": null,
-      "errors": [],
-      "details": [
-        {
-          "symbol": "VEILPONS",
-          "address": "Egv73vvRrhZH9J3AhYdfm9Q3doRWtvKUo2jgRz6Epump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "liquidity_not_locked_or_burned"
-            ]
-          }
-        },
-        {
-          "symbol": "CAPE",
-          "address": "EnAtbbo1AZWmuXA5PH1Gn4UgGpiTzzmaGbJpLWgjpump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "token_too_new (25m)",
-              "top_holder_too_concentrated (38.6%)",
-              "top10_holders_too_concentrated (98.9%)"
-            ]
-          }
-        },
-        {
-          "symbol": "CTD",
-          "address": "CHxwVbJ9B3eMRdEWzYpcKy7ops5H8PxXU79NqzQGpump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "top_holder_too_concentrated (35.1%)",
-              "top10_holders_too_concentrated (79.3%)"
-            ]
-          }
-        },
-        {
-          "symbol": "DIG",
-          "address": "42PFZcSnnFd4iEi5QNmujDVCpefkUJpDWcYJEC97pump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "liquidity_below_min ($14,325)",
-              "top_holder_too_concentrated (49.1%)",
-              "top10_holders_too_concentrated (106.8%)"
-            ]
-          }
-        }
-      ],
-      "watch": {}
-    },
     {
       "timestamp": "2026-10-15T01:04:52.988924",
       "discovery": {
@@ -16048,10 +15961,25 @@
       "errors": [],
       "details": [],
       "watch": {}
+    },
+    {
+      "timestamp": "2026-10-19T15:56:04.133131",
+      "discovery": {},
+      "candidates_discovered": 0,
+      "candidates_evaluated": 0,
+      "rugcheck_failures": 0,
+      "rejections": {},
+      "hard_filter_reasons": {},
+      "opened": [],
+      "closed": [],
+      "emergency": "consecutive_execution_errors",
+      "errors": [],
+      "details": [],
+      "watch": {}
     }
   ],
   "cycle_totals": {
-    "cycles": 309,
+    "cycles": 310,
     "addresses_collected": 13517,
     "skipped_recently_seen": 4853,
     "pairs_returned": 11847,
