@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-19T09:04:28.319824",
+  "generated_at": "2026-10-19T10:00:42.315027",
   "mode": "paper",
   "portfolio": {
     "cash_usd": 983.83,
@@ -131,113 +131,6 @@
     "emergency_drawdown_pct": 20.0
   },
   "cycle_log": [
-    {
-      "timestamp": "2026-10-14T20:19:07.338143",
-      "discovery": {
-        "addresses_collected": 50,
-        "skipped_recently_seen": 34,
-        "pairs_returned": 30,
-        "pre_filter_rejected": {
-          "low_liquidity": 6
-        },
-        "passed_pre_filter": 10,
-        "batch_failures": 0
-      },
-      "candidates_discovered": 10,
-      "candidates_evaluated": 6,
-      "rugcheck_failures": 4,
-      "rejections": {
-        "scanner_score_too_low": 2,
-        "scanner_hard_filter_failed": 4,
-        "rugcheck_failed": 4
-      },
-      "hard_filter_reasons": {
-        "liquidity_not_locked_or_burned": 1,
-        "top_holder_too_concentrated": 4,
-        "token_too_new": 2,
-        "top10_holders_too_concentrated": 3,
-        "liquidity_below_min": 2
-      },
-      "opened": [],
-      "closed": [],
-      "emergency": null,
-      "errors": [],
-      "details": [
-        {
-          "symbol": "VEILTRUMP",
-          "address": "7fumw7GYTHZJJxkKJ8sSh1CqTdHmB234vX3xsKjepump",
-          "result": "scanner_score_too_low",
-          "scanner_score": 67.09,
-          "signal_score": null,
-          "hard_filter_reasons": null
-        },
-        {
-          "symbol": "CFLARE",
-          "address": "kXzjEQ2frgfKHAUWGS1rZFH53tyWjD6b9njoQ82pump",
-          "result": "scanner_score_too_low",
-          "scanner_score": 54.89,
-          "signal_score": null,
-          "hard_filter_reasons": null
-        },
-        {
-          "symbol": "TSF",
-          "address": "36UT1iwuMAx4Rzak9AbF2iX816adwtPwkeECezm7pump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "token_too_new (26m)",
-              "top_holder_too_concentrated (17.6%)",
-              "liquidity_not_locked_or_burned"
-            ]
-          }
-        },
-        {
-          "symbol": "CUP",
-          "address": "9frsdmBSKgPiHsp3mmWojPi6NU8F3wivuFwf6KcWpump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "top_holder_too_concentrated (24.8%)",
-              "top10_holders_too_concentrated (107.6%)"
-            ]
-          }
-        },
-        {
-          "symbol": "EVYN",
-          "address": "9m5hwLG4brTyZkEhtKvkzgFAbA7YxVvwPY1XuSpupump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "liquidity_below_min ($13,017)",
-              "top_holder_too_concentrated (25.7%)",
-              "top10_holders_too_concentrated (72.1%)"
-            ]
-          }
-        },
-        {
-          "symbol": "DAEJON",
-          "address": "9sKU4DuJahbA8CKdvNp7DFSWC2BQ9edWHKqJFbh5A9DP",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "liquidity_below_min ($11,997)",
-              "token_too_new (26m)",
-              "top_holder_too_concentrated (43.7%)",
-              "top10_holders_too_concentrated (105.1%)"
-            ]
-          }
-        }
-      ],
-      "watch": {}
-    },
     {
       "timestamp": "2026-10-14T20:55:30.934443",
       "discovery": {
@@ -16515,10 +16408,25 @@
       "errors": [],
       "details": [],
       "watch": {}
+    },
+    {
+      "timestamp": "2026-10-19T10:00:42.309562",
+      "discovery": {},
+      "candidates_discovered": 0,
+      "candidates_evaluated": 0,
+      "rugcheck_failures": 0,
+      "rejections": {},
+      "hard_filter_reasons": {},
+      "opened": [],
+      "closed": [],
+      "emergency": "consecutive_execution_errors",
+      "errors": [],
+      "details": [],
+      "watch": {}
     }
   ],
   "cycle_totals": {
-    "cycles": 301,
+    "cycles": 302,
     "addresses_collected": 13517,
     "skipped_recently_seen": 4853,
     "pairs_returned": 11847,
