@@ -145,11 +145,20 @@ class Orchestrator:
         except Exception as e:  # noqa: BLE001 — القياس مايوقفش دورة التداول أبدًا
             logger.warning(f"shadow_followups_failed error={e}")
 
-    def _record_shadow(self, candidate: DiscoveredCandidate, token, signals, trading_allowed: bool) -> None:
-        if self.shadow_log is None:
-            return
+    def _record_shadow(self, candidate: DiscoveredCandidate, token, signals, trading_allowed: bool):
+        """
+        بيقيّم المرشح بكل المسارات (shadow_evaluate) ويسجّله في الـshadow log لو موجود.
+        بيرجّع dict القرارات (أو None لو فشل) — الـOrchestrator بيستخدمه يعرف هل فيه
+        مسار شغّال (مش shadow) وافق، عشان يحدّث السعر قبل الدخول.
+        """
         try:
             profiles = self.engine.shadow_evaluate(token, signals)
+        except Exception as e:  # noqa: BLE001
+            logger.warning(f"shadow_evaluate_failed address={candidate.address} error={e}")
+            return None
+        if self.shadow_log is None:
+            return profiles
+        try:
             price = candidate.pair.get("priceUsd")
             self.shadow_log.add(
                 address=candidate.address, symbol=candidate.symbol,
@@ -165,6 +174,7 @@ class Orchestrator:
             )
         except Exception as e:  # noqa: BLE001
             logger.warning(f"shadow_record_failed address={candidate.address} error={e}")
+        return profiles
 
     def _update_open_positions(self, result: CycleResult) -> dict:
         current_prices = {}
@@ -221,12 +231,33 @@ class Orchestrator:
         price = pair.get("priceUsd")
         if price is None:
             return None
-        entry_price = float(price)
+        return self._entry_and_stop_from_price(float(price))
+
+    def _entry_and_stop_from_price(self, entry_price: float):
         if entry_price <= 0:
             return None
         stop_pct = self.config["default_initial_stop_loss_pct"] / 100.0
-        stop_loss_price = entry_price * (1 - stop_pct)
-        return entry_price, stop_loss_price
+        return entry_price, entry_price * (1 - stop_pct)
+
+    def _refresh_entry_price(self, candidate: DiscoveredCandidate, snapshot_price: float):
+        """
+        بيجيب سعر طازة (الـpair الحي) قبل ما نفتح الصفقة فعليًا. سعر الاكتشاف ممكن
+        يكون قديم دقايق (RugCheck بطيء، والـDexScreener نفسه فيه تأخير)، وصفقتين
+        محافظ اتضربوا في الستوب بعد 1-3 دقايق من الدخول. بنرجّع:
+          (price, drift_pct, None)        لو تمام — الدخول بالسعر الطازة
+          (None, drift_pct_or_None, why)  لو لازم نرفض (no_price / drifted)
+        max_entry_price_drift_pct = 0 أو غايب => التحديث مقفول.
+        """
+        max_drift = float(self.config.get("max_entry_price_drift_pct", 0) or 0)
+        if max_drift <= 0:
+            return snapshot_price, 0.0, None
+        fresh = self._fetch_current_price(candidate.address)
+        if fresh is None or fresh <= 0:
+            return None, None, "entry_price_unavailable"
+        drift_pct = (fresh / snapshot_price - 1) * 100
+        if abs(drift_pct) > max_drift:
+            return None, round(drift_pct, 2), "entry_price_drifted"
+        return fresh, round(drift_pct, 2), None
 
     # ------------------------------------------------------------------
     # مراقبة لصيقة: لما فيه صفقة مفتوحة، نفحص السعر كل interval ثانية
@@ -356,7 +387,7 @@ class Orchestrator:
             result.candidates_evaluated += 1
             # الـbuild الناجح ممكن يكون رفع إيقاف الأخطاء المتتالية — نعيد الفحص
             can_trade, _ = self.engine.risk_engine.can_open_new_trade()
-            self._record_shadow(candidate, token, signals, trading_allowed=can_trade)
+            profiles = self._record_shadow(candidate, token, signals, trading_allowed=can_trade)
             if not can_trade:
                 result.rejection_counts["trading_halted"] = result.rejection_counts.get("trading_halted", 0) + 1
                 continue
@@ -366,6 +397,23 @@ class Orchestrator:
                 result.rejection_counts["no_valid_price"] = result.rejection_counts.get("no_valid_price", 0) + 1
                 continue
             entry_price, stop_loss_price = entry_stop
+
+            # لو فيه مسار شغّال (مش shadow) وافق، نحدّث السعر قبل الدخول فعليًا
+            live_approved = profiles is None or any(
+                r["stage"] == "approved" and not r["shadow_only"] for r in profiles.values()
+            )
+            entry_drift_pct = None
+            if live_approved:
+                fresh_price, entry_drift_pct, why = self._refresh_entry_price(candidate, entry_price)
+                if why is not None:
+                    result.rejection_counts[why] = result.rejection_counts.get(why, 0) + 1
+                    result.candidate_details.append({
+                        "symbol": candidate.symbol, "address": candidate.address, "result": why,
+                        "entry_drift_pct": entry_drift_pct, "scanner_score": None, "signal_score": None,
+                        "hard_filter_reasons": None,
+                    })
+                    continue
+                entry_price, stop_loss_price = self._entry_and_stop_from_price(fresh_price)
 
             decision = self.engine.evaluate_candidate_auto(token, signals, entry_price, stop_loss_price)
             if decision.opened:
@@ -389,6 +437,7 @@ class Orchestrator:
                 "scanner_score": decision.scanner_score,
                 "signal_score": decision.signal_score,
                 "hard_filter_reasons": scan_reasons or None,
+                "entry_drift_pct": entry_drift_pct,
             })
 
         return result

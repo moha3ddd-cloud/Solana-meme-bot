@@ -85,7 +85,8 @@ def main():
     engine = build_engine(shadow_only_profiles=shadow_only)
     logger.info(f"Shadow-only profiles (evaluated, never traded): {shadow_only or 'none'}")
     shadow_log = ShadowLog(path=SHADOW_LOG_PATH,
-                           horizons_min=config.get("shadow_horizons_minutes") or (30, 60, 120))
+                           horizons_min=config.get("shadow_horizons_minutes") or (30, 60, 120),
+                           rules=config.get("shadow_rules") or {})
 
     if os.path.exists(STATE_PATH):
         with open(STATE_PATH, "r", encoding="utf-8") as f:

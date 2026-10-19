@@ -30,10 +30,50 @@ MAX_COMPLETED = 3000           # حد أقصى للسجلات المنتهية �
 DUMP_THRESHOLD_PCT = -30.0
 
 
+def _f(value):
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return None
+
+
+def rule_matches(rule: dict, record: dict) -> bool:
+    """
+    قاعدة دخول مرشّحة للقياس (من config.shadow_rules). كل الشروط اختيارية وكلها لازم تتحقق:
+      passed_hard_filters: true   -> أي مسار عدّى الـhard filters (الفلاتر واحدة بين المسارات)
+      m5_min / m5_max             -> تغيّر السعر 5 دقايق وقت التقييم (min شامل، max غير شامل)
+      h1_min / h1_max             -> تغيّر السعر ساعة
+      min_scanner_score           -> أعلى scanner score بين المسارات
+    لو قيمة السياق ناقصة والقاعدة بتشترطها => السجل مايدخلش القاعدة.
+    """
+    profiles = record.get("profiles") or {}
+    ctx = record.get("context") or {}
+    if rule.get("passed_hard_filters"):
+        if not any(p.get("stage") not in (None, "hard_filter_failed") for p in profiles.values()):
+            return False
+    for key, ctx_key, lo_key, hi_key in (("m5", "price_change_m5", "m5_min", "m5_max"),
+                                          ("h1", "price_change_h1", "h1_min", "h1_max")):
+        if lo_key in rule or hi_key in rule:
+            v = _f(ctx.get(ctx_key))
+            if v is None:
+                return False
+            if lo_key in rule and v < rule[lo_key]:
+                return False
+            if hi_key in rule and v >= rule[hi_key]:
+                return False
+    if "min_scanner_score" in rule:
+        scores = [p.get("scanner_score") for p in profiles.values() if p.get("scanner_score") is not None]
+        if not scores or max(scores) < rule["min_scanner_score"]:
+            return False
+    return True
+
+
 class ShadowLog:
     def __init__(self, path: str = "data/shadow_log.json",
                  horizons_min=DEFAULT_HORIZONS_MIN,
-                 clock: Callable[[], float] = time.time):
+                 clock: Callable[[], float] = time.time,
+                 rules: Optional[dict] = None):
+        self.rules = rules or {}   # {اسم: قاعدة} — بتتحسب وقت الملخص، فبتنطبق على السجلات القديمة كمان
         self.path = path
         self.horizons = tuple(sorted(horizons_min))
         self.clock = clock
@@ -129,6 +169,8 @@ class ShadowLog:
         for name in profile_names:
             groups[f"{name}_would_enter"] = [r for r in records if (r.get("profiles") or {}).get(name, {}).get("stage") == "approved"]
             groups[f"{name}_not_entered"] = [r for r in records if (r.get("profiles") or {}).get(name, {}).get("stage") not in (None, "approved")]
+        for rule_name, rule in self.rules.items():
+            groups[f"rule:{rule_name}"] = [r for r in records if rule_matches(rule, r)]
 
         out = {"horizons_min": list(self.horizons), "records_total": len(records),
                "pending": len(self.pending), "completed": len(self.completed), "groups": {}}
