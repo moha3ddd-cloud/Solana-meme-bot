@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-19T11:58:36.370236",
+  "generated_at": "2026-10-19T12:29:10.372760",
   "mode": "paper",
   "portfolio": {
     "cash_usd": 983.83,
@@ -131,48 +131,6 @@
     "emergency_drawdown_pct": 20.0
   },
   "cycle_log": [
-    {
-      "timestamp": "2026-10-14T22:15:32.514522",
-      "discovery": {
-        "addresses_collected": 50,
-        "skipped_recently_seen": 39,
-        "pairs_returned": 16,
-        "pre_filter_rejected": {
-          "low_liquidity": 10,
-          "low_volume_5m": 1
-        },
-        "passed_pre_filter": 1,
-        "batch_failures": 0
-      },
-      "candidates_discovered": 1,
-      "candidates_evaluated": 1,
-      "rugcheck_failures": 0,
-      "rejections": {
-        "scanner_hard_filter_failed": 1
-      },
-      "hard_filter_reasons": {
-        "liquidity_not_locked_or_burned": 1
-      },
-      "opened": [],
-      "closed": [],
-      "emergency": null,
-      "errors": [],
-      "details": [
-        {
-          "symbol": "Meepcat",
-          "address": "9zeCbgyJ2m36f1QMHFwh4xxNZeCfPqKGL5szwRU4pump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "liquidity_not_locked_or_burned"
-            ]
-          }
-        }
-      ],
-      "watch": {}
-    },
     {
       "timestamp": "2026-10-14T22:51:22.800620",
       "discovery": {
@@ -16215,10 +16173,25 @@
       "errors": [],
       "details": [],
       "watch": {}
+    },
+    {
+      "timestamp": "2026-10-19T12:29:10.369406",
+      "discovery": {},
+      "candidates_discovered": 0,
+      "candidates_evaluated": 0,
+      "rugcheck_failures": 0,
+      "rejections": {},
+      "hard_filter_reasons": {},
+      "opened": [],
+      "closed": [],
+      "emergency": "consecutive_execution_errors",
+      "errors": [],
+      "details": [],
+      "watch": {}
     }
   ],
   "cycle_totals": {
-    "cycles": 305,
+    "cycles": 306,
     "addresses_collected": 13517,
     "skipped_recently_seen": 4853,
     "pairs_returned": 11847,
