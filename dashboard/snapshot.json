@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-19T19:06:29.191551",
+  "generated_at": "2026-10-19T19:57:21.717948",
   "mode": "paper",
   "portfolio": {
     "cash_usd": 983.83,
@@ -131,52 +131,6 @@
     "emergency_drawdown_pct": 20.0
   },
   "cycle_log": [
-    {
-      "timestamp": "2026-10-15T04:20:34.360955",
-      "discovery": {
-        "addresses_collected": 52,
-        "skipped_recently_seen": 43,
-        "pairs_returned": 16,
-        "pre_filter_rejected": {
-          "low_liquidity": 7
-        },
-        "passed_pre_filter": 2,
-        "batch_failures": 0
-      },
-      "candidates_discovered": 2,
-      "candidates_evaluated": 1,
-      "rugcheck_failures": 1,
-      "rejections": {
-        "rugcheck_failed": 1,
-        "scanner_hard_filter_failed": 1
-      },
-      "hard_filter_reasons": {
-        "top_holder_too_concentrated": 1,
-        "top10_holders_too_concentrated": 1,
-        "liquidity_not_locked_or_burned": 1
-      },
-      "opened": [],
-      "closed": [],
-      "emergency": null,
-      "errors": [],
-      "details": [
-        {
-          "symbol": "PLUS1",
-          "address": "F4dfnxRpH4ZDqXqfPcHm4Dqyk8s8TfqNuT8V95xpump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "top_holder_too_concentrated (84.5%)",
-              "top10_holders_too_concentrated (149.9%)",
-              "liquidity_not_locked_or_burned"
-            ]
-          }
-        }
-      ],
-      "watch": {}
-    },
     {
       "timestamp": "2026-10-15T04:55:57.331463",
       "discovery": {
@@ -15518,10 +15472,25 @@
       "errors": [],
       "details": [],
       "watch": {}
+    },
+    {
+      "timestamp": "2026-10-19T19:57:21.712041",
+      "discovery": {},
+      "candidates_discovered": 0,
+      "candidates_evaluated": 0,
+      "rugcheck_failures": 0,
+      "rejections": {},
+      "hard_filter_reasons": {},
+      "opened": [],
+      "closed": [],
+      "emergency": "consecutive_execution_errors",
+      "errors": [],
+      "details": [],
+      "watch": {}
     }
   ],
   "cycle_totals": {
-    "cycles": 316,
+    "cycles": 317,
     "addresses_collected": 13517,
     "skipped_recently_seen": 4853,
     "pairs_returned": 11847,
