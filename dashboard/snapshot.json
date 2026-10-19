@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-19T05:27:09.569230",
+  "generated_at": "2026-10-19T05:58:26.511178",
   "mode": "paper",
   "portfolio": {
     "cash_usd": 983.83,
@@ -131,76 +131,6 @@
     "emergency_drawdown_pct": 20.0
   },
   "cycle_log": [
-    {
-      "timestamp": "2026-10-14T17:24:00.941046",
-      "discovery": {
-        "addresses_collected": 42,
-        "skipped_recently_seen": 28,
-        "pairs_returned": 29,
-        "pre_filter_rejected": {
-          "low_liquidity": 10,
-          "low_volume_5m": 3
-        },
-        "passed_pre_filter": 3,
-        "batch_failures": 0
-      },
-      "candidates_discovered": 3,
-      "candidates_evaluated": 3,
-      "rugcheck_failures": 0,
-      "rejections": {
-        "scanner_hard_filter_failed": 2,
-        "scanner_score_too_low": 1
-      },
-      "hard_filter_reasons": {
-        "liquidity_not_locked_or_burned": 1,
-        "top10_holders_too_concentrated": 2,
-        "top_holder_too_concentrated": 2,
-        "liquidity_below_min": 1
-      },
-      "opened": [],
-      "closed": [],
-      "emergency": null,
-      "errors": [],
-      "details": [
-        {
-          "symbol": "WETOWL",
-          "address": "7QB5fMj9RGZEfPgbRbJrqmAyyrHA8QCYMtWi87PKpump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "top_holder_too_concentrated (22.1%)",
-              "top10_holders_too_concentrated (57.4%)",
-              "liquidity_not_locked_or_burned"
-            ]
-          }
-        },
-        {
-          "symbol": "LAND",
-          "address": "H9NC5DXKn1LBEJPGPDMNn6DHEA2vP4NRPsUoDETvpump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "liquidity_below_min ($12,342)",
-              "top_holder_too_concentrated (22.4%)",
-              "top10_holders_too_concentrated (67.4%)"
-            ]
-          }
-        },
-        {
-          "symbol": "EUROMIND",
-          "address": "KDqKrzV9aSRphNUbTus9saZHfYQjqSB91cTYm5Ypump",
-          "result": "scanner_score_too_low",
-          "scanner_score": 60.82,
-          "signal_score": null,
-          "hard_filter_reasons": null
-        }
-      ],
-      "watch": {}
-    },
     {
       "timestamp": "2026-10-14T17:56:23.977361",
       "discovery": {
@@ -16854,10 +16784,25 @@
       "errors": [],
       "details": [],
       "watch": {}
+    },
+    {
+      "timestamp": "2026-10-19T05:58:26.505704",
+      "discovery": {},
+      "candidates_discovered": 0,
+      "candidates_evaluated": 0,
+      "rugcheck_failures": 0,
+      "rejections": {},
+      "hard_filter_reasons": {},
+      "opened": [],
+      "closed": [],
+      "emergency": "consecutive_execution_errors",
+      "errors": [],
+      "details": [],
+      "watch": {}
     }
   ],
   "cycle_totals": {
-    "cycles": 296,
+    "cycles": 297,
     "addresses_collected": 13517,
     "skipped_recently_seen": 4853,
     "pairs_returned": 11847,
