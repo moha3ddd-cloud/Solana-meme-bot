@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-19T04:59:50.546817",
+  "generated_at": "2026-10-19T05:27:09.569230",
   "mode": "paper",
   "portfolio": {
     "cash_usd": 983.83,
@@ -131,121 +131,6 @@
     "emergency_drawdown_pct": 20.0
   },
   "cycle_log": [
-    {
-      "timestamp": "2026-10-14T16:58:47.687300",
-      "discovery": {
-        "addresses_collected": 42,
-        "skipped_recently_seen": 0,
-        "pairs_returned": 58,
-        "pre_filter_rejected": {
-          "too_old": 4,
-          "low_liquidity": 28,
-          "low_volume_5m": 5
-        },
-        "passed_pre_filter": 6,
-        "batch_failures": 0
-      },
-      "candidates_discovered": 6,
-      "candidates_evaluated": 6,
-      "rugcheck_failures": 0,
-      "rejections": {
-        "scanner_hard_filter_failed": 6
-      },
-      "hard_filter_reasons": {
-        "top10_holders_too_concentrated": 6,
-        "top_holder_too_concentrated": 6,
-        "token_too_new": 1,
-        "liquidity_below_min": 2
-      },
-      "opened": [],
-      "closed": [],
-      "emergency": null,
-      "errors": [],
-      "details": [
-        {
-          "symbol": "DIKSHIT",
-          "address": "AMQ8BusAhpwbt3ufSCTi4k3BEQ7AecX9u12Jnk6Spump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "top_holder_too_concentrated (23.2%)",
-              "top10_holders_too_concentrated (50.6%)"
-            ]
-          }
-        },
-        {
-          "symbol": "1EDGE",
-          "address": "1EwcGE6WrssiY2sKSadB5E5DE9WhPDQvBC6kev1EDGE",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "top_holder_too_concentrated (40.2%)",
-              "top10_holders_too_concentrated (70.8%)"
-            ]
-          }
-        },
-        {
-          "symbol": "Sonny",
-          "address": "G7iitrjD6NNxGXt27eMifxfGiDkn2tHc4PAHk1ropump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "liquidity_below_min ($14,660)",
-              "token_too_new (11m)",
-              "top_holder_too_concentrated (42.6%)",
-              "top10_holders_too_concentrated (73.1%)"
-            ]
-          }
-        },
-        {
-          "symbol": "THEZIS",
-          "address": "G4MgG4kbV63TN1CXbbg3Cnp7uUP2NvVjQjUHXuecpump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "top_holder_too_concentrated (23.3%)",
-              "top10_holders_too_concentrated (82.4%)"
-            ]
-          }
-        },
-        {
-          "symbol": "FARTCRACK",
-          "address": "9BvXtxTCC8gHrANkpXPVQkuz5ziPfqwwngCKGVDSJH35",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "liquidity_below_min ($12,807)",
-              "top_holder_too_concentrated (34.5%)",
-              "top10_holders_too_concentrated (80.8%)"
-            ]
-          }
-        },
-        {
-          "symbol": "angrykitten",
-          "address": "DutcPngjK2QaChfiKAZKQpcGLJYkCZrenDJ4bdY3pump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "top_holder_too_concentrated (21.2%)",
-              "top10_holders_too_concentrated (54.6%)"
-            ]
-          }
-        }
-      ],
-      "watch": {}
-    },
     {
       "timestamp": "2026-10-14T17:24:00.941046",
       "discovery": {
@@ -16954,10 +16839,25 @@
       "errors": [],
       "details": [],
       "watch": {}
+    },
+    {
+      "timestamp": "2026-10-19T05:27:09.563217",
+      "discovery": {},
+      "candidates_discovered": 0,
+      "candidates_evaluated": 0,
+      "rugcheck_failures": 0,
+      "rejections": {},
+      "hard_filter_reasons": {},
+      "opened": [],
+      "closed": [],
+      "emergency": "consecutive_execution_errors",
+      "errors": [],
+      "details": [],
+      "watch": {}
     }
   ],
   "cycle_totals": {
-    "cycles": 295,
+    "cycles": 296,
     "addresses_collected": 13517,
     "skipped_recently_seen": 4853,
     "pairs_returned": 11847,
