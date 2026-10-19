@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-19T17:52:55.780326",
+  "generated_at": "2026-10-19T18:16:36.556593",
   "mode": "paper",
   "portfolio": {
     "cash_usd": 983.83,
@@ -131,50 +131,6 @@
     "emergency_drawdown_pct": 20.0
   },
   "cycle_log": [
-    {
-      "timestamp": "2026-10-15T03:17:31.320217",
-      "discovery": {
-        "addresses_collected": 50,
-        "skipped_recently_seen": 45,
-        "pairs_returned": 6,
-        "pre_filter_rejected": {
-          "too_old": 1,
-          "low_liquidity": 2
-        },
-        "passed_pre_filter": 1,
-        "batch_failures": 0
-      },
-      "candidates_discovered": 1,
-      "candidates_evaluated": 1,
-      "rugcheck_failures": 0,
-      "rejections": {
-        "scanner_hard_filter_failed": 1
-      },
-      "hard_filter_reasons": {
-        "top10_holders_too_concentrated": 1,
-        "top_holder_too_concentrated": 1
-      },
-      "opened": [],
-      "closed": [],
-      "emergency": null,
-      "errors": [],
-      "details": [
-        {
-          "symbol": "BATMAN",
-          "address": "3vFnqunqv6UWA5pYiaD6TiaRUB3EvwMEYo1wV7ZZpump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "top_holder_too_concentrated (24.7%)",
-              "top10_holders_too_concentrated (85.3%)"
-            ]
-          }
-        }
-      ],
-      "watch": {}
-    },
     {
       "timestamp": "2026-10-15T03:57:11.080436",
       "discovery": {
@@ -15640,10 +15596,25 @@
       "errors": [],
       "details": [],
       "watch": {}
+    },
+    {
+      "timestamp": "2026-10-19T18:16:36.553240",
+      "discovery": {},
+      "candidates_discovered": 0,
+      "candidates_evaluated": 0,
+      "rugcheck_failures": 0,
+      "rejections": {},
+      "hard_filter_reasons": {},
+      "opened": [],
+      "closed": [],
+      "emergency": "consecutive_execution_errors",
+      "errors": [],
+      "details": [],
+      "watch": {}
     }
   ],
   "cycle_totals": {
-    "cycles": 314,
+    "cycles": 315,
     "addresses_collected": 13517,
     "skipped_recently_seen": 4853,
     "pairs_returned": 11847,
