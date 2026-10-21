@@ -1,41 +1,6 @@
 {
-  "cash_usd": 980.1940029927238,
-  "open_positions": {
-    "4wopERxtKHjzaANSywo9BVVycGJ7q7uXJ38Q6EoCpump": {
-      "position": {
-        "symbol": "Pokecity",
-        "address": "4wopERxtKHjzaANSywo9BVVycGJ7q7uXJ38Q6EoCpump",
-        "entry_price": 0.0003011,
-        "initial_stop_price": 0.00027099000000000003,
-        "original_size_usd": 49.19,
-        "remaining_size_pct": 40.0,
-        "current_stop_price": 0.0003011,
-        "highest_price_seen": 0.0005212,
-        "targets_hit": [
-          0,
-          1
-        ],
-        "trailing_active": false,
-        "opened_at": "2026-10-20T23:48:21.007331",
-        "top_holder_addresses": [
-          "E3BDYRV7SmeTka14vegy5jS6JrtL43qhyym7SCmXA52B",
-          "GdSfEboBNVWjAX9dmzn3XwKZZoub28AVky7tKN9qZX8D",
-          "Adk8TM6JCeFHCEPj9MrPzpdhzztfafbsRqBcVZbrKZQv",
-          "G89bi3aTDcDQhRKn6ofdkBbAfGEuYL9xW1yhj6ZMn944",
-          "82BWsZoH5J1iMSw9foBkwKRnG8myCA8vQiiEFxJzdAzT",
-          "2U7skjhKv7bykR3LBgFPPamAzwAExPUntKJnpxQe1BfV",
-          "FK4K9pngzTW99nZfwR4XwYSNrJzNp6F6ha82EDEsdVQh",
-          "HsfoX1nEZ9tS4Jj9XbytwRReJnPapxwUqDpX7jtX3Z6s",
-          "JCnqu5eACN4SFSmnoW2gEKeW7gzGa3Vmx9SFs2semjTZ",
-          "5aLLkK5FzLMg4nLjTLVK7yTU8CjTmtBFUmciANvRd7Vs"
-        ]
-      },
-      "profile": "conservative",
-      "entry_scanner_score": 70.03,
-      "entry_signal_score": 65.09,
-      "entry_reasons": "[conservative] scanner_score=70.0, signal_score=65.1"
-    }
-  },
+  "cash_usd": 1022.5225616111229,
+  "open_positions": {},
   "closed_trades": [
     {
       "symbol": "Musclecat",
@@ -54,6 +19,15 @@
       "entry_reasons": "[conservative] scanner_score=70.1, signal_score=70.3",
       "total_pnl_usd": -5.28,
       "win": false
+    },
+    {
+      "symbol": "Pokecity",
+      "address": "4wopERxtKHjzaANSywo9BVVycGJ7q7uXJ38Q6EoCpump",
+      "profile": "conservative",
+      "entry_price": 0.0003011,
+      "entry_reasons": "[conservative] scanner_score=70.0, signal_score=65.1",
+      "total_pnl_usd": 38.69,
+      "win": true
     }
   ],
   "trade_log": [
@@ -144,16 +118,60 @@
       "size_usd": 14.756999999999998,
       "reason": "target_1_hit_at_60pct_gain",
       "pnl_usd": 10.787166057788108
+    },
+    {
+      "timestamp": "2026-10-21T01:08:28.959536",
+      "symbol": "Pokecity",
+      "address": "4wopERxtKHjzaANSywo9BVVycGJ7q7uXJ38Q6EoCpump",
+      "profile": "conservative",
+      "action": "partial_exit",
+      "price": 0.0006903,
+      "size_usd": 9.838000000000001,
+      "reason": "target_2_hit_at_100pct_gain",
+      "pnl_usd": 12.71653802723348
+    },
+    {
+      "timestamp": "2026-10-21T01:08:28.959542",
+      "symbol": "Pokecity",
+      "address": "4wopERxtKHjzaANSywo9BVVycGJ7q7uXJ38Q6EoCpump",
+      "profile": "conservative",
+      "action": "trailing_update",
+      "price": 0.000586755,
+      "size_usd": 0.0,
+      "reason": "trailing_stop_advanced",
+      "pnl_usd": null
+    },
+    {
+      "timestamp": "2026-10-21T01:09:39.045006",
+      "symbol": "Pokecity",
+      "address": "4wopERxtKHjzaANSywo9BVVycGJ7q7uXJ38Q6EoCpump",
+      "profile": "conservative",
+      "action": "trailing_update",
+      "price": 0.000623305,
+      "size_usd": 0.0,
+      "reason": "trailing_stop_advanced",
+      "pnl_usd": null
+    },
+    {
+      "timestamp": "2026-10-21T01:17:39.394415",
+      "symbol": "Pokecity",
+      "address": "4wopERxtKHjzaANSywo9BVVycGJ7q7uXJ38Q6EoCpump",
+      "profile": "conservative",
+      "action": "full_exit",
+      "price": 0.0006052,
+      "size_usd": 9.838000000000001,
+      "reason": "stop_hit_at_0.0006052",
+      "pnl_usd": 9.936020591165725
     }
   ],
   "risk_engine_state": {
-    "peak_equity_usd": 1000.0,
-    "current_equity_usd": 999.8700029927238,
+    "peak_equity_usd": 1022.522561611123,
+    "current_equity_usd": 1022.522561611123,
     "kill_switch_active": false,
     "daily_state": {
       "trading_day": "2026-10-21",
       "starting_equity_usd": 989.0828369349357,
-      "realized_pnl_usd": 10.787166057788108,
+      "realized_pnl_usd": 33.43972467618731,
       "trades_opened": 0,
       "consecutive_errors": 0,
       "halted": false,
