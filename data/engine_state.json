@@ -1,5 +1,5 @@
 {
-  "cash_usd": 1022.5225616111229,
+  "cash_usd": 1016.2999956287182,
   "open_positions": {},
   "closed_trades": [
     {
@@ -28,6 +28,15 @@
       "entry_reasons": "[conservative] scanner_score=70.0, signal_score=65.1",
       "total_pnl_usd": 38.69,
       "win": true
+    },
+    {
+      "symbol": "HUMANOID",
+      "address": "DR3uVReJt6qGVdQ4WbWYhz246TS845XnUQshhDdKpump",
+      "profile": "conservative",
+      "entry_price": 0.000341,
+      "entry_reasons": "[conservative] scanner_score=70.3, signal_score=70.9",
+      "total_pnl_usd": -6.22,
+      "win": false
     }
   ],
   "trade_log": [
@@ -162,17 +171,39 @@
       "size_usd": 9.838000000000001,
       "reason": "stop_hit_at_0.0006052",
       "pnl_usd": 9.936020591165725
+    },
+    {
+      "timestamp": "2026-10-21T14:58:06.264925",
+      "symbol": "HUMANOID",
+      "address": "DR3uVReJt6qGVdQ4WbWYhz246TS845XnUQshhDdKpump",
+      "profile": "conservative",
+      "action": "entry",
+      "price": 0.000341,
+      "size_usd": 51.13,
+      "reason": "[conservative] scanner_score=70.3, signal_score=70.9",
+      "pnl_usd": null
+    },
+    {
+      "timestamp": "2026-10-21T15:03:06.756942",
+      "symbol": "HUMANOID",
+      "address": "DR3uVReJt6qGVdQ4WbWYhz246TS845XnUQshhDdKpump",
+      "profile": "conservative",
+      "action": "full_exit",
+      "price": 0.0002995,
+      "size_usd": 51.13,
+      "reason": "stop_hit_at_0.0002995",
+      "pnl_usd": -6.222565982404689
     }
   ],
   "risk_engine_state": {
     "peak_equity_usd": 1022.522561611123,
-    "current_equity_usd": 1022.522561611123,
+    "current_equity_usd": 1016.2999956287183,
     "kill_switch_active": false,
     "daily_state": {
       "trading_day": "2026-10-21",
       "starting_equity_usd": 989.0828369349357,
-      "realized_pnl_usd": 33.43972467618731,
-      "trades_opened": 0,
+      "realized_pnl_usd": 27.217158693782622,
+      "trades_opened": 1,
       "consecutive_errors": 0,
       "halted": false,
       "halt_reason": "none"
