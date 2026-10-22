@@ -1,5 +1,5 @@
 {
-  "cash_usd": 965.4899956287181,
+  "cash_usd": 985.6063960372983,
   "open_positions": {
     "8NAtYWBvPEJvSEqHxjfB8tb2gkBZ2NUketXkJktKpump": {
       "position": {
@@ -8,10 +8,12 @@
         "entry_price": 0.0001958,
         "initial_stop_price": 0.00017622,
         "original_size_usd": 50.81,
-        "remaining_size_pct": 100.0,
-        "current_stop_price": 0.00017622,
-        "highest_price_seen": 0.0002537,
-        "targets_hit": [],
+        "remaining_size_pct": 70.0,
+        "current_stop_price": 0.0001958,
+        "highest_price_seen": 0.0002592,
+        "targets_hit": [
+          0
+        ],
         "trailing_active": false,
         "opened_at": "2026-10-22T05:01:56.047232",
         "top_holder_addresses": [
@@ -236,16 +238,38 @@
       "size_usd": 50.81,
       "reason": "[conservative] scanner_score=70.5, signal_score=70.6",
       "pnl_usd": null
+    },
+    {
+      "timestamp": "2026-10-22T10:03:58.818432",
+      "symbol": "FRENS",
+      "address": "8NAtYWBvPEJvSEqHxjfB8tb2gkBZ2NUketXkJktKpump",
+      "profile": "conservative",
+      "action": "partial_exit",
+      "price": 0.0002584,
+      "size_usd": 15.243,
+      "reason": "target_0_hit_at_30pct_gain",
+      "pnl_usd": 4.873400408580185
+    },
+    {
+      "timestamp": "2026-10-22T10:03:58.818438",
+      "symbol": "FRENS",
+      "address": "8NAtYWBvPEJvSEqHxjfB8tb2gkBZ2NUketXkJktKpump",
+      "profile": "conservative",
+      "action": "stop_move",
+      "price": 0.0001958,
+      "size_usd": 0.0,
+      "reason": "breakeven_after_target_0",
+      "pnl_usd": null
     }
   ],
   "risk_engine_state": {
     "peak_equity_usd": 1022.522561611123,
-    "current_equity_usd": 1016.2999956287183,
+    "current_equity_usd": 1021.1733960372985,
     "kill_switch_active": false,
     "daily_state": {
       "trading_day": "2026-10-22",
       "starting_equity_usd": 1016.2999956287183,
-      "realized_pnl_usd": 0.0,
+      "realized_pnl_usd": 4.873400408580185,
       "trades_opened": 1,
       "consecutive_errors": 0,
       "halted": false,
