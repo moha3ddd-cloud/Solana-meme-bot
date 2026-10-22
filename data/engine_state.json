@@ -1,41 +1,6 @@
 {
-  "cash_usd": 1010.5339169770327,
-  "open_positions": {
-    "8NAtYWBvPEJvSEqHxjfB8tb2gkBZ2NUketXkJktKpump": {
-      "position": {
-        "symbol": "FRENS",
-        "address": "8NAtYWBvPEJvSEqHxjfB8tb2gkBZ2NUketXkJktKpump",
-        "entry_price": 0.0001958,
-        "initial_stop_price": 0.00017622,
-        "original_size_usd": 50.81,
-        "remaining_size_pct": 40.0,
-        "current_stop_price": 0.0001958,
-        "highest_price_seen": 0.0003381,
-        "targets_hit": [
-          0,
-          1
-        ],
-        "trailing_active": false,
-        "opened_at": "2026-10-22T05:01:56.047232",
-        "top_holder_addresses": [
-          "DZo5VQdUMekhqHif6Z53teWmYSAvNgYPCEfNM94YQUUb",
-          "4wHmt11g15EsmnBS4sKPFZULrvAnEEuh1Sm2gToeUuC1",
-          "FnhQSaYbyBrwcqPufJQSGKLv8FAPVDtnDeKJtfJDy1MK",
-          "8ynsn6rbgphaf8RP1kiduMw1QurJvEXajkYR7fVK2s1S",
-          "7P47Rg1LDVhYzYvov3nA6GD6ZABobGvj6mvKQkP7YkDa",
-          "9EXsUCfiAB8SNE9X74ZSHfD7WieDpHRD3yuXvu7RbLRh",
-          "sK1hVmzB37goUT7xukc3jw1oGajiQKvc9jbQ8K5TY21",
-          "Y8EEuXGsZ8atoR3idjh2dELraJG8pMUuEhDkHEs8SyP",
-          "ETUC2Xb8sEPTcUsRA8q94pZ7ev2fXRjV9pA5UtYynwmF",
-          "HEspWBEDtHgjDEzkctwNMtRxYuC4AtqsrxySnytYQPpt"
-        ]
-      },
-      "profile": "conservative",
-      "entry_scanner_score": 70.45,
-      "entry_signal_score": 70.57,
-      "entry_reasons": "[conservative] scanner_score=70.5, signal_score=70.6"
-    }
-  },
+  "cash_usd": 1047.5229741782584,
+  "open_positions": {},
   "closed_trades": [
     {
       "symbol": "Musclecat",
@@ -72,6 +37,15 @@
       "entry_reasons": "[conservative] scanner_score=70.3, signal_score=70.9",
       "total_pnl_usd": -6.22,
       "win": false
+    },
+    {
+      "symbol": "FRENS",
+      "address": "8NAtYWBvPEJvSEqHxjfB8tb2gkBZ2NUketXkJktKpump",
+      "profile": "conservative",
+      "entry_price": 0.0001958,
+      "entry_reasons": "[conservative] scanner_score=70.5, signal_score=70.6",
+      "total_pnl_usd": 31.22,
+      "win": true
     }
   ],
   "trade_log": [
@@ -272,16 +246,49 @@
       "size_usd": 15.243,
       "reason": "target_1_hit_at_60pct_gain",
       "pnl_usd": 9.684520939734423
+    },
+    {
+      "timestamp": "2026-10-22T19:10:02.204265",
+      "symbol": "FRENS",
+      "address": "8NAtYWBvPEJvSEqHxjfB8tb2gkBZ2NUketXkJktKpump",
+      "profile": "conservative",
+      "action": "partial_exit",
+      "price": 0.0004049,
+      "size_usd": 10.162,
+      "reason": "target_2_hit_at_100pct_gain",
+      "pnl_usd": 10.85226864147089
+    },
+    {
+      "timestamp": "2026-10-22T19:10:02.204273",
+      "symbol": "FRENS",
+      "address": "8NAtYWBvPEJvSEqHxjfB8tb2gkBZ2NUketXkJktKpump",
+      "profile": "conservative",
+      "action": "trailing_update",
+      "price": 0.00034416499999999995,
+      "size_usd": 0.0,
+      "reason": "trailing_stop_advanced",
+      "pnl_usd": null
+    },
+    {
+      "timestamp": "2026-10-22T19:31:02.916916",
+      "symbol": "FRENS",
+      "address": "8NAtYWBvPEJvSEqHxjfB8tb2gkBZ2NUketXkJktKpump",
+      "profile": "conservative",
+      "action": "full_exit",
+      "price": 0.0003078,
+      "size_usd": 10.162,
+      "reason": "stop_hit_at_0.0003078",
+      "pnl_usd": 5.812788559754853
     }
   ],
   "risk_engine_state": {
-    "peak_equity_usd": 1030.857916977033,
-    "current_equity_usd": 1030.857916977033,
+    "peak_equity_usd": 1047.5229741782587,
+    "current_equity_usd": 1047.5229741782587,
     "kill_switch_active": false,
     "daily_state": {
       "trading_day": "2026-10-22",
       "starting_equity_usd": 1016.2999956287183,
-      "realized_pnl_usd": 14.557921348314608,
+      "realized_pnl_usd": 31.22297854954035,
       "trades_opened": 1,
       "consecutive_errors": 0,
       "halted": false,
