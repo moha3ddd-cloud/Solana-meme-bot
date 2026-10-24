@@ -111,6 +111,7 @@ class GeckoTerminalClient:
         timeframe: str = "minute",
         aggregate: int = 5,
         limit: int = 100,
+        before_timestamp: int | None = None,
     ) -> dict:
         """
         timeframe: 'minute' | 'hour' | 'day'
@@ -121,4 +122,6 @@ class GeckoTerminalClient:
         if limit > 1000:
             raise ValueError("geckoterminal_max_ohlcv_limit_is_1000")
         params = {"aggregate": aggregate, "limit": limit}
+        if before_timestamp is not None:
+            params["before_timestamp"] = int(before_timestamp)  # بيرجع الشموع الأقدم من اللحظة دي
         return self._get(f"/networks/{SOLANA_NETWORK_ID}/pools/{pool_address}/ohlcv/{timeframe}", params=params)
