@@ -13,6 +13,7 @@ from core.data.geckoterminal_mappers import ohlcv_response_to_candles
 from core.exit_sim import simulate_exit
 from core.shadow_log import rule_matches
 
+TIME_BUDGET_SEC = 36 * 60   # نقفل بتقرير جزئي قبل ما الـworkflow يتقتل
 MAX_HOLD_MIN = 12 * 60
 LATENCY_SEC = 60
 COSTS_PCT = (0.0, 3.0, 6.0)   # تكلفة round-trip (slippage+رسوم) كنسبة من المركز
@@ -81,11 +82,21 @@ def main():
     for r in records:
         first.setdefault(r["address"], r)   # أول تقييم لكل عملة بس (مستقل)
     wanted = [r for r in first.values() if any(rule_matches(rl, r) for rl in rules.values())]
+    # الأهم الأول: القواعد الضيقة (calm_entry وعيلتها) قبل passed_filters_any
+    prio = {"calm_entry": 0, "chasing_pump": 0, "calm_in_uptrend": 0}
+    def rank(r):
+        return min((prio.get(k, 1) for k, rl in rules.items() if rule_matches(rl, r)), default=2)
+    wanted.sort(key=lambda r: (rank(r), r["ts"]))
     print(f"tokens to test: {len(wanted)} (of {len(first)})", flush=True)
+    t0 = time.time()
 
     client = GeckoTerminalClient(timeout_seconds=20)
     trades, skipped = [], {}
     for n, r in enumerate(wanted, 1):
+        if time.time() - t0 > TIME_BUDGET_SEC:
+            skipped["time_budget_not_reached"] = len(wanted) - n + 1
+            print("time budget reached, writing partial report", flush=True)
+            break
         candles, why = fetch_candles(client, r["address"], r["ts"])
         if not candles:
             skipped[why] = skipped.get(why, 0) + 1
