@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day Trader Deck — Binance Paper</title>
+<style>
+  :root{--bg:#10141C;--s:#171D28;--s2:#1E2632;--hl:#2A3342;--tx:#E7EAEF;--mu:#8B94A5;--fa:#5B6478;--ok:#4FD1C5;--warn:#E8A33D;--bad:#E5484D;
+        --mono:ui-monospace,'IBM Plex Mono',Menlo,Consolas,monospace;--sans:'IBM Plex Sans Arabic',system-ui,'Segoe UI',Tahoma,sans-serif}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--tx);font-family:var(--sans);padding:18px 14px 60px;line-height:1.5}
+  .wrap{max-width:980px;margin:0 auto}
+  h1{font-size:20px;font-weight:700} h2{font-size:13px;color:var(--mu);font-weight:600;margin:22px 0 8px;letter-spacing:.02em}
+  .top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+  .badge{font-family:var(--mono);font-size:11px;padding:3px 9px;border-radius:99px;border:1px solid var(--hl);color:var(--mu)}
+  .badge.ok{color:var(--ok);border-color:var(--ok)} .badge.bad{color:var(--bad);border-color:var(--bad)} .badge.warn{color:var(--warn);border-color:var(--warn)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+  .card{background:var(--s);border:1px solid var(--hl);border-radius:10px;padding:12px 14px}
+  .k{font-size:11px;color:var(--mu)} .v{direction:ltr;text-align:right;font-family:var(--mono);font-size:20px;font-weight:600;margin-top:2px}
+  .pos{color:var(--ok)} .neg{color:var(--bad)}
+  table{width:100%;border-collapse:collapse;font-size:12.5px;background:var(--s);border:1px solid var(--hl);border-radius:10px;overflow:hidden}
+  th,td{padding:8px 10px;text-align:right;border-bottom:1px solid var(--hl)} th{color:var(--mu);font-weight:500;background:var(--s2);font-size:11px}
+  td.m{font-family:var(--mono);direction:ltr} tr:last-child td{border-bottom:none}
+  .scroll{overflow-x:auto} .note{font-size:12px;color:var(--mu);margin-top:6px}
+  canvas{width:100%;height:170px;background:var(--s);border:1px solid var(--hl);border-radius:10px;display:block}
+  .bar{display:flex;height:6px;border-radius:3px;overflow:hidden;background:var(--s2);min-width:80px}
+  .bar i{display:block;background:var(--ok)} .why{color:var(--mu);font-size:11.5px}
+  .empty{padding:16px;text-align:center;color:var(--fa);font-size:13px;background:var(--s);border:1px dashed var(--hl);border-radius:10px}
+  label.file{display:inline-block;margin-top:10px;font-size:12px;color:var(--mu);cursor:pointer;text-decoration:underline}
+</style>
+</head>
+<body><div class="wrap">
+<div class="top"><div><h1>Day Trader Deck</h1><div class="note" id="sub">بينانس سبوت — Paper Trading</div></div>
+<div id="badges"></div></div>
+<div id="app"><div class="empty">بحمّل snapshot.json …</div></div>
+<label class="file">لو الصفحة مش بتحمّل لوحدها: اختار ملف snapshot.json <input id="f" type="file" accept=".json" hidden></label>
+</div>
+<script>
+const $=s=>document.querySelector(s);
+const fmt=(x,d=2)=>x==null?'—':Number(x).toLocaleString('en',{minimumFractionDigits:d,maximumFractionDigits:d});
+const sg=x=>x==null?'':x>0?'pos':x<0?'neg':'';
+const pct=x=>x==null?'—':(x>0?'+':'')+fmt(x)+'%';
+const usd=x=>x==null?'—':(x<0?'-':x>0?'+':'')+'$'+fmt(Math.abs(x));
+const tm=ts=>ts?new Date(ts).toLocaleString('en-GB',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'}):'—';
+const esc=s=>String(s??'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+function card(k,v,c=''){return `<div class="card"><div class="k">${k}</div><div class="v ${c}">${v}</div></div>`}
+function curve(pts){const c=$('#cv');if(!c||pts.length<2)return;const r=devicePixelRatio||1,W=c.clientWidth,H=c.clientHeight;c.width=W*r;c.height=H*r;
+ const g=c.getContext('2d');g.scale(r,r);const ys=pts.map(p=>p[1]),mn=Math.min(...ys),mx=Math.max(...ys),pad=(mx-mn)*.15||1;
+ const X=i=>8+i*(W-16)/(pts.length-1),Y=v=>H-10-(v-(mn-pad))*(H-20)/((mx+pad)-(mn-pad));
+ g.strokeStyle='#2A3342';g.lineWidth=1;g.beginPath();[0,.5,1].forEach(t=>{const y=10+t*(H-20);g.moveTo(0,y);g.lineTo(W,y)});g.stroke();
+ g.strokeStyle='#4FD1C5';g.lineWidth=2;g.beginPath();pts.forEach((p,i)=>i?g.lineTo(X(i),Y(p[1])):g.moveTo(X(i),Y(p[1])));g.stroke();
+ g.fillStyle='#8B94A5';g.font='11px monospace';g.fillText(fmt(mx),8,12);g.fillText(fmt(mn),8,H-2);}
+function render(d){
+ const s=d.stats,r=d.report||{},g=r.gate||{},rg=r.regime||{},nw=r.news||{};
+ let b=`<span class="badge ${d.killed?'bad':'ok'}">${d.killed?'KILL SWITCH':'PAPER'}</span> `;
+ b+=`<span class="badge ${g.open?'ok':'warn'}">${g.open?'الدخول مفتوح':'الدخول مقفول'}</span> <span class="badge">${tm(d.generated_ts)}</span>`;
+ $('#badges').innerHTML=b;
+ let h=`<h2>الأداء</h2><div class="grid">`+card('الرصيد','$'+fmt(s.equity))+card('الربح الكلي',usd(s.total_pnl)+' ('+pct(s.total_pnl_pct)+')',sg(s.total_pnl))
+  +card('اليوم (UTC)',usd(s.today_pnl)+' ('+pct(s.today_pnl_pct)+')',sg(s.today_pnl))+card('صفقات',s.trades)
+  +card('نسبة النجاح',s.win_rate==null?'—':s.win_rate+'%')+card('Profit Factor',s.profit_factor??'—')+card('متوسط R',s.avg_r??'—')
+  +card('أقصى تراجع',s.max_drawdown_pct+'%','neg')+card('رسوم مدفوعة','$'+fmt(s.fees))+`</div>`;
+ h+=`<h2>منحنى الرصيد</h2><canvas id="cv"></canvas>`;
+ h+=`<h2>حالة السوق والأخبار</h2><div class="card"><div>BTC: <b>${rg.btc_trend==='up'?'صاعد':rg.btc_trend==='down'?'هابط':'—'}</b> — ${esc(rg.reason||'')}</div>
+ <div class="note">قرار البوت: ${esc(g.reason||'—')}</div>
+ <div class="note">الأخبار: ${nw.n??0} عنوان • score عام ${nw.global??0} ${nw.llm?'• تقييم Claude مفعّل':''} ${nw.ok===false?'• ⚠️ الفيدات مش شغالة (المخاطرة بتتخفض للنص)':''}</div>
+ ${(nw.notes||[]).map(n=>`<div class="note">• ${esc(n)}</div>`).join('')}${nw.summary?`<div class="note">${esc(nw.summary)}</div>`:''}</div>`;
+ h+=`<h2>الصفقات المفتوحة</h2>`;
+ if(!d.positions.length)h+=`<div class="empty">مفيش صفقات مفتوحة دلوقتي</div>`;else{
+  h+=`<div class="scroll"><table><tr><th>العملة</th><th>دخول</th><th>سعر حالي</th><th>الستوب</th><th>الهدف 1</th><th>R</th><th>الحالة</th><th>سبب الدخول</th></tr>`;
+  d.positions.forEach(p=>{const R=(p.mark-p.entry)/p.risk_dist;h+=`<tr><td><b>${p.symbol.replace('USDT','')}</b></td><td class="m">${p.entry.toPrecision(6)}</td><td class="m">${p.mark.toPrecision(6)}</td>
+  <td class="m">${p.stop.toPrecision(6)}</td><td class="m">${p.tp1_done?'✅':p.tp1.toPrecision(6)}</td><td class="m ${sg(R)}">${R.toFixed(2)}</td><td>${p.tp1_done?'trailing':'ستوب أولي'}</td><td class="why">${esc((p.reasons||[]).join(' • '))}</td></tr>`});h+=`</table></div>`}
+ h+=`<h2>أفضل المرشحين في آخر دورة</h2><div class="scroll"><table><tr><th>العملة</th><th>النقاط</th><th>اتجاه/زخم/محفز/قوة/أخبار</th><th>القرار</th></tr>`;
+ (r.top||[]).forEach(c=>{const p=c.parts||{};h+=`<tr><td><b>${c.symbol.replace('USDT','')}</b></td><td class="m">${c.score}</td><td class="m">${p.trend??'-'}/${p.momentum??'-'}/${p.trigger??'-'}/${p.rel_strength??'-'}/${p.news??'-'}</td><td class="why">${esc(c.decision||'')}</td></tr>`});h+=`</table></div>`;
+ h+=`<h2>آخر الصفقات</h2>`;
+ if(!d.trades.length)h+=`<div class="empty">لسه مفيش صفقات مقفولة</div>`;else{
+  h+=`<div class="scroll"><table><tr><th>العملة</th><th>فتح</th><th>قفل</th><th>PnL</th><th>R</th><th>نوع الخروج</th><th>رسوم</th></tr>`;
+  d.trades.slice().reverse().slice(0,25).forEach(t=>{h+=`<tr><td><b>${t.symbol.replace('USDT','')}</b></td><td class="m">${tm(t.open_ts)}</td><td class="m">${tm(t.close_ts)}</td><td class="m ${sg(t.pnl)}">${usd(t.pnl)}</td><td class="m ${sg(t.r)}">${t.r}</td><td>${t.exit_type}${t.tp1?' (+tp1)':''}</td><td class="m">${fmt(t.fees)}</td></tr>`});h+=`</table></div>`}
+ const S=d.settings||{};h+=`<h2>الإعدادات الحالية (من config.yaml)</h2><div class="card note">مخاطرة/صفقة ${S.risk?.risk_per_trade_pct}% • حد خسارة يومي ${S.risk?.daily_loss_limit_pct}% • قفل مكسب ${S.risk?.daily_profit_lock_pct}% • أقصى صفقات ${S.risk?.max_open_positions} • حد النقاط ${S.entry?.score_threshold} • ستوب ${S.exit?.stop_atr_mult}×ATR • رسوم ${(S.costs?.fee_rate*100).toFixed(2)}% + انزلاق ${(S.costs?.slippage*100).toFixed(2)}%${d.killed?`<br><b class="neg">KILL SWITCH: ${esc(d.killed_reason)}</b>`:''}</div>`;
+ $('#app').innerHTML=h;curve(d.equity_curve||[]);
+}
+fetch('snapshot.json?'+Date.now()).then(r=>r.json()).then(render).catch(()=>{$('#app').innerHTML='<div class="empty">مش قادر أحمّل snapshot.json — اختار الملف يدوياً من تحت</div>'});
+$('#f').onchange=e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>render(JSON.parse(rd.result));rd.readAsText(f)};
+</script></body></html>

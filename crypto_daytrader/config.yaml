@@ -1,0 +1,79 @@
+# ===== إعدادات بوت التداول اليومي (Binance Spot — Paper Trading) =====
+# كل الأرقام هنا قابلة للتعديل من غير ما نلمس الكود.
+
+mode: paper               # paper بس. التحويل للحقيقي لاحقاً بعد نتايج كافية.
+capital_usd: 1000.0
+
+universe:
+  top_n: 25               # أعلى 25 زوج USDT سيولة
+  min_quote_volume_24h: 80000000   # 80M$ حجم تداول يومي كحد أدنى
+  exclude: []
+  include: [BTCUSDT, ETHUSDT]      # دايماً موجودين (BTC مرجع السوق)
+
+costs:                    # تكاليف واقعية (Binance Spot عادي بدون خصم BNB)
+  fee_rate: 0.001         # 0.1% لكل ناحية
+  slippage: 0.0005        # 0.05% انزلاق سعري ضد البوت لكل أمر Market
+
+entry:
+  score_threshold: 70     # من 100 — ما يدخلش تحت الرقم ده
+  min_atr_pct: 0.35       # لو التقلب أقل من كده، التكاليف هتاكل الربح
+  max_atr_pct: 4.0        # لو أعلى من كده، خطر زيادة
+  max_extension_atr: 2.5  # ما يلحقش سعر مبتعد عن EMA20 بأكتر من 2.5 ATR
+  max_cost_to_risk: 0.25  # (رسوم+انزلاق) / مخاطرة الصفقة لازم تبقى أقل من 25%
+
+exit:
+  stop_atr_mult: 1.5      # وقف الخسارة = 1.5 × ATR(1h)
+  min_stop_pct: 0.8       # أقل مسافة ستوب 0.8%
+  tp1_r: 1.0              # الهدف الأول عند +1R
+  tp1_fraction: 0.5       # يقفل 50% عند الهدف الأول ويحرك الستوب للتعادل
+  trail_atr_mult: 1.5     # بعد الهدف الأول: trailing stop = أعلى سعر − 1.5×ATR
+  max_hold_hours: 24      # day-trading: مفيش صفقة تعدي 24 ساعة
+  stale_hours: 8          # بعد 8 ساعات لو الصفقة مجابتش +0.3R يقفلها
+  stale_min_r: 0.3
+
+risk:
+  risk_per_trade_pct: 0.75        # مخاطرة 0.75% من الحساب للصفقة (≈ 7.5$ على 1000$)
+  max_position_pct: 30.0          # أقصى حجم صفقة 30% من الحساب (سبوت، بدون رافعة)
+  max_open_positions: 3
+  max_trades_per_day: 6
+  daily_loss_limit_pct: 2.0       # بعد -2% في اليوم: يوقف دخول جديد لحد اليوم الجاي (UTC)
+  daily_profit_lock_pct: 2.0      # بعد +2% في اليوم: يوقف دخول جديد ويحمي المكسب (0 = معطّل)
+  consecutive_loss_pause: 3       # 3 خسايِر ورا بعض → وقفة
+  pause_hours: 6
+  symbol_cooldown_hours: 4        # بعد ستوب في عملة ما يرجعش لها قبل 4 ساعات
+  drawdown_steps:                 # [نسبة التراجع من القمة %, معامل المخاطرة]
+    - [3.0, 0.5]
+    - [6.0, 0.25]
+  kill_switch_drawdown_pct: 10.0  # تراجع 10% من القمة → البوت يقفل نفسه (kill switch)
+
+regime:                   # فلتر حالة السوق (BTC هو المرجع)
+  require_btc_trend: true # لازم BTC فوق EMA50 على 1h (أو فوق EMA50 على 4h)
+  panic_drop_pct: 2.5     # BTC نزل أكتر من 2.5% في 4 ساعات → ما فيش دخول
+  panic_pause_hours: 4
+
+news:
+  enabled: true
+  lookback_hours: 8
+  half_life_hours: 3
+  veto_symbol_score: -2.0   # خبر سلبي على العملة نفسها → تتجاهل
+  veto_global_score: -3.0   # خبر سلبي كبير على السوق كله → ما فيش دخول
+  positive_bonus: 5
+  feeds:
+    - https://www.coindesk.com/arc/outboundfeeds/rss/
+    - https://cointelegraph.com/rss
+    - https://decrypt.co/feed
+    - https://www.theblock.co/rss.xml
+  use_llm: true             # لو ANTHROPIC_API_KEY موجود كـ secret، Claude يقيّم العناوين (اختياري)
+  llm_model: claude-haiku-5-5
+
+# أوقات صدور أخبار اقتصادية كبيرة (UTC) — البوت ما يدخلش قبلها بـ60 دقيقة وبعدها بـ30.
+# أضفها يدوياً من تقويم اقتصادي (FOMC, CPI, NFP). مثال: "2026-11-05T19:00:00Z"
+blackout_events_utc: []
+blackout_before_min: 60
+blackout_after_min: 30
+
+backtest:                 # قائمة ثابتة للباك تيست (ملاحظة: فيها انحياز البقاء — عملات نجحت لحد النهارده)
+  symbols: [BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT, DOGEUSDT, ADAUSDT, AVAXUSDT, LINKUSDT, LTCUSDT,
+            DOTUSDT, TRXUSDT, NEARUSDT, SUIUSDT, AAVEUSDT, UNIUSDT]
+  days: 90
+  threshold_sweep: [65, 70, 75, 80]
