@@ -1,6 +1,38 @@
 {
-  "cash_usd": 1047.5229741782584,
-  "open_positions": {},
+  "cash_usd": 995.1429741782584,
+  "open_positions": {
+    "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump": {
+      "position": {
+        "symbol": "DESSA",
+        "address": "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump",
+        "entry_price": 0.0003589,
+        "initial_stop_price": 0.00032301,
+        "original_size_usd": 52.38,
+        "remaining_size_pct": 100.0,
+        "current_stop_price": 0.00032301,
+        "highest_price_seen": 0.0003589,
+        "targets_hit": [],
+        "trailing_active": false,
+        "opened_at": "2026-10-26T16:18:48.676468",
+        "top_holder_addresses": [
+          "DQFLMN9TyjLUyJndsaf5xg9XJ4dzcycQTnL3rbbaMtPY",
+          "CYJR4BVckviHdJQvDqr2MLAATZ3M5gbAAyDoJyx6MqzG",
+          "7X4v9oE3Vt6VFHnbgD6bWew73Mgxcx7bWfLDQpgyq1ZT",
+          "9Atdbo1THPTU8NPedQ4PTzUHoEpPPa82D7P9vy1yFnJm",
+          "4msh1BUGz9kCh5iruxUWd8zhNkVX5MBCMNhJANJ6mNMo",
+          "EM7jcqkursmQcYJBzFf6J2WAbPAPMUJ3Pu9fgzhgx2kY",
+          "8DVAGuxyMgzkXDdeBn5i43sWFiXiXH9nDf47TSghWtCq",
+          "HVcGbn3N7VVUcUMBZLQAjBeJdsNfSzxHCzxRtwcmqEuF",
+          "BKdQcohkRTKrWizGB4Ve5pTZBeJqx7iNbGSsECxHwTny",
+          "B3KzgHiVZJgYwWwKz25CyqR7QgQq72ycbcBQfAyjXPC7"
+        ]
+      },
+      "profile": "conservative",
+      "entry_scanner_score": 71.51,
+      "entry_signal_score": 77.19,
+      "entry_reasons": "[conservative] scanner_score=71.5, signal_score=77.2"
+    }
+  },
   "closed_trades": [
     {
       "symbol": "Musclecat",
@@ -279,6 +311,17 @@
       "size_usd": 10.162,
       "reason": "stop_hit_at_0.0003078",
       "pnl_usd": 5.812788559754853
+    },
+    {
+      "timestamp": "2026-10-26T16:18:48.676478",
+      "symbol": "DESSA",
+      "address": "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump",
+      "profile": "conservative",
+      "action": "entry",
+      "price": 0.0003589,
+      "size_usd": 52.38,
+      "reason": "[conservative] scanner_score=71.5, signal_score=77.2",
+      "pnl_usd": null
     }
   ],
   "risk_engine_state": {
@@ -289,7 +332,7 @@
       "trading_day": "2026-10-26",
       "starting_equity_usd": 1047.5229741782587,
       "realized_pnl_usd": 0.0,
-      "trades_opened": 0,
+      "trades_opened": 1,
       "consecutive_errors": 0,
       "halted": false,
       "halt_reason": "none"
