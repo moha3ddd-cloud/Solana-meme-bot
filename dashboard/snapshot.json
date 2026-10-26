@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-25T23:45:45.209891",
+  "generated_at": "2026-10-26T00:11:24.821674",
   "mode": "paper",
   "portfolio": {
     "cash_usd": 1047.52,
@@ -345,69 +345,6 @@
     "emergency_drawdown_pct": 20.0
   },
   "cycle_log": [
-    {
-      "timestamp": "2026-10-21T03:20:56.855208",
-      "discovery": {
-        "addresses_collected": 44,
-        "skipped_recently_seen": 37,
-        "pairs_returned": 13,
-        "pre_filter_rejected": {
-          "low_liquidity": 7,
-          "low_volume_5m": 1
-        },
-        "passed_pre_filter": 2,
-        "batch_failures": 0
-      },
-      "candidates_discovered": 2,
-      "candidates_evaluated": 2,
-      "rugcheck_failures": 0,
-      "rejections": {
-        "scanner_hard_filter_failed": 2
-      },
-      "hard_filter_reasons": {
-        "token_too_new": 1,
-        "liquidity_below_min": 2,
-        "top_holder_too_concentrated": 2,
-        "top10_holders_too_concentrated": 1
-      },
-      "opened": [],
-      "closed": [],
-      "emergency": null,
-      "errors": [],
-      "details": [
-        {
-          "symbol": "LARPOOOR",
-          "address": "BpcfF47hpkfbydyPZaiHs9sLawzi6EpyMo4kyNf8pump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "liquidity_below_min ($14,742)",
-              "token_too_new (2m)",
-              "top_holder_too_concentrated (21.6%)"
-            ]
-          },
-          "entry_drift_pct": null
-        },
-        {
-          "symbol": "KIMCHI",
-          "address": "9Mxu4MMPv4cdCnAUqMqGxHtopZZv756aM36CtZ34pump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "liquidity_below_min ($12,452)",
-              "top_holder_too_concentrated (32.0%)",
-              "top10_holders_too_concentrated (94.0%)"
-            ]
-          },
-          "entry_drift_pct": null
-        }
-      ],
-      "watch": {}
-    },
     {
       "timestamp": "2026-10-21T03:58:54.706428",
       "discovery": {
@@ -18846,24 +18783,79 @@
         }
       ],
       "watch": {}
+    },
+    {
+      "timestamp": "2026-10-26T00:11:24.803685",
+      "discovery": {
+        "addresses_collected": 48,
+        "skipped_recently_seen": 41,
+        "pairs_returned": 30,
+        "pre_filter_rejected": {
+          "low_liquidity": 22
+        },
+        "passed_pre_filter": 2,
+        "batch_failures": 0
+      },
+      "candidates_discovered": 2,
+      "candidates_evaluated": 2,
+      "rugcheck_failures": 0,
+      "rejections": {
+        "scanner_hard_filter_failed": 2
+      },
+      "hard_filter_reasons": {
+        "token_too_new": 2
+      },
+      "opened": [],
+      "closed": [],
+      "emergency": null,
+      "errors": [],
+      "details": [
+        {
+          "symbol": "GTONK",
+          "address": "9qyUWAY2LsccnYxNh5UCF8pybsbjru7nZLP59SMfpump",
+          "result": "scanner_hard_filter_failed",
+          "scanner_score": null,
+          "signal_score": null,
+          "hard_filter_reasons": {
+            "conservative": [
+              "token_too_new (28m)"
+            ]
+          },
+          "entry_drift_pct": null
+        },
+        {
+          "symbol": "carti",
+          "address": "H5UCZUqCsuTQijwNLBX2KjwP7XJaMaESBSDzQytypump",
+          "result": "scanner_hard_filter_failed",
+          "scanner_score": null,
+          "signal_score": null,
+          "hard_filter_reasons": {
+            "conservative": [
+              "token_too_new (26m)"
+            ]
+          },
+          "entry_drift_pct": null
+        }
+      ],
+      "watch": {}
     }
   ],
   "cycle_totals": {
-    "cycles": 570,
-    "addresses_collected": 25002,
-    "skipped_recently_seen": 8631,
-    "pairs_returned": 22794,
-    "passed_pre_filter": 2669,
-    "evaluated": 2459,
+    "cycles": 571,
+    "addresses_collected": 25050,
+    "skipped_recently_seen": 8672,
+    "pairs_returned": 22824,
+    "passed_pre_filter": 2671,
+    "evaluated": 2461,
     "opened": 7,
     "errors": 0,
     "pre_filter_rejected": {
-      "low_liquidity": 11038,
+      "low_liquidity": 11060,
       "low_volume_5m": 2331,
       "too_old": 848
     },
     "rejections": {
-      "scanner_hard_filter_failed": 1537,
+      "scanner_hard_filter_failed": 1539,
       "scanner_score_too_low": 893,
       "opened": 7,
       "signal_rejected": 16,
@@ -18876,7 +18868,7 @@
       "top10_holders_too_concentrated": 757,
       "top_holder_too_concentrated": 1261,
       "liquidity_not_locked_or_burned": 121,
-      "token_too_new": 695,
+      "token_too_new": 697,
       "mint_authority_still_active": 5
     }
   },
@@ -18886,13 +18878,13 @@
       60,
       120
     ],
-    "records_total": 2395,
-    "pending": 31,
-    "completed": 2364,
+    "records_total": 2397,
+    "pending": 22,
+    "completed": 2375,
     "groups": {
       "all": {
-        "records": 2395,
-        "unique_tokens": 1300,
+        "records": 2397,
+        "unique_tokens": 1302,
         "by_horizon": {
           "30": {
             "n": 2387,
@@ -18903,18 +18895,18 @@
             "unresolved": 0
           },
           "60": {
-            "n": 2375,
-            "mean_return_pct": 1.72,
-            "median_return_pct": -30.75,
+            "n": 2387,
+            "mean_return_pct": 1.5,
+            "median_return_pct": -30.87,
             "pct_positive": 29.4,
-            "pct_dumped_30": 50.4,
+            "pct_dumped_30": 50.5,
             "unresolved": 0
           },
           "120": {
-            "n": 2364,
-            "mean_return_pct": -5.82,
-            "median_return_pct": -48.39,
-            "pct_positive": 25.0,
+            "n": 2375,
+            "mean_return_pct": -5.99,
+            "median_return_pct": -48.42,
+            "pct_positive": 25.1,
             "pct_dumped_30": 58.8,
             "unresolved": 0
           }
@@ -18951,8 +18943,8 @@
         }
       },
       "conservative_not_entered": {
-        "records": 2387,
-        "unique_tokens": 1297,
+        "records": 2389,
+        "unique_tokens": 1299,
         "by_horizon": {
           "30": {
             "n": 2379,
@@ -18963,17 +18955,17 @@
             "unresolved": 0
           },
           "60": {
-            "n": 2367,
-            "mean_return_pct": 1.67,
-            "median_return_pct": -30.89,
+            "n": 2379,
+            "mean_return_pct": 1.44,
+            "median_return_pct": -30.93,
             "pct_positive": 29.3,
-            "pct_dumped_30": 50.5,
+            "pct_dumped_30": 50.6,
             "unresolved": 0
           },
           "120": {
-            "n": 2356,
-            "mean_return_pct": -5.79,
-            "median_return_pct": -48.5,
+            "n": 2367,
+            "mean_return_pct": -5.95,
+            "median_return_pct": -48.57,
             "pct_positive": 25.0,
             "pct_dumped_30": 58.9,
             "unresolved": 0
@@ -19011,8 +19003,8 @@
         }
       },
       "scalp_not_entered": {
-        "records": 2338,
-        "unique_tokens": 1283,
+        "records": 2340,
+        "unique_tokens": 1285,
         "by_horizon": {
           "30": {
             "n": 2330,
@@ -19023,18 +19015,18 @@
             "unresolved": 0
           },
           "60": {
-            "n": 2318,
-            "mean_return_pct": 2.09,
-            "median_return_pct": -30.84,
+            "n": 2330,
+            "mean_return_pct": 1.86,
+            "median_return_pct": -30.91,
             "pct_positive": 29.3,
-            "pct_dumped_30": 50.5,
+            "pct_dumped_30": 50.6,
             "unresolved": 0
           },
           "120": {
-            "n": 2307,
-            "mean_return_pct": -5.38,
-            "median_return_pct": -48.21,
-            "pct_positive": 24.9,
+            "n": 2318,
+            "mean_return_pct": -5.55,
+            "median_return_pct": -48.29,
+            "pct_positive": 25.0,
             "pct_dumped_30": 58.8,
             "unresolved": 0
           }
@@ -19053,19 +19045,19 @@
             "unresolved": 0
           },
           "60": {
-            "n": 348,
-            "mean_return_pct": -8.6,
-            "median_return_pct": -4.45,
-            "pct_positive": 43.1,
-            "pct_dumped_30": 26.1,
+            "n": 349,
+            "mean_return_pct": -8.76,
+            "median_return_pct": -4.46,
+            "pct_positive": 43.0,
+            "pct_dumped_30": 26.4,
             "unresolved": 0
           },
           "120": {
-            "n": 347,
-            "mean_return_pct": -16.03,
-            "median_return_pct": -12.94,
-            "pct_positive": 37.8,
-            "pct_dumped_30": 36.0,
+            "n": 348,
+            "mean_return_pct": -16.17,
+            "median_return_pct": -12.96,
+            "pct_positive": 37.6,
+            "pct_dumped_30": 36.2,
             "unresolved": 0
           }
         }
@@ -19143,19 +19135,19 @@
             "unresolved": 0
           },
           "60": {
-            "n": 897,
-            "mean_return_pct": -16.69,
+            "n": 901,
+            "mean_return_pct": -16.73,
             "median_return_pct": -14.75,
-            "pct_positive": 35.6,
+            "pct_positive": 35.5,
             "pct_dumped_30": 39.8,
             "unresolved": 0
           },
           "120": {
-            "n": 893,
-            "mean_return_pct": -27.48,
-            "median_return_pct": -28.89,
-            "pct_positive": 29.2,
-            "pct_dumped_30": 49.6,
+            "n": 897,
+            "mean_return_pct": -27.37,
+            "median_return_pct": -28.86,
+            "pct_positive": 29.4,
+            "pct_dumped_30": 49.5,
             "unresolved": 0
           }
         }
