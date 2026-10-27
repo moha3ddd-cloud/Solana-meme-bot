@@ -1,5 +1,5 @@
 {
-  "cash_usd": 989.3003282638615,
+  "cash_usd": 1010.9645444800777,
   "open_positions": {
     "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump": {
       "position": {
@@ -8,10 +8,12 @@
         "entry_price": 0.0003589,
         "initial_stop_price": 0.00032301,
         "original_size_usd": 52.38,
-        "remaining_size_pct": 100.0,
-        "current_stop_price": 0.00032301,
-        "highest_price_seen": 0.0004033,
-        "targets_hit": [],
+        "remaining_size_pct": 70.0,
+        "current_stop_price": 0.0003589,
+        "highest_price_seen": 0.000502,
+        "targets_hit": [
+          0
+        ],
         "trailing_active": false,
         "opened_at": "2026-10-26T16:18:48.676468",
         "top_holder_addresses": [
@@ -353,16 +355,38 @@
       "size_usd": 52.38,
       "reason": "stop_hit_at_0.000274",
       "pnl_usd": -5.842645914396892
+    },
+    {
+      "timestamp": "2026-10-27T04:06:29.685800",
+      "symbol": "DESSA",
+      "address": "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump",
+      "profile": "conservative",
+      "action": "partial_exit",
+      "price": 0.0004948,
+      "size_usd": 15.714,
+      "reason": "target_0_hit_at_30pct_gain",
+      "pnl_usd": 5.950216216216217
+    },
+    {
+      "timestamp": "2026-10-27T04:06:29.685807",
+      "symbol": "DESSA",
+      "address": "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump",
+      "profile": "conservative",
+      "action": "stop_move",
+      "price": 0.0003589,
+      "size_usd": 0.0,
+      "reason": "breakeven_after_target_0",
+      "pnl_usd": null
     }
   ],
   "risk_engine_state": {
-    "peak_equity_usd": 1047.5229741782587,
-    "current_equity_usd": 1041.6803282638618,
+    "peak_equity_usd": 1047.630544480078,
+    "current_equity_usd": 1047.630544480078,
     "kill_switch_active": false,
     "daily_state": {
       "trading_day": "2026-10-27",
       "starting_equity_usd": 1041.6803282638618,
-      "realized_pnl_usd": 0.0,
+      "realized_pnl_usd": 5.950216216216217,
       "trades_opened": 0,
       "consecutive_errors": 0,
       "halted": false,
