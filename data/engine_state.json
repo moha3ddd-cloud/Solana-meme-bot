@@ -1,5 +1,5 @@
 {
-  "cash_usd": 1010.9645444800777,
+  "cash_usd": 1036.2715715071047,
   "open_positions": {
     "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump": {
       "position": {
@@ -8,11 +8,12 @@
         "entry_price": 0.0003589,
         "initial_stop_price": 0.00032301,
         "original_size_usd": 52.38,
-        "remaining_size_pct": 70.0,
+        "remaining_size_pct": 40.0,
         "current_stop_price": 0.0003589,
-        "highest_price_seen": 0.0005453,
+        "highest_price_seen": 0.000578,
         "targets_hit": [
-          0
+          0,
+          1
         ],
         "trailing_active": false,
         "opened_at": "2026-10-26T16:18:48.676468",
@@ -377,16 +378,27 @@
       "size_usd": 0.0,
       "reason": "breakeven_after_target_0",
       "pnl_usd": null
+    },
+    {
+      "timestamp": "2026-10-27T06:33:02.093744",
+      "symbol": "DESSA",
+      "address": "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump",
+      "profile": "conservative",
+      "action": "partial_exit",
+      "price": 0.000578,
+      "size_usd": 15.714,
+      "reason": "target_1_hit_at_60pct_gain",
+      "pnl_usd": 9.593027027027025
     }
   ],
   "risk_engine_state": {
-    "peak_equity_usd": 1047.630544480078,
-    "current_equity_usd": 1047.630544480078,
+    "peak_equity_usd": 1057.2235715071051,
+    "current_equity_usd": 1057.2235715071051,
     "kill_switch_active": false,
     "daily_state": {
       "trading_day": "2026-10-27",
       "starting_equity_usd": 1041.6803282638618,
-      "realized_pnl_usd": 5.950216216216217,
+      "realized_pnl_usd": 15.543243243243243,
       "trades_opened": 0,
       "consecutive_errors": 0,
       "halted": false,
