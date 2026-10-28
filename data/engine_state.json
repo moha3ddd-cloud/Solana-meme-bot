@@ -1,5 +1,5 @@
 {
-  "cash_usd": 1057.3140579935912,
+  "cash_usd": 1038.9835398588762,
   "open_positions": {
     "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump": {
       "position": {
@@ -9,8 +9,8 @@
         "initial_stop_price": 0.00032301,
         "original_size_usd": 52.38,
         "remaining_size_pct": 20.0,
-        "current_stop_price": 0.0006850999999999999,
-        "highest_price_seen": 0.000806,
+        "current_stop_price": 0.0007117899999999999,
+        "highest_price_seen": 0.0008374,
         "targets_hit": [
           0,
           1,
@@ -90,6 +90,15 @@
       "entry_price": 0.0003084,
       "entry_reasons": "[conservative] scanner_score=71.0, signal_score=84.4",
       "total_pnl_usd": -5.84,
+      "win": false
+    },
+    {
+      "symbol": "GTA",
+      "address": "7ZyS2j2omYn7ySfDUxgCJpntRrhMNhbXfMiPiMzrpump",
+      "profile": "conservative",
+      "entry_price": 0.0003667,
+      "entry_reasons": "[conservative] scanner_score=70.5, signal_score=71.4",
+      "total_pnl_usd": -18.33,
       "win": false
     }
   ],
@@ -632,17 +641,94 @@
       "size_usd": 0.0,
       "reason": "trailing_stop_advanced",
       "pnl_usd": null
+    },
+    {
+      "timestamp": "2026-10-28T20:06:04.553032",
+      "symbol": "DESSA",
+      "address": "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump",
+      "profile": "conservative",
+      "action": "trailing_update",
+      "price": 0.00070159,
+      "size_usd": 0.0,
+      "reason": "trailing_stop_advanced",
+      "pnl_usd": null
+    },
+    {
+      "timestamp": "2026-10-28T20:06:05.883186",
+      "symbol": "GTA",
+      "address": "7ZyS2j2omYn7ySfDUxgCJpntRrhMNhbXfMiPiMzrpump",
+      "profile": "conservative",
+      "action": "entry",
+      "price": 0.0003667,
+      "size_usd": 53.39,
+      "reason": "[conservative] scanner_score=70.5, signal_score=71.4",
+      "pnl_usd": null
+    },
+    {
+      "timestamp": "2026-10-28T20:09:05.756580",
+      "symbol": "DESSA",
+      "address": "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump",
+      "profile": "conservative",
+      "action": "trailing_update",
+      "price": 0.00070278,
+      "size_usd": 0.0,
+      "reason": "trailing_stop_advanced",
+      "pnl_usd": null
+    },
+    {
+      "timestamp": "2026-10-28T20:10:05.957057",
+      "symbol": "DESSA",
+      "address": "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump",
+      "profile": "conservative",
+      "action": "trailing_update",
+      "price": 0.000707965,
+      "size_usd": 0.0,
+      "reason": "trailing_stop_advanced",
+      "pnl_usd": null
+    },
+    {
+      "timestamp": "2026-10-28T20:10:05.987614",
+      "symbol": "GTA",
+      "address": "7ZyS2j2omYn7ySfDUxgCJpntRrhMNhbXfMiPiMzrpump",
+      "profile": "conservative",
+      "action": "full_exit",
+      "price": 0.0002408,
+      "size_usd": 53.39,
+      "reason": "stop_hit_at_0.0002408",
+      "pnl_usd": -18.330518134715028
+    },
+    {
+      "timestamp": "2026-10-28T20:15:06.479406",
+      "symbol": "DESSA",
+      "address": "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump",
+      "profile": "conservative",
+      "action": "trailing_update",
+      "price": 0.000709665,
+      "size_usd": 0.0,
+      "reason": "trailing_stop_advanced",
+      "pnl_usd": null
+    },
+    {
+      "timestamp": "2026-10-28T20:17:06.754371",
+      "symbol": "DESSA",
+      "address": "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump",
+      "profile": "conservative",
+      "action": "trailing_update",
+      "price": 0.0007117899999999999,
+      "size_usd": 0.0,
+      "reason": "trailing_stop_advanced",
+      "pnl_usd": null
     }
   ],
   "risk_engine_state": {
     "peak_equity_usd": 1067.7900579935915,
-    "current_equity_usd": 1067.7900579935915,
+    "current_equity_usd": 1049.4595398588765,
     "kill_switch_active": false,
     "daily_state": {
       "trading_day": "2026-10-28",
       "starting_equity_usd": 1057.2235715071051,
-      "realized_pnl_usd": 10.566486486486488,
-      "trades_opened": 0,
+      "realized_pnl_usd": -7.76403164822854,
+      "trades_opened": 1,
       "consecutive_errors": 0,
       "halted": false,
       "halt_reason": "none"
