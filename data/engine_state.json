@@ -1,5 +1,5 @@
 {
-  "cash_usd": 1036.2715715071047,
+  "cash_usd": 1057.3140579935912,
   "open_positions": {
     "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump": {
       "position": {
@@ -8,14 +8,15 @@
         "entry_price": 0.0003589,
         "initial_stop_price": 0.00032301,
         "original_size_usd": 52.38,
-        "remaining_size_pct": 40.0,
-        "current_stop_price": 0.0003589,
-        "highest_price_seen": 0.0006847,
+        "remaining_size_pct": 20.0,
+        "current_stop_price": 0.000620415,
+        "highest_price_seen": 0.0007299,
         "targets_hit": [
           0,
-          1
+          1,
+          2
         ],
-        "trailing_active": false,
+        "trailing_active": true,
         "opened_at": "2026-10-26T16:18:48.676468",
         "top_holder_addresses": [
           "DQFLMN9TyjLUyJndsaf5xg9XJ4dzcycQTnL3rbbaMtPY",
@@ -389,16 +390,93 @@
       "size_usd": 15.714,
       "reason": "target_1_hit_at_60pct_gain",
       "pnl_usd": 9.593027027027025
+    },
+    {
+      "timestamp": "2026-10-28T11:07:15.323449",
+      "symbol": "DESSA",
+      "address": "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump",
+      "profile": "conservative",
+      "action": "partial_exit",
+      "price": 0.0007209,
+      "size_usd": 10.476,
+      "reason": "target_2_hit_at_100pct_gain",
+      "pnl_usd": 10.566486486486488
+    },
+    {
+      "timestamp": "2026-10-28T11:07:15.323457",
+      "symbol": "DESSA",
+      "address": "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump",
+      "profile": "conservative",
+      "action": "trailing_update",
+      "price": 0.000612765,
+      "size_usd": 0.0,
+      "reason": "trailing_stop_advanced",
+      "pnl_usd": null
+    },
+    {
+      "timestamp": "2026-10-28T11:08:17.737663",
+      "symbol": "DESSA",
+      "address": "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump",
+      "profile": "conservative",
+      "action": "trailing_update",
+      "price": 0.000614125,
+      "size_usd": 0.0,
+      "reason": "trailing_stop_advanced",
+      "pnl_usd": null
+    },
+    {
+      "timestamp": "2026-10-28T11:10:17.851803",
+      "symbol": "DESSA",
+      "address": "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump",
+      "profile": "conservative",
+      "action": "trailing_update",
+      "price": 0.0006144649999999999,
+      "size_usd": 0.0,
+      "reason": "trailing_stop_advanced",
+      "pnl_usd": null
+    },
+    {
+      "timestamp": "2026-10-28T11:13:17.984528",
+      "symbol": "DESSA",
+      "address": "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump",
+      "profile": "conservative",
+      "action": "trailing_update",
+      "price": 0.00061472,
+      "size_usd": 0.0,
+      "reason": "trailing_stop_advanced",
+      "pnl_usd": null
+    },
+    {
+      "timestamp": "2026-10-28T11:16:18.100102",
+      "symbol": "DESSA",
+      "address": "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump",
+      "profile": "conservative",
+      "action": "trailing_update",
+      "price": 0.00061761,
+      "size_usd": 0.0,
+      "reason": "trailing_stop_advanced",
+      "pnl_usd": null
+    },
+    {
+      "timestamp": "2026-10-28T11:17:18.123736",
+      "symbol": "DESSA",
+      "address": "npz2FhoufQ7pKqhGpaipYWacrAkidyW2yDpVWSvpump",
+      "profile": "conservative",
+      "action": "trailing_update",
+      "price": 0.000620415,
+      "size_usd": 0.0,
+      "reason": "trailing_stop_advanced",
+      "pnl_usd": null
     }
   ],
   "risk_engine_state": {
-    "peak_equity_usd": 1057.2235715071051,
-    "current_equity_usd": 1057.2235715071051,
+    "peak_equity_usd": 1067.7900579935915,
+    "current_equity_usd": 1067.7900579935915,
     "kill_switch_active": false,
     "daily_state": {
       "trading_day": "2026-10-28",
       "starting_equity_usd": 1057.2235715071051,
-      "realized_pnl_usd": 0.0,
+      "realized_pnl_usd": 10.566486486486488,
       "trades_opened": 0,
       "consecutive_errors": 0,
       "halted": false,
