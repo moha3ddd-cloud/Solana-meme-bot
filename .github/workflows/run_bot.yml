@@ -3,6 +3,7 @@ name: Run Bot Cycle
 on:
   schedule:
     - cron: "*/30 * * * *"
+    - cron: "15,45 * * * *"   # موعد إضافي: GitHub بيفوّت/بيأخر جزء من الـcron، فده بيعوّض
   workflow_dispatch: {}
 
 permissions:
