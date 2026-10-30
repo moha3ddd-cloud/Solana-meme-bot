@@ -1,5 +1,5 @@
 {
-  "cash_usd": 1059.652404723741,
+  "cash_usd": 1050.7182340089596,
   "open_positions": {},
   "closed_trades": [
     {
@@ -73,6 +73,15 @@
       "entry_reasons": "[conservative] scanner_score=71.5, signal_score=77.2",
       "total_pnl_usd": 36.3,
       "win": true
+    },
+    {
+      "symbol": "SPACEINU",
+      "address": "5izHfawy4Rg1Vjm27F3ieHzmkEtWWyVNenhFFDPvpump",
+      "profile": "conservative",
+      "entry_price": 0.0002882,
+      "entry_reasons": "[conservative] scanner_score=71.7, signal_score=76.4",
+      "total_pnl_usd": -8.93,
+      "win": false
     }
   ],
   "trade_log": [
@@ -768,17 +777,39 @@
       "size_usd": 10.476,
       "reason": "stop_hit_at_0.0007081",
       "pnl_usd": 10.192864864864866
+    },
+    {
+      "timestamp": "2026-10-30T17:24:12.784171",
+      "symbol": "SPACEINU",
+      "address": "5izHfawy4Rg1Vjm27F3ieHzmkEtWWyVNenhFFDPvpump",
+      "profile": "conservative",
+      "action": "entry",
+      "price": 0.0002882,
+      "size_usd": 52.98,
+      "reason": "[conservative] scanner_score=71.7, signal_score=76.4",
+      "pnl_usd": null
+    },
+    {
+      "timestamp": "2026-10-30T17:37:13.186001",
+      "symbol": "SPACEINU",
+      "address": "5izHfawy4Rg1Vjm27F3ieHzmkEtWWyVNenhFFDPvpump",
+      "profile": "conservative",
+      "action": "full_exit",
+      "price": 0.0002396,
+      "size_usd": 52.98,
+      "reason": "stop_hit_at_0.0002396",
+      "pnl_usd": -8.934170714781404
     }
   ],
   "risk_engine_state": {
     "peak_equity_usd": 1067.7900579935915,
-    "current_equity_usd": 1059.6524047237413,
+    "current_equity_usd": 1050.7182340089598,
     "kill_switch_active": false,
     "daily_state": {
       "trading_day": "2026-10-30",
       "starting_equity_usd": 1059.6524047237413,
-      "realized_pnl_usd": 0.0,
-      "trades_opened": 0,
+      "realized_pnl_usd": -8.934170714781404,
+      "trades_opened": 1,
       "consecutive_errors": 0,
       "halted": false,
       "halt_reason": "none"
