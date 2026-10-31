@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-31T09:50:07.686870",
+  "generated_at": "2026-10-31T10:00:15.400129",
   "mode": "paper",
   "portfolio": {
     "cash_usd": 1050.72,
@@ -865,61 +865,6 @@
     "emergency_drawdown_pct": 20.0
   },
   "cycle_log": [
-    {
-      "timestamp": "2026-10-25T04:23:16.538926",
-      "discovery": {
-        "addresses_collected": 51,
-        "skipped_recently_seen": 42,
-        "pairs_returned": 30,
-        "pre_filter_rejected": {
-          "low_liquidity": 20
-        },
-        "passed_pre_filter": 2,
-        "batch_failures": 0
-      },
-      "candidates_discovered": 2,
-      "candidates_evaluated": 2,
-      "rugcheck_failures": 0,
-      "rejections": {
-        "scanner_hard_filter_failed": 2
-      },
-      "hard_filter_reasons": {
-        "token_too_new": 2
-      },
-      "opened": [],
-      "closed": [],
-      "emergency": null,
-      "errors": [],
-      "details": [
-        {
-          "symbol": "KID",
-          "address": "3R1Kry3rj4xpFwud5quHtpQQxh6e8gwp25qiaEqBXkid",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "token_too_new (20m)"
-            ]
-          },
-          "entry_drift_pct": null
-        },
-        {
-          "symbol": "MOON",
-          "address": "3KMHtbaxxMwp1EWWE5yFvLbJA9eLLiy11RucstArXwy7",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "token_too_new (13m)"
-            ]
-          },
-          "entry_drift_pct": null
-        }
-      ],
-      "watch": {}
-    },
     {
       "timestamp": "2026-10-25T04:58:52.527177",
       "discovery": {
@@ -21133,19 +21078,43 @@
       "errors": [],
       "details": [],
       "watch": {}
+    },
+    {
+      "timestamp": "2026-10-31T10:00:15.372856",
+      "discovery": {
+        "addresses_collected": 46,
+        "skipped_recently_seen": 41,
+        "pairs_returned": 4,
+        "pre_filter_rejected": {
+          "low_liquidity": 4
+        },
+        "passed_pre_filter": 0,
+        "batch_failures": 0
+      },
+      "candidates_discovered": 0,
+      "candidates_evaluated": 0,
+      "rugcheck_failures": 0,
+      "rejections": {},
+      "hard_filter_reasons": {},
+      "opened": [],
+      "closed": [],
+      "emergency": "consecutive_execution_errors",
+      "errors": [],
+      "details": [],
+      "watch": {}
     }
   ],
   "cycle_totals": {
-    "cycles": 733,
-    "addresses_collected": 32576,
-    "skipped_recently_seen": 9698,
-    "pairs_returned": 31346,
+    "cycles": 734,
+    "addresses_collected": 32622,
+    "skipped_recently_seen": 9739,
+    "pairs_returned": 31350,
     "passed_pre_filter": 3728,
     "evaluated": 3443,
     "opened": 11,
     "errors": 0,
     "pre_filter_rejected": {
-      "low_liquidity": 14588,
+      "low_liquidity": 14592,
       "low_volume_5m": 3376,
       "too_old": 1317
     },
