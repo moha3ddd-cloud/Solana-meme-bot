@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-31T08:52:34.045829",
+  "generated_at": "2026-10-31T09:02:21.942589",
   "mode": "paper",
   "portfolio": {
     "cash_usd": 1050.72,
@@ -865,85 +865,6 @@
     "emergency_drawdown_pct": 20.0
   },
   "cycle_log": [
-    {
-      "timestamp": "2026-10-25T03:18:53.622146",
-      "discovery": {
-        "addresses_collected": 55,
-        "skipped_recently_seen": 46,
-        "pairs_returned": 30,
-        "pre_filter_rejected": {
-          "low_liquidity": 15
-        },
-        "passed_pre_filter": 4,
-        "batch_failures": 0
-      },
-      "candidates_discovered": 4,
-      "candidates_evaluated": 4,
-      "rugcheck_failures": 0,
-      "rejections": {
-        "scanner_score_too_low": 2,
-        "scanner_hard_filter_failed": 2
-      },
-      "hard_filter_reasons": {
-        "token_too_new": 2,
-        "liquidity_not_locked_or_burned": 1,
-        "top_holder_too_concentrated": 2
-      },
-      "opened": [],
-      "closed": [],
-      "emergency": null,
-      "errors": [],
-      "details": [
-        {
-          "symbol": "Chunkee",
-          "address": "GkrpmRvhNdyubgHfqW5f58kfvkBtF6TbmwQEtHGnpump",
-          "result": "scanner_score_too_low",
-          "scanner_score": 68.81,
-          "signal_score": null,
-          "hard_filter_reasons": null,
-          "entry_drift_pct": null
-        },
-        {
-          "symbol": "Marvin",
-          "address": "FmuciqKXRRnKqhi7BNin5mYH6fm3oTrfVB5A5Fyrpump",
-          "result": "scanner_score_too_low",
-          "scanner_score": 56.27,
-          "signal_score": null,
-          "hard_filter_reasons": null,
-          "entry_drift_pct": null
-        },
-        {
-          "symbol": "METACAT",
-          "address": "6uEpcGrKa9S3AupEeDPiGPGvpzgFYxqeLVbXMsJCpump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "token_too_new (25m)",
-              "top_holder_too_concentrated (22.9%)",
-              "liquidity_not_locked_or_burned"
-            ]
-          },
-          "entry_drift_pct": null
-        },
-        {
-          "symbol": "Hobbes",
-          "address": "9LepYg9iRDy2APTZnSz8NyoTtVqG9wHobzfU7ZEvpump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "token_too_new (21m)",
-              "top_holder_too_concentrated (18.2%)"
-            ]
-          },
-          "entry_drift_pct": null
-        }
-      ],
-      "watch": {}
-    },
     {
       "timestamp": "2026-10-25T03:59:28.271918",
       "discovery": {
@@ -21313,19 +21234,45 @@
       "errors": [],
       "details": [],
       "watch": {}
+    },
+    {
+      "timestamp": "2026-10-31T09:02:21.925194",
+      "discovery": {
+        "addresses_collected": 45,
+        "skipped_recently_seen": 40,
+        "pairs_returned": 5,
+        "pre_filter_rejected": {
+          "low_liquidity": 3
+        },
+        "passed_pre_filter": 1,
+        "batch_failures": 0
+      },
+      "candidates_discovered": 1,
+      "candidates_evaluated": 0,
+      "rugcheck_failures": 1,
+      "rejections": {
+        "rugcheck_failed": 1
+      },
+      "hard_filter_reasons": {},
+      "opened": [],
+      "closed": [],
+      "emergency": "consecutive_execution_errors",
+      "errors": [],
+      "details": [],
+      "watch": {}
     }
   ],
   "cycle_totals": {
-    "cycles": 731,
-    "addresses_collected": 32485,
-    "skipped_recently_seen": 9658,
-    "pairs_returned": 31281,
-    "passed_pre_filter": 3724,
+    "cycles": 732,
+    "addresses_collected": 32530,
+    "skipped_recently_seen": 9698,
+    "pairs_returned": 31286,
+    "passed_pre_filter": 3725,
     "evaluated": 3443,
     "opened": 11,
     "errors": 0,
     "pre_filter_rejected": {
-      "low_liquidity": 14558,
+      "low_liquidity": 14561,
       "low_volume_5m": 3369,
       "too_old": 1312
     },
@@ -21335,7 +21282,7 @@
       "opened": 11,
       "signal_rejected": 24,
       "position_already_open": 5,
-      "rugcheck_failed": 122,
+      "rugcheck_failed": 123,
       "entry_price_drifted": 2
     },
     "hard_filter_reasons": {
