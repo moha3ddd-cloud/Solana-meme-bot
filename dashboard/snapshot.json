@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-31T13:21:00.054623",
+  "generated_at": "2026-10-31T13:29:12.275987",
   "mode": "paper",
   "portfolio": {
     "cash_usd": 1050.72,
@@ -865,106 +865,6 @@
     "emergency_drawdown_pct": 20.0
   },
   "cycle_log": [
-    {
-      "timestamp": "2026-10-25T09:53:31.196914",
-      "discovery": {
-        "addresses_collected": 46,
-        "skipped_recently_seen": 0,
-        "pairs_returned": 60,
-        "pre_filter_rejected": {
-          "low_liquidity": 31,
-          "low_volume_5m": 8,
-          "too_old": 3
-        },
-        "passed_pre_filter": 6,
-        "batch_failures": 0
-      },
-      "candidates_discovered": 6,
-      "candidates_evaluated": 6,
-      "rugcheck_failures": 0,
-      "rejections": {
-        "scanner_score_too_low": 4,
-        "scanner_hard_filter_failed": 2
-      },
-      "hard_filter_reasons": {
-        "top10_holders_too_concentrated": 2,
-        "token_too_new": 2,
-        "top_holder_too_concentrated": 2
-      },
-      "opened": [],
-      "closed": [],
-      "emergency": null,
-      "errors": [],
-      "details": [
-        {
-          "symbol": "Chubby",
-          "address": "2LVYAfg3ZtgFLp2B9QrTZy18sVzxqmocNmAgBS9Vpump",
-          "result": "scanner_score_too_low",
-          "scanner_score": 58.71,
-          "signal_score": null,
-          "hard_filter_reasons": null,
-          "entry_drift_pct": null
-        },
-        {
-          "symbol": "BTC",
-          "address": "BTCk1ZAAGrbSq7e4L7mg8oiRKRqafkUbeLQpXeGq9BTC",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "token_too_new (21m)",
-              "top_holder_too_concentrated (15.3%)",
-              "top10_holders_too_concentrated (52.4%)"
-            ]
-          },
-          "entry_drift_pct": null
-        },
-        {
-          "symbol": "Wolves",
-          "address": "JBdcnX7qT4yVsTWHQzzCzTbsR7QsNd8YvziA5ziJpump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "token_too_new (16m)",
-              "top_holder_too_concentrated (24.2%)",
-              "top10_holders_too_concentrated (47.9%)"
-            ]
-          },
-          "entry_drift_pct": null
-        },
-        {
-          "symbol": "MAYA",
-          "address": "3KpyR7uM657Bbcw64gLHQpJfPYByJEiVhu4ED3cnpump",
-          "result": "scanner_score_too_low",
-          "scanner_score": 62.57,
-          "signal_score": null,
-          "hard_filter_reasons": null,
-          "entry_drift_pct": null
-        },
-        {
-          "symbol": "KURUMI",
-          "address": "AUHK6bsTMU6nemt7epnvELJtGezx9JS76Lm48pxipump",
-          "result": "scanner_score_too_low",
-          "scanner_score": 67.41,
-          "signal_score": null,
-          "hard_filter_reasons": null,
-          "entry_drift_pct": null
-        },
-        {
-          "symbol": "REACHY",
-          "address": "DgmECo2oh1h7WC7sb7Y25fuH6YLBDCnjCBzKbVQ1pump",
-          "result": "scanner_score_too_low",
-          "scanner_score": 63.18,
-          "signal_score": null,
-          "hard_filter_reasons": null,
-          "entry_drift_pct": null
-        }
-      ],
-      "watch": {}
-    },
     {
       "timestamp": "2026-10-25T10:13:22.665213",
       "discovery": {
@@ -20524,19 +20424,43 @@
       "errors": [],
       "details": [],
       "watch": {}
+    },
+    {
+      "timestamp": "2026-10-31T13:29:12.247295",
+      "discovery": {
+        "addresses_collected": 45,
+        "skipped_recently_seen": 42,
+        "pairs_returned": 3,
+        "pre_filter_rejected": {
+          "low_liquidity": 3
+        },
+        "passed_pre_filter": 0,
+        "batch_failures": 0
+      },
+      "candidates_discovered": 0,
+      "candidates_evaluated": 0,
+      "rugcheck_failures": 0,
+      "rejections": {},
+      "hard_filter_reasons": {},
+      "opened": [],
+      "closed": [],
+      "emergency": "consecutive_execution_errors",
+      "errors": [],
+      "details": [],
+      "watch": {}
     }
   ],
   "cycle_totals": {
-    "cycles": 742,
-    "addresses_collected": 33018,
-    "skipped_recently_seen": 9885,
-    "pairs_returned": 31699,
+    "cycles": 743,
+    "addresses_collected": 33063,
+    "skipped_recently_seen": 9927,
+    "pairs_returned": 31702,
     "passed_pre_filter": 3751,
     "evaluated": 3443,
     "opened": 11,
     "errors": 0,
     "pre_filter_rejected": {
-      "low_liquidity": 14780,
+      "low_liquidity": 14783,
       "low_volume_5m": 3411,
       "too_old": 1340
     },
