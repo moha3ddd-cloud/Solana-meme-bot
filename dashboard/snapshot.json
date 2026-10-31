@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-31T07:00:24.594010",
+  "generated_at": "2026-10-31T07:22:37.416246",
   "mode": "paper",
   "portfolio": {
     "cash_usd": 1050.72,
@@ -865,141 +865,6 @@
     "emergency_drawdown_pct": 20.0
   },
   "cycle_log": [
-    {
-      "timestamp": "2026-10-25T01:04:47.714643",
-      "discovery": {
-        "addresses_collected": 49,
-        "skipped_recently_seen": 0,
-        "pairs_returned": 60,
-        "pre_filter_rejected": {
-          "low_liquidity": 26,
-          "too_old": 3,
-          "low_volume_5m": 8
-        },
-        "passed_pre_filter": 11,
-        "batch_failures": 0
-      },
-      "candidates_discovered": 11,
-      "candidates_evaluated": 11,
-      "rugcheck_failures": 0,
-      "rejections": {
-        "scanner_score_too_low": 9,
-        "scanner_hard_filter_failed": 2
-      },
-      "hard_filter_reasons": {
-        "top10_holders_too_concentrated": 2,
-        "top_holder_too_concentrated": 2,
-        "token_too_new": 1
-      },
-      "opened": [],
-      "closed": [],
-      "emergency": null,
-      "errors": [],
-      "details": [
-        {
-          "symbol": "CATTLEAXE",
-          "address": "H7VZNCBynDK5ikBS9krDJ2Tx8CUr1wxedV19ZgkWpump",
-          "result": "scanner_score_too_low",
-          "scanner_score": 63.06,
-          "signal_score": null,
-          "hard_filter_reasons": null,
-          "entry_drift_pct": null
-        },
-        {
-          "symbol": "KURUMI",
-          "address": "AUHK6bsTMU6nemt7epnvELJtGezx9JS76Lm48pxipump",
-          "result": "scanner_score_too_low",
-          "scanner_score": 64.73,
-          "signal_score": null,
-          "hard_filter_reasons": null,
-          "entry_drift_pct": null
-        },
-        {
-          "symbol": "PRUE",
-          "address": "GnmByQQRgRPtu87EATAre5Zm1XeGUReUaW7P11h6pump",
-          "result": "scanner_score_too_low",
-          "scanner_score": 59.77,
-          "signal_score": null,
-          "hard_filter_reasons": null,
-          "entry_drift_pct": null
-        },
-        {
-          "symbol": "REACHY",
-          "address": "DgmECo2oh1h7WC7sb7Y25fuH6YLBDCnjCBzKbVQ1pump",
-          "result": "scanner_score_too_low",
-          "scanner_score": 68.52,
-          "signal_score": null,
-          "hard_filter_reasons": null,
-          "entry_drift_pct": null
-        },
-        {
-          "symbol": "BTC",
-          "address": "8999yFbaFmsyZSv9q7scLgAD1b1ELoDbrejjexo7pump",
-          "result": "scanner_score_too_low",
-          "scanner_score": 61.08,
-          "signal_score": null,
-          "hard_filter_reasons": null,
-          "entry_drift_pct": null
-        },
-        {
-          "symbol": "Chunkee",
-          "address": "GkrpmRvhNdyubgHfqW5f58kfvkBtF6TbmwQEtHGnpump",
-          "result": "scanner_score_too_low",
-          "scanner_score": 67.6,
-          "signal_score": null,
-          "hard_filter_reasons": null,
-          "entry_drift_pct": null
-        },
-        {
-          "symbol": "NI",
-          "address": "Eez2VqN8FqLq5LPmW4DzBAk6FgkGGxGPFkV9q1nKpump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "top_holder_too_concentrated (35.0%)",
-              "top10_holders_too_concentrated (61.5%)"
-            ]
-          },
-          "entry_drift_pct": null
-        },
-        {
-          "symbol": "Myers",
-          "address": "8BqMeQLvypnnKbHS9hFHMzfxcY9Fea6mB5AnVoKNpump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "token_too_new (14m)",
-              "top_holder_too_concentrated (21.1%)",
-              "top10_holders_too_concentrated (57.3%)"
-            ]
-          },
-          "entry_drift_pct": null
-        },
-        {
-          "symbol": "SWORDOPE",
-          "address": "3SVjZ7BfT9FxiR49nZc7UdBmLgzRLJY7XBZDKhEFpump",
-          "result": "scanner_score_too_low",
-          "scanner_score": 59.06,
-          "signal_score": null,
-          "hard_filter_reasons": null,
-          "entry_drift_pct": null
-        },
-        {
-          "symbol": "Pablo",
-          "address": "EfMZfcStz5oxorWLhBLcPzkePLz91BG5knrGAGiXpump",
-          "result": "scanner_score_too_low",
-          "scanner_score": 57.73,
-          "signal_score": null,
-          "hard_filter_reasons": null,
-          "entry_drift_pct": null
-        }
-      ],
-      "watch": {}
-    },
     {
       "timestamp": "2026-10-25T01:53:41.808817",
       "discovery": {
@@ -21654,19 +21519,45 @@
       "errors": [],
       "details": [],
       "watch": {}
+    },
+    {
+      "timestamp": "2026-10-31T07:22:37.387938",
+      "discovery": {
+        "addresses_collected": 46,
+        "skipped_recently_seen": 40,
+        "pairs_returned": 12,
+        "pre_filter_rejected": {
+          "low_liquidity": 9
+        },
+        "passed_pre_filter": 1,
+        "batch_failures": 0
+      },
+      "candidates_discovered": 1,
+      "candidates_evaluated": 0,
+      "rugcheck_failures": 1,
+      "rejections": {
+        "rugcheck_failed": 1
+      },
+      "hard_filter_reasons": {},
+      "opened": [],
+      "closed": [],
+      "emergency": "consecutive_execution_errors",
+      "errors": [],
+      "details": [],
+      "watch": {}
     }
   ],
   "cycle_totals": {
-    "cycles": 727,
-    "addresses_collected": 32302,
-    "skipped_recently_seen": 9576,
-    "pairs_returned": 31147,
-    "passed_pre_filter": 3717,
+    "cycles": 728,
+    "addresses_collected": 32348,
+    "skipped_recently_seen": 9616,
+    "pairs_returned": 31159,
+    "passed_pre_filter": 3718,
     "evaluated": 3443,
     "opened": 11,
     "errors": 0,
     "pre_filter_rejected": {
-      "low_liquidity": 14493,
+      "low_liquidity": 14502,
       "low_volume_5m": 3352,
       "too_old": 1305
     },
@@ -21676,7 +21567,7 @@
       "opened": 11,
       "signal_rejected": 24,
       "position_already_open": 5,
-      "rugcheck_failed": 115,
+      "rugcheck_failed": 116,
       "entry_price_drifted": 2
     },
     "hard_filter_reasons": {
