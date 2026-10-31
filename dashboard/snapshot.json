@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-31T07:58:18.201499",
+  "generated_at": "2026-10-31T08:08:23.611007",
   "mode": "paper",
   "portfolio": {
     "cash_usd": 1050.72,
@@ -865,48 +865,6 @@
     "emergency_drawdown_pct": 20.0
   },
   "cycle_log": [
-    {
-      "timestamp": "2026-10-25T02:17:46.666407",
-      "discovery": {
-        "addresses_collected": 52,
-        "skipped_recently_seen": 44,
-        "pairs_returned": 14,
-        "pre_filter_rejected": {
-          "low_liquidity": 7
-        },
-        "passed_pre_filter": 1,
-        "batch_failures": 0
-      },
-      "candidates_discovered": 1,
-      "candidates_evaluated": 1,
-      "rugcheck_failures": 0,
-      "rejections": {
-        "scanner_hard_filter_failed": 1
-      },
-      "hard_filter_reasons": {
-        "token_too_new": 1
-      },
-      "opened": [],
-      "closed": [],
-      "emergency": null,
-      "errors": [],
-      "details": [
-        {
-          "symbol": "Marvin",
-          "address": "8zsFH5cS1YT93nhb3ZWzCYk7gvADt7Nqc9P2PgGUpump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "token_too_new (13m)"
-            ]
-          },
-          "entry_drift_pct": null
-        }
-      ],
-      "watch": {}
-    },
     {
       "timestamp": "2026-10-25T02:56:40.351655",
       "discovery": {
@@ -21441,19 +21399,43 @@
       "errors": [],
       "details": [],
       "watch": {}
+    },
+    {
+      "timestamp": "2026-10-31T08:08:23.582517",
+      "discovery": {
+        "addresses_collected": 46,
+        "skipped_recently_seen": 42,
+        "pairs_returned": 2,
+        "pre_filter_rejected": {
+          "low_liquidity": 2
+        },
+        "passed_pre_filter": 0,
+        "batch_failures": 0
+      },
+      "candidates_discovered": 0,
+      "candidates_evaluated": 0,
+      "rugcheck_failures": 0,
+      "rejections": {},
+      "hard_filter_reasons": {},
+      "opened": [],
+      "closed": [],
+      "emergency": "consecutive_execution_errors",
+      "errors": [],
+      "details": [],
+      "watch": {}
     }
   ],
   "cycle_totals": {
-    "cycles": 729,
-    "addresses_collected": 32394,
-    "skipped_recently_seen": 9616,
-    "pairs_returned": 31219,
+    "cycles": 730,
+    "addresses_collected": 32440,
+    "skipped_recently_seen": 9658,
+    "pairs_returned": 31221,
     "passed_pre_filter": 3722,
     "evaluated": 3443,
     "opened": 11,
     "errors": 0,
     "pre_filter_rejected": {
-      "low_liquidity": 14529,
+      "low_liquidity": 14531,
       "low_volume_5m": 3361,
       "too_old": 1308
     },
