@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-31T10:45:16.057047",
+  "generated_at": "2026-10-31T10:56:50.500975",
   "mode": "paper",
   "portfolio": {
     "cash_usd": 1050.72,
@@ -865,30 +865,6 @@
     "emergency_drawdown_pct": 20.0
   },
   "cycle_log": [
-    {
-      "timestamp": "2026-10-25T05:20:59.832731",
-      "discovery": {
-        "addresses_collected": 51,
-        "skipped_recently_seen": 48,
-        "pairs_returned": 3,
-        "pre_filter_rejected": {
-          "low_liquidity": 3
-        },
-        "passed_pre_filter": 0,
-        "batch_failures": 0
-      },
-      "candidates_discovered": 0,
-      "candidates_evaluated": 0,
-      "rugcheck_failures": 0,
-      "rejections": {},
-      "hard_filter_reasons": {},
-      "opened": [],
-      "closed": [],
-      "emergency": null,
-      "errors": [],
-      "details": [],
-      "watch": {}
-    },
     {
       "timestamp": "2026-10-25T05:54:41.332249",
       "discovery": {
@@ -20973,20 +20949,45 @@
       "errors": [],
       "details": [],
       "watch": {}
+    },
+    {
+      "timestamp": "2026-10-31T10:56:50.472655",
+      "discovery": {
+        "addresses_collected": 50,
+        "skipped_recently_seen": 42,
+        "pairs_returned": 19,
+        "pre_filter_rejected": {
+          "low_liquidity": 14,
+          "low_volume_5m": 2
+        },
+        "passed_pre_filter": 0,
+        "batch_failures": 0
+      },
+      "candidates_discovered": 0,
+      "candidates_evaluated": 0,
+      "rugcheck_failures": 0,
+      "rejections": {},
+      "hard_filter_reasons": {},
+      "opened": [],
+      "closed": [],
+      "emergency": "consecutive_execution_errors",
+      "errors": [],
+      "details": [],
+      "watch": {}
     }
   ],
   "cycle_totals": {
-    "cycles": 735,
-    "addresses_collected": 32671,
-    "skipped_recently_seen": 9739,
-    "pairs_returned": 31410,
+    "cycles": 736,
+    "addresses_collected": 32721,
+    "skipped_recently_seen": 9781,
+    "pairs_returned": 31429,
     "passed_pre_filter": 3733,
     "evaluated": 3443,
     "opened": 11,
     "errors": 0,
     "pre_filter_rejected": {
-      "low_liquidity": 14621,
-      "low_volume_5m": 3382,
+      "low_liquidity": 14635,
+      "low_volume_5m": 3384,
       "too_old": 1322
     },
     "rejections": {
