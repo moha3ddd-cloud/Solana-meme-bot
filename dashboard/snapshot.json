@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-31T15:52:38.586834",
+  "generated_at": "2026-10-31T15:57:01.208681",
   "mode": "paper",
   "portfolio": {
     "cash_usd": 1050.72,
@@ -865,109 +865,6 @@
     "emergency_drawdown_pct": 20.0
   },
   "cycle_log": [
-    {
-      "timestamp": "2026-10-25T13:51:48.273367",
-      "discovery": {
-        "addresses_collected": 42,
-        "skipped_recently_seen": 0,
-        "pairs_returned": 60,
-        "pre_filter_rejected": {
-          "low_volume_5m": 11,
-          "too_old": 2,
-          "low_liquidity": 26
-        },
-        "passed_pre_filter": 6,
-        "batch_failures": 0
-      },
-      "candidates_discovered": 6,
-      "candidates_evaluated": 6,
-      "rugcheck_failures": 0,
-      "rejections": {
-        "scanner_hard_filter_failed": 3,
-        "signal_rejected": 1,
-        "scanner_score_too_low": 2
-      },
-      "hard_filter_reasons": {
-        "top10_holders_too_concentrated": 2,
-        "top_holder_too_concentrated": 2,
-        "token_too_new": 1
-      },
-      "opened": [],
-      "closed": [],
-      "emergency": null,
-      "errors": [],
-      "details": [
-        {
-          "symbol": "BTC",
-          "address": "BTCk1ZAAGrbSq7e4L7mg8oiRKRqafkUbeLQpXeGq9BTC",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "top10_holders_too_concentrated (45.1%)"
-            ]
-          },
-          "entry_drift_pct": null
-        },
-        {
-          "symbol": "MERGE",
-          "address": "fwphSGZVuFpdUPsB8K8YFtC9DpZB6xzTjso7A4Zpump",
-          "result": "signal_rejected:signal_score_below_minimum",
-          "scanner_score": 71.81,
-          "signal_score": null,
-          "hard_filter_reasons": null,
-          "entry_drift_pct": null
-        },
-        {
-          "symbol": "GME",
-          "address": "9gexoGn8qnxT1XpncwNXJDwQci9cPGuNXG3uNfDkpump",
-          "result": "scanner_score_too_low",
-          "scanner_score": 66.2,
-          "signal_score": null,
-          "hard_filter_reasons": null,
-          "entry_drift_pct": null
-        },
-        {
-          "symbol": "BASE",
-          "address": "6p5ECyCAymV4Dzyq5yZhMnGLqjeUKKTnRHama1b3pump",
-          "result": "scanner_score_too_low",
-          "scanner_score": 55.52,
-          "signal_score": null,
-          "hard_filter_reasons": null,
-          "entry_drift_pct": null
-        },
-        {
-          "symbol": "Catoween",
-          "address": "6S3EZbPxC8JdxKe3hFyRb3BSC1nvajAR3uX1u6tWpump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "top_holder_too_concentrated (99.4%)",
-              "top10_holders_too_concentrated (99.5%)"
-            ]
-          },
-          "entry_drift_pct": null
-        },
-        {
-          "symbol": "JuJu",
-          "address": "FFrv51GpLpexAjcHAKK4viywVa3WX74rF4UveyHCpump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "token_too_new (27m)",
-              "top_holder_too_concentrated (23.2%)"
-            ]
-          },
-          "entry_drift_pct": null
-        }
-      ],
-      "watch": {}
-    },
     {
       "timestamp": "2026-10-25T14:12:49.685547",
       "discovery": {
@@ -20114,25 +20011,96 @@
         }
       ],
       "watch": {}
+    },
+    {
+      "timestamp": "2026-10-31T15:57:01.181266",
+      "discovery": {
+        "addresses_collected": 44,
+        "skipped_recently_seen": 35,
+        "pairs_returned": 28,
+        "pre_filter_rejected": {
+          "low_liquidity": 14,
+          "low_volume_5m": 1
+        },
+        "passed_pre_filter": 3,
+        "batch_failures": 0
+      },
+      "candidates_discovered": 3,
+      "candidates_evaluated": 3,
+      "rugcheck_failures": 0,
+      "rejections": {
+        "scanner_score_too_low": 1,
+        "scanner_hard_filter_failed": 2
+      },
+      "hard_filter_reasons": {
+        "token_too_new": 1,
+        "top10_holders_too_concentrated": 1,
+        "top_holder_too_concentrated": 1,
+        "liquidity_below_min": 1
+      },
+      "opened": [],
+      "closed": [],
+      "emergency": null,
+      "errors": [],
+      "details": [
+        {
+          "symbol": "SIS",
+          "address": "8S49oCFR9Shcvibo42fJft2GH3X5rKgcFisZ57jopump",
+          "result": "scanner_score_too_low",
+          "scanner_score": 63.31,
+          "signal_score": null,
+          "hard_filter_reasons": null,
+          "entry_drift_pct": null
+        },
+        {
+          "symbol": "HALLOWTRUMP",
+          "address": "5kCcoN8Xy2tPWEYi7pGLCxym5kmh3znMT3odrhWvpump",
+          "result": "scanner_hard_filter_failed",
+          "scanner_score": null,
+          "signal_score": null,
+          "hard_filter_reasons": {
+            "conservative": [
+              "token_too_new (11m)"
+            ]
+          },
+          "entry_drift_pct": null
+        },
+        {
+          "symbol": "billy",
+          "address": "DUTxGHL2LmpfjQaoK6LdZp8WQPoDiwvtDHVDf4fMpump",
+          "result": "scanner_hard_filter_failed",
+          "scanner_score": null,
+          "signal_score": null,
+          "hard_filter_reasons": {
+            "conservative": [
+              "liquidity_below_min ($11,926)",
+              "top_holder_too_concentrated (32.5%)",
+              "top10_holders_too_concentrated (53.5%)"
+            ]
+          },
+          "entry_drift_pct": null
+        }
+      ],
+      "watch": {}
     }
   ],
   "cycle_totals": {
-    "cycles": 749,
-    "addresses_collected": 33330,
-    "skipped_recently_seen": 10048,
-    "pairs_returned": 31913,
-    "passed_pre_filter": 3765,
-    "evaluated": 3446,
+    "cycles": 750,
+    "addresses_collected": 33374,
+    "skipped_recently_seen": 10083,
+    "pairs_returned": 31941,
+    "passed_pre_filter": 3768,
+    "evaluated": 3449,
     "opened": 11,
     "errors": 0,
     "pre_filter_rejected": {
-      "low_liquidity": 14879,
-      "low_volume_5m": 3432,
+      "low_liquidity": 14893,
+      "low_volume_5m": 3433,
       "too_old": 1357
     },
     "rejections": {
-      "scanner_hard_filter_failed": 2066,
-      "scanner_score_too_low": 1338,
+      "scanner_hard_filter_failed": 2068,
+      "scanner_score_too_low": 1339,
       "opened": 11,
       "signal_rejected": 24,
       "position_already_open": 5,
@@ -20140,11 +20108,11 @@
       "entry_price_drifted": 2
     },
     "hard_filter_reasons": {
-      "liquidity_below_min": 557,
-      "top10_holders_too_concentrated": 968,
-      "top_holder_too_concentrated": 1704,
+      "liquidity_below_min": 558,
+      "top10_holders_too_concentrated": 969,
+      "top_holder_too_concentrated": 1705,
       "liquidity_not_locked_or_burned": 161,
-      "token_too_new": 904,
+      "token_too_new": 905,
       "mint_authority_still_active": 5
     }
   },
@@ -20154,13 +20122,13 @@
       60,
       120
     ],
-    "records_total": 3003,
-    "pending": 3,
+    "records_total": 3006,
+    "pending": 6,
     "completed": 3000,
     "groups": {
       "all": {
-        "records": 3003,
-        "unique_tokens": 1565,
+        "records": 3006,
+        "unique_tokens": 1568,
         "by_horizon": {
           "30": {
             "n": 3000,
@@ -20219,8 +20187,8 @@
         }
       },
       "conservative_not_entered": {
-        "records": 2991,
-        "unique_tokens": 1560,
+        "records": 2994,
+        "unique_tokens": 1563,
         "by_horizon": {
           "30": {
             "n": 2988,
@@ -20279,8 +20247,8 @@
         }
       },
       "scalp_not_entered": {
-        "records": 2928,
-        "unique_tokens": 1542,
+        "records": 2931,
+        "unique_tokens": 1545,
         "by_horizon": {
           "30": {
             "n": 2925,
@@ -20399,8 +20367,8 @@
         }
       },
       "rule:passed_filters_any": {
-        "records": 1254,
-        "unique_tokens": 513,
+        "records": 1255,
+        "unique_tokens": 514,
         "by_horizon": {
           "30": {
             "n": 1253,
