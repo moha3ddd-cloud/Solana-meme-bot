@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-31T04:54:21.305618",
+  "generated_at": "2026-10-31T05:05:38.830218",
   "mode": "paper",
   "portfolio": {
     "cash_usd": 1050.72,
@@ -865,50 +865,6 @@
     "emergency_drawdown_pct": 20.0
   },
   "cycle_log": [
-    {
-      "timestamp": "2026-10-24T22:11:24.372696",
-      "discovery": {
-        "addresses_collected": 47,
-        "skipped_recently_seen": 42,
-        "pairs_returned": 30,
-        "pre_filter_rejected": {
-          "low_liquidity": 25
-        },
-        "passed_pre_filter": 1,
-        "batch_failures": 0
-      },
-      "candidates_discovered": 1,
-      "candidates_evaluated": 1,
-      "rugcheck_failures": 0,
-      "rejections": {
-        "scanner_hard_filter_failed": 1
-      },
-      "hard_filter_reasons": {
-        "token_too_new": 1,
-        "top_holder_too_concentrated": 1
-      },
-      "opened": [],
-      "closed": [],
-      "emergency": null,
-      "errors": [],
-      "details": [
-        {
-          "symbol": "WILDWOOD",
-          "address": "CrSCphSin4iVXFwKT7JKBTGUh8M7PTp9fsivKoREpump",
-          "result": "scanner_hard_filter_failed",
-          "scanner_score": null,
-          "signal_score": null,
-          "hard_filter_reasons": {
-            "conservative": [
-              "token_too_new (17m)",
-              "top_holder_too_concentrated (15.2%)"
-            ]
-          },
-          "entry_drift_pct": null
-        }
-      ],
-      "watch": {}
-    },
     {
       "timestamp": "2026-10-24T22:48:41.712219",
       "discovery": {
@@ -21864,19 +21820,43 @@
       "errors": [],
       "details": [],
       "watch": {}
+    },
+    {
+      "timestamp": "2026-10-31T05:05:38.808210",
+      "discovery": {
+        "addresses_collected": 50,
+        "skipped_recently_seen": 42,
+        "pairs_returned": 12,
+        "pre_filter_rejected": {
+          "low_liquidity": 11
+        },
+        "passed_pre_filter": 0,
+        "batch_failures": 0
+      },
+      "candidates_discovered": 0,
+      "candidates_evaluated": 0,
+      "rugcheck_failures": 0,
+      "rejections": {},
+      "hard_filter_reasons": {},
+      "opened": [],
+      "closed": [],
+      "emergency": "consecutive_execution_errors",
+      "errors": [],
+      "details": [],
+      "watch": {}
     }
   ],
   "cycle_totals": {
-    "cycles": 723,
-    "addresses_collected": 32107,
-    "skipped_recently_seen": 9493,
-    "pairs_returned": 31005,
+    "cycles": 724,
+    "addresses_collected": 32157,
+    "skipped_recently_seen": 9535,
+    "pairs_returned": 31017,
     "passed_pre_filter": 3699,
     "evaluated": 3443,
     "opened": 11,
     "errors": 0,
     "pre_filter_rejected": {
-      "low_liquidity": 14426,
+      "low_liquidity": 14437,
       "low_volume_5m": 3336,
       "too_old": 1300
     },
